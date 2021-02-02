@@ -1,12 +1,12 @@
+import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+
+import Frame from './frame'
+import Home from './page-home'
 import React from 'react'
 import ReactDom from 'react-dom'
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
-import Frame from './frame'
-
-import Home from './page-home'
 
 export default class Entry extends React.Component {
-  render() {
+  render () {
     return (
       <Router>
         <Switch>

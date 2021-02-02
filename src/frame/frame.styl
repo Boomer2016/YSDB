@@ -1,0 +1,37 @@
+#root
+  width 100%
+  height 100%
+.frame
+  min-width 1200px
+  height 100%
+.frame-main
+  @extend .frame
+  /.main-col
+    height 100%
+    overflow-y auto
+  /.sidebar-col
+    @extend .main-col
+    background-color #fff
+.frame-title-control
+  display inline-block
+  margin 12px 0 0 12px
+  font-weight 600
+  font-size 18px
+  color rgba(0, 0, 0, 0.65)
+  font-family Avenir, Helvetica Neue, Arial, Helvetica, sans-serif
+  vertical-align middle
+.common-header
+  height: 60px
+  line-height: 60px
+  .menu-item
+    font-size: 16px
+    color: rgba(0,0,0,.85)
+    &:hover
+      color: #108EE9
+      cursor pointer
+  .active
+    color: #108EE9
+    cursor pointer
+
+
+  

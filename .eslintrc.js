@@ -342,6 +342,10 @@ module.exports = {
     }],
     // prop types
     'react/prop-types': 'off',
+    'space-before-function-paren': 'off',
+    'import/order': 'off',
+    'quotes': 'off',
+    'no-param-reassign': 'off',
     // 检测的文件扩展名
     'react/jsx-filename-extension': ['error', {
       'extensions': ['.js', '.jsx'],

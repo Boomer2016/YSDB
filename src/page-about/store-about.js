@@ -1,6 +1,7 @@
-import { observable, action, runInAction } from 'mobx'
-import { message } from 'antd'
+import { action, observable, runInAction } from 'mobx'
+
 import io from './io'
+import { message } from 'antd'
 
 export default class AboutStore {
   // 被观察的属性

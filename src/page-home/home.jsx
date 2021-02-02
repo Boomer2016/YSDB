@@ -1,9 +1,9 @@
-import { Button, Modal } from "antd";
-import React, { Component } from "react";
-import { action, observable } from "mobx";
+import { Button, Modal } from "antd"
+import React, { Component } from "react"
+import { action, observable } from "mobx"
 
-import HomeStore from "./store-home";
-import { observer } from "mobx-react";
+import HomeStore from "./store-home"
+import { observer } from "mobx-react"
 
 const store = new HomeStore()
 
@@ -17,4 +17,3 @@ export default class Home extends Component {
     return <div className="page-home">home</div>
   }
 }
-

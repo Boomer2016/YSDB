@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { observable, action } from "mobx";
-import { observer } from "mobx-react";
-import { Button, Modal } from "antd";
+import { Button, Modal } from 'antd'
+import React, { Component } from "react"
+import { action, observable } from "mobx"
 
-import AboutStore from "./store-about";
+import AboutStore from "./store-about"
+import { observer } from "mobx-react"
 
-const store = new AboutStore();
+const store = new AboutStore()
 
 @observer
 export default class About extends Component {
@@ -14,6 +14,6 @@ export default class About extends Component {
   }
 
   render () {
-    return <div className="page-home">home</div>;
+    return <div className="page-home">home</div>
   }
 }

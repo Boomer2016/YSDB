@@ -1,13 +1,14 @@
-import {observable, action, runInAction} from 'mobx'
-import {message} from 'antd'
+import { action, observable, runInAction } from 'mobx'
+
 import io from './io'
+import { message } from 'antd'
 
 export default class HomeStore {
   // 被观察的属性
   @observable content = ''
 
   // 异步action示例
-  @action async getContent() {
+  @action async getContent () {
     try {
       const res = await io.getContent({
         param: '1',
@@ -21,7 +22,7 @@ export default class HomeStore {
   }
 
   // 更新action示例
-  @action clearContent() {
+  @action clearContent () {
     this.content = ''
   }
 }

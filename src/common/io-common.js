@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+export const BASE_PATH = 'https://192.168.1.21:9999/'
+
 const codeMsgMap = {
   400: '发出的请求有错误，服务器没有进行新建或修改数据的操作。',
   401: '用户没有权限（令牌、用户名、密码错误）。',
@@ -76,5 +78,4 @@ request.interceptors.response.use(
   },
 )
 
-export const BASE_PATH = 'https://192.168.1.21:9999/'
 export default request

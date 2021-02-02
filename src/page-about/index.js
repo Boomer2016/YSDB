@@ -1,6 +1,6 @@
-import { asyncComponent } from '../common/util'
 import './home.styl'
 
+import { asyncComponent } from '../common/util'
 
 export default asyncComponent(async () => {
   try {

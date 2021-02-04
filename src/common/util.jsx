@@ -2,22 +2,22 @@
 
 import React from 'react'
 
-export function asyncComponent(getComponent) {
+export function asyncComponent (getComponent) {
   return class AsyncComponent extends React.Component {
     static Component = null
-    state = {Component: AsyncComponent.Component}
+    state = { Component: AsyncComponent.Component }
 
-    componentWillMount() {
+    componentWillMount () {
       if (!this.state.Component) {
         getComponent().then(Component => {
           AsyncComponent.Component = Component
-          this.setState({Component})
+          this.setState({ Component })
         })
       }
     }
 
-    render() {
-      const {Component} = this.state
+    render () {
+      const { Component } = this.state
 
       if (Component) {
         return <Component {...this.props} />
@@ -28,7 +28,7 @@ export function asyncComponent(getComponent) {
 }
 
 // 获取URL参数
-export function getUrlParam(name, type) {
+export function getUrlParam (name, type) {
   const reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`)
   const r = window.location.search.substr(1).match(reg)
   const h = window.location.hash.substr(1).match(reg)
@@ -42,4 +42,4 @@ export function getUrlParam(name, type) {
   return null
 }
 
-export function noop() {}
+export function noop () { }

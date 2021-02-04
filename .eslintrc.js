@@ -346,6 +346,7 @@ module.exports = {
     'import/order': 'off',
     'quotes': 'off',
     'no-param-reassign': 'off',
+    "jsx-a11y/anchor-is-valid": 'off',
     // 检测的文件扩展名
     'react/jsx-filename-extension': ['error', {
       'extensions': ['.js', '.jsx'],

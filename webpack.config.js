@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const safeParser = require('postcss-safe-parser')
 const pkg = require('./package.json')
 
@@ -88,8 +89,13 @@ module.exports = {
         include: [path.resolve(__dirname, 'src')],
         exclude: /node_modules/,
       },
+      // 引入bootstrap的样式后，单独处理css
       {
-        test: /\.(le|c)ss$/,
+        test: /\.css$/,
+        use: ["style-loader", "css-loader", "postcss-loader"],
+      },
+      {
+        test: /\.less$/,
         use: [
           clientIsDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
@@ -98,7 +104,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpg|jpeg|png|gif|svg)$/,
+        test: /\.(jpg|jpeg|png|gif|svg|woff|woff2|eot|ttf)$/,
         exclude: [path.resolve(__dirname, './src/icon')],
         use: [
           {
@@ -175,6 +181,16 @@ module.exports = {
     new webpack.ProvidePlugin({
       lodash: '_',
       moment: 'moment',
+    }),
+    // 复制public文件夹下的文件到dist/public目录下，copy-webpack-plugin的版本有限制的，目前工程下，不能为最新版，降级到6.x才行
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'public'),
+          to: path.resolve(__dirname, 'dist/public'),
+          toType: 'dir',
+        },
+      ],
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html'),

@@ -1,12 +1,14 @@
-import React from 'react'
-import { ConfigProvider } from 'antd'
-import zhCN from 'antd/lib/locale-provider/zh_CN'
-// 公用的样式模块
 import 'antd/dist/antd.less'
 import '../common/util.styl'
 import '../common/flex-box.styl'
-import Header from './header'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
+import { ConfigProvider } from 'antd'
+import Header from './header'
+import React from 'react'
+import zhCN from 'antd/lib/locale-provider/zh_CN'
+
+// 公用的样式模块
 export default class Frame extends React.Component {
   render () {
     const { children } = this.props
@@ -14,12 +16,14 @@ export default class Frame extends React.Component {
     return (
       <ConfigProvider locale={zhCN}>
         <div className="FBV">
-          {/* <Header /> */}
-          <div className="FB1">{children}</div>
+          <Header />
+          <main role="main" className="container">
+            <div>{children}</div>
+          </main>
           <div className="common-footer">
-            <div className="footer-logo"></div>
+            <div className="footer-logo">111</div>
             <div className="friend-links">
-
+              222
             </div>
             <div className="qrcode">
               二维码

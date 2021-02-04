@@ -43,7 +43,6 @@ request.interceptors.request.use(
   },
 )
 
-
 /**
  *  暂定后端正常返回结构为 { hasError: boolean; data: object; errorDesc: string; errorId: string}
  */
@@ -52,7 +51,7 @@ let rid = 0
 
 request.interceptors.response.use(
   response => {
-    const { hasError, data, errorDesc } = response.data || {};
+    const { hasError, data, errorDesc } = response.data || {}
     rid += 1
     response.data = {
       hasError: hasError || false,

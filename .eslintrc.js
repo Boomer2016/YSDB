@@ -347,6 +347,7 @@ module.exports = {
     'quotes': 'off',
     'no-param-reassign': 'off',
     "jsx-a11y/anchor-is-valid": 'off',
+    "react/self-closing-comp": 'off',
     // 检测的文件扩展名
     'react/jsx-filename-extension': ['error', {
       'extensions': ['.js', '.jsx'],

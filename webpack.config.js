@@ -22,9 +22,9 @@ module.exports = {
     inline: true,
     hot: true,
     port: 8888,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
+    // headers: {
+    //   'Access-Control-Allow-Origin': '*',
+    // },
     historyApiFallback: true,
     noInfo: false,
     // proxy URLs to backend development server
@@ -182,16 +182,6 @@ module.exports = {
       lodash: '_',
       moment: 'moment',
     }),
-    // 复制public文件夹下的文件到dist/public目录下，copy-webpack-plugin的版本有限制的，目前工程下，不能为最新版，降级到6.x才行
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'public'),
-          to: path.resolve(__dirname, 'dist/public'),
-          toType: 'dir',
-        },
-      ],
-    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html'),
     }),
@@ -204,6 +194,16 @@ if (process.env.NODE_ENV !== 'development') {
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[name].chunk.css',
+    }),
+    // 复制public文件夹下的文件到dist/public目录下，copy-webpack-plugin的版本有限制的，目前工程下，不能为最新版，降级到6.x才行
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'asset'),
+          to: path.resolve(__dirname, 'dist/web/asset'),
+          toType: 'dir',
+        },
+      ],
     }),
     /**
      * ! 一般不需要开启, 默认打包出来的 stats.json 文件会随着项目增大而变大

@@ -1,9 +1,13 @@
+import "babel-polyfill"
+
 import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import Frame from './frame'
 import Home from './page-home'
 import React from 'react'
 import ReactDom from 'react-dom'
+
+require('es6-symbol/implement')
 
 export default class Entry extends React.Component {
   render () {

@@ -203,6 +203,11 @@ if (process.env.NODE_ENV !== 'development') {
           to: path.resolve(__dirname, 'dist/web/asset'),
           toType: 'dir',
         },
+        {
+          from: path.resolve(__dirname, 'server/config.js'),
+          to: path.resolve(__dirname, 'dist/config.js'),
+          toType: 'file',
+        },
       ],
     }),
     /**

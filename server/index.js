@@ -1,16 +1,14 @@
 const path = require('path')
 const fs = require('fs')
 const Koa = require('koa')
-const static = require('koa-static')
+const koaStatic = require('koa-static')
 const proxy = require('koa-proxy')
 const conditional = require('koa-conditional-get')
 const etag = require('koa-etag')
 const compress = require('koa-compress')
 const zlib = require('zlib')
 const log = require('./log')
-
-const webConf = eval('require')('./config')
-console.log(webConf, JSON.stringify(webConf))
+const webConf = require('./config')
 
 const staticPath = process.env.NODE_ENV === 'production' ? './web/' : '../dist/web/'
 
@@ -47,7 +45,7 @@ app.use(conditional())
 app.use(etag())
 
 app.use(
-  static(path.join(__dirname, staticPath), {
+  koaStatic(path.join(__dirname, staticPath), {
     maxage: 24 * 60 * 60 * 1000,
   }),
 )
@@ -94,7 +92,7 @@ app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 })
 
-const server = app.listen(3000, () => {
+const server = app.listen(webConf.port, () => {
   console.log(`server starting at port ${webConf.port}`)
   console.log(`api server ${webConf.apiServer}`)
 })

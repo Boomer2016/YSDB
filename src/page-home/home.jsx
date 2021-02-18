@@ -1,15 +1,16 @@
 import { Button, Modal } from "antd"
 import React, { Component } from "react"
 import { action, observable } from "mobx"
+import { inject, observer } from "mobx-react"
 
 import HomeStore from "./store-home"
-import { observer } from "mobx-react"
 
 const store = new HomeStore()
 
 @observer
-export default class Home extends Component {
+class Home extends Component {
   componentDidMount () {
+    console.log(this.props, 1111)
     // store.getContent()
   }
 
@@ -313,3 +314,5 @@ export default class Home extends Component {
     )
   }
 }
+
+export default inject('store')(Home)

@@ -3,58 +3,11 @@ import { observable } from 'mobx'
 import { observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 
-const menus = [
-  {
-    menuName: '关于YSDB',
-    menuKey: 'aboutGE',
-    menuPath: './about',
-  },
-  {
-    menuName: '产品中心',
-    menuKey: 'productCenter',
-    menuPath: './about',
-  },
-  {
-    menuName: '应用领域',
-    menuKey: 'appArea',
-    menuPath: './about',
-  },
-  {
-    menuName: '客户服务',
-    menuKey: 'customerService',
-    menuPath: './about',
-  },
-  {
-    menuName: '新闻中心',
-    menuKey: 'newsCenter',
-    menuPath: './about',
-  },
-  {
-    menuName: '联系我们',
-    menuKey: 'contactUs',
-    menuPath: './about',
-  },
-]
-
 @observer
 class Header extends React.Component {
   @observable activeKey = 'aboutGE'
   render () {
     const { history } = this.props
-    // const menuItem = menus.map(item => {
-    //   return (
-    //     <span
-    //       key={item.menuKey}
-    //       className={cls({ "mr40 menu-item": true, active: this.activeKey === item.menuKey })}
-    //       onClick={() => {
-    //         this.activeKey = item.menuKey
-    //         history.push(item.menuPath)
-    //       }}
-    //     >
-    //       {item.menuName}
-    //     </span>
-    //   )
-    // })
     return (
       <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <a className="navbar-brand" href="#">Fixed navbar</a>

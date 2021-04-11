@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { ConfigProvider } from 'antd'
 import Header from './header'
+import Footer from './footer'
 import React from 'react'
 import zhCN from 'antd/lib/locale-provider/zh_CN'
 
@@ -20,15 +21,7 @@ export default class Frame extends React.Component {
           <main role="main">
             {children}
           </main>
-          <footer className="container">
-            <p className="float-right"><a href="#">Back to top</a></p>
-            <p>
-              &copy; 2017-2021 Company, Inc. &middot;
-              <a href="#">Privacy</a>
-              &middot;
-              <a href="#">Terms</a>
-            </p>
-          </footer>
+          <Footer />
         </div>
       </ConfigProvider>
     )

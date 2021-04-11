@@ -1,7 +1,9 @@
-import { Button, Modal } from "antd"
+import { Button, Modal, Row, Col } from "antd"
 import React, { Component } from "react"
 import { action, observable } from "mobx"
 import { inject, observer } from "mobx-react"
+import LineTitle from '../component/line-title'
+import '../component/side-slider'
 
 import HomeStore from "./store-home"
 
@@ -10,305 +12,81 @@ const store = new HomeStore()
 @observer
 class Home extends Component {
   componentDidMount () {
-    console.log(this.props, 1111)
     // store.getContent()
   }
 
   render () {
+    const { productHighLights, productAdvances } = store
+    const highLights = productHighLights.map((item, i) => (
+      <Col
+        xs={12}
+        sm={12}
+        md={12}
+        lg={4}
+        xl={4}
+        className={`FBV FBAC ${i ? 'detail-item' : ''}`}
+        key={item.id}
+      >
+        <span className="subtitle-font">{item.value}</span>
+        <div className="highlight-border"></div>
+        <span className="mini-font mt6">{item.name}</span>
+      </Col>
+    ))
+    const homeAdvanceItems = productAdvances.map(item => (
+      <Col
+        key={item.id}
+        xs={12}
+        sm={12}
+        md={12}
+        lg={6}
+        xl={6}
+        className="FBV FBAC advance-item"
+      >
+        <div className="advance-icon"></div>
+        <span className="advance-name">{item.name}</span>
+        <div className="thin mini-font fac">{item.value}</div>
+      </Col>
+    ))
     return (
-      <div>
-        <div id="myCarousel" className="carousel slide" data-ride="carousel">
-          <ol className="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" className="active" />
-            <li data-target="#myCarousel" data-slide-to="1" />
-            <li data-target="#myCarousel" data-slide-to="2" />
-          </ol>
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <svg
-                className="bd-placeholder-img"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label=" :  "
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title></title>
-                <rect width="100%" height="100%" fill="#777" />
-                <text x="50%" y="50%" fill="#777" dy=".3em"></text>
-              </svg>
-              <div className="container">
-                <div className="carousel-caption text-left">
-                  <h1>Example headline.</h1>
-                  <p>
-                    Some representative placeholder content for the first slide of
-                    the carousel.
-                  </p>
-                  <p>
-                    <a className="btn btn-lg btn-primary" href="#">Sign up today</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="carousel-item">
-              <svg
-                className="bd-placeholder-img"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label=" :  "
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title></title>
-                <rect width="100%" height="100%" fill="#777" />
-                <text x="50%" y="50%" fill="#777" dy=".3em"></text>
-              </svg>
-
-              <div className="container">
-                <div className="carousel-caption">
-                  <h1>Another example headline.</h1>
-                  <p>
-                    Some representative placeholder content for the second slide
-                    of the carousel.
-                  </p>
-                  <p><a className="btn btn-lg btn-primary" href="#">Learn more</a></p>
-                </div>
-              </div>
-            </div>
-            <div className="carousel-item">
-              <svg
-                className="bd-placeholder-img"
-                width="100%"
-                height="100%"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label=" :  "
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title></title>
-                <rect width="100%" height="100%" fill="#777" />
-                <text x="50%" y="50%" fill="#777" dy=".3em"></text>
-              </svg>
-
-              <div className="container">
-                <div className="carousel-caption text-right">
-                  <h1>One more for good measure.</h1>
-                  <p>
-                    Some representative placeholder content for the third slide of
-                    this carousel.
-                  </p>
-                  <p>
-                    <a className="btn btn-lg btn-primary" href="#">Browse gallery</a>
-                  </p>
-                </div>
-              </div>
-            </div>
+      <div className="page-home">
+        <div className="home-header FBV FBAC">
+          <h1 className="home-header-title">YashanDB - SQL at SCALE</h1>
+          <div className="home-header-content mini-font">
+            YashanDB是一款定位于在线事务处理/在线分析处理（HTAP: Hybrid Transactional/Analytical Processing）
+            的融合型数据库产品，实现了一键水平伸缩，强一致性的多副本数据安全，分布式事务，实时OLAP等重要特性。
+            同时兼容 MySQL 协议和生态，迁移便捷，运维成本极低。
           </div>
-          <a
-            className="carousel-control-prev"
-            href="#myCarousel"
-            role="button"
-            data-slide="prev"
-          >
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="sr-only">Previous</span>
-          </a>
-          <a
-            className="carousel-control-next"
-            href="#myCarousel"
-            role="button"
-            data-slide="next"
-          >
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-            <span className="sr-only">Next</span>
-          </a>
+          <button type="button" className="start-btn">立即开始</button>
+          <div className="home-header-banner"></div>
         </div>
-        <div className="container marketing">
-          <div className="row">
-            <div className="col-lg-4">
-              <svg
-                className="bd-placeholder-img rounded-circle"
-                width="140"
-                height="140"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: 140x140"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#777" />
-                <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-              </svg>
-
-              <h2>Heading</h2>
-              <p>
-                Some representative placeholder content for the three columns of
-                text below the carousel. This is the first column.
-              </p>
-              <p>
-                <a className="btn btn-secondary" href="#">View details &raquo;</a>
-              </p>
-            </div>
-            <div className="col-lg-4">
-              <svg
-                className="bd-placeholder-img rounded-circle"
-                width="140"
-                height="140"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: 140x140"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#777" />
-                <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-              </svg>
-
-              <h2>Heading</h2>
-              <p>
-                Another exciting bit of representative placeholder content. This
-                time, we have moved on to the second column.
-              </p>
-              <p>
-                <a className="btn btn-secondary" href="#">View details &raquo;</a>
-              </p>
-            </div>
-            <div className="col-lg-4">
-              <svg
-                className="bd-placeholder-img rounded-circle"
-                width="140"
-                height="140"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: 140x140"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#777" />
-                <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-              </svg>
-
-              <h2>Heading</h2>
-              <p>
-                And lastly this, the third column of representative placeholder
-                content.
-              </p>
-              <p>
-                <a className="btn btn-secondary" href="#">View details &raquo;</a>
-              </p>
-            </div>
+        <div className="home-highlight FBV">
+          <div className="top-line"></div>
+          <div className="FBAC-S">
+            <LineTitle title="产品亮点" titleClass="subtitle-font" />
           </div>
-
-          <hr className="featurette-divider" />
-
-          <div className="row featurette">
-            <div className="col-md-7">
-              <h2 className="featurette-heading">
-                First featurette heading.
-                <span className="text-muted">
-                  It’ll blow your mind.
-                </span>
-              </h2>
-              <p className="lead">
-                Some great placeholder content for the first featurette here.
-                Imagine some exciting prose here.
-              </p>
-            </div>
-            <div className="col-md-5">
-              <svg
-                className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-                width="500"
-                height="500"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: 500x500"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#eee" />
-                <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-              </svg>
-            </div>
+          <div className="FBAC-S highlight-content">
+            产品亮点文案补充，可补充一些吸引用户的相关利益点，
+            产品亮点文案可补充一些吸引用户相关利益。产品亮点文案补充，产品亮点文案可补充
           </div>
-
-          <hr className="featurette-divider" />
-
-          <div className="row featurette">
-            <div className="col-md-7 order-md-2">
-              <h2 className="featurette-heading">
-                Oh yeah, it’s that good.
-                <span className="text-muted">
-                  See for yourself.
-                </span>
-              </h2>
-              <p className="lead">
-                Another featurette? Of course. More placeholder content here to
-                give you an idea of how this layout would work with some actual
-                real-world content in place.
-              </p>
-            </div>
-            <div className="col-md-5 order-md-1">
-              <svg
-                className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-                width="500"
-                height="500"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: 500x500"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#eee" />
-                <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-              </svg>
-            </div>
+          <Row gutter={8} className="highlight-detail FBAC-S FBJB">
+            {highLights}
+          </Row>
+          <div className="bottom-line FBAE-S"></div>
+        </div>
+        <div className="home-advance FBV">
+          <div className="FBAC-S">
+            <LineTitle title="产品亮点" titleClass="subtitle-white" />
           </div>
-
-          <hr className="featurette-divider" />
-
-          <div className="row featurette">
-            <div className="col-md-7">
-              <h2 className="featurette-heading">
-                And lastly, this one.
-                <span className="text-muted">
-                  Checkmate.
-                </span>
-              </h2>
-              <p className="lead">
-                And yes, this is the last block of representative placeholder
-                content. Again, not really intended to be actually read, simply
-                here to give you a better view of what this would look like with
-                some actual content. Your content.
-              </p>
-            </div>
-            <div className="col-md-5">
-              <svg
-                className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-                width="500"
-                height="500"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: 500x500"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#eee" />
-                <text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text>
-              </svg>
-            </div>
+          <div className="FBAC-S highlight-content">
+            产品亮点文案补充，可补充一些吸引用户的相关利益点，
+            产品亮点文案可补充一些吸引用户相关利益。产品亮点文案补充，产品亮点文案可补充
           </div>
-          <hr className="featurette-divider" />
+          <Row gutter={16} className="advance-detail FBAC-S">
+            {homeAdvanceItems}
+          </Row>
+        </div>
+        <div className="slider">
+
         </div>
       </div>
     )

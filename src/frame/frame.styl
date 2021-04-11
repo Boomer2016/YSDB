@@ -3,35 +3,58 @@
   width 100%
   height 100%
   min-height 75rem
-  padding-top 0.5rem
-.frame
-  min-width 1200px
-  height 100%
-.frame-main
-  @extend .frame
-  /.main-col
-    height 100%
-    overflow-y auto
-  /.sidebar-col
-    @extend .main-col
-    background-color #fff
-.frame-title-control
-  display inline-block
-  margin 12px 0 0 12px
-  font-weight 600
-  font-size 18px
-  color rgba(0, 0, 0, 0.65)
-  font-family Avenir, Helvetica Neue, Arial, Helvetica, sans-serif
-  vertical-align middle
-.common-header
-  height 60px
-  line-height 60px
+  overflow-y auto
+  overflow-x hidden
+  font-family 'Microsoft YaHei'
+.header-dark
+  background #001322
+  font-weight 300
   .menu-item
-    font-size 16px
-    color rgba(0, 0, 0, 0.85)
-    &:hover
-      color #108EE9
-      cursor pointer
-  .active
-    color #108EE9
+    color #ffffff !important
+    font-size 0.9rem
+    padding-bottom 0.2rem
     cursor pointer
+    margin 0.8rem
+    &:hover
+      border-bottom 0.1rem solid rgba(255, 255, 255, 0.8)
+  .active
+    border-bottom 0.1rem solid rgba(255, 255, 255, 0.8)
+  .nav-logo
+    width 25vw
+  .nav-menu
+    width 50vw
+    margin-right 25vw
+.frame-footer
+  background #001322
+  width 100%
+  color #ffffff
+  font-weight 300
+  .footer-main
+    width 100%
+    .footer-logo
+      padding-left 10vw
+      font-weight 500
+      font-size 1.4rem
+      padding-top 4rem
+      @media only screen and (max-width: 768px)
+        text-align center
+        padding 1rem
+    .footer-link
+      padding 4rem 2rem
+      @media only screen and (max-width: 768px)
+        padding 1rem
+      .link-item
+        font-size 1.2rem
+        font-weight 800
+      .link-name
+        font-size 0.9rem
+        color rgba(255, 255, 255, 0.65)
+  .footer-address
+    width 100%
+    border-top 0.1rem solid rgba(255, 255, 255, 0.4)
+    padding 1.6rem 0rem 1.6rem 10vw
+    font-size 0.9rem
+    color rgba(255, 255, 255, 0.65)
+    @media only screen and (max-width: 768px)
+      padding 1rem
+      text-align center

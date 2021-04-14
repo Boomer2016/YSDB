@@ -3,7 +3,7 @@ import React, { Component } from "react"
 import { action, observable } from "mobx"
 import { inject, observer } from "mobx-react"
 import LineTitle from '../component/line-title'
-import '../component/side-slider'
+// import '../component/side-slider'
 
 import HomeStore from "./store-home"
 
@@ -56,7 +56,7 @@ class Home extends Component {
             的融合型数据库产品，实现了一键水平伸缩，强一致性的多副本数据安全，分布式事务，实时OLAP等重要特性。
             同时兼容 MySQL 协议和生态，迁移便捷，运维成本极低。
           </div>
-          <button type="button" className="start-btn">立即开始</button>
+          <button type="button" className="common-btn">立即开始</button>
           <div className="home-header-banner"></div>
         </div>
         <div className="home-highlight FBV">
@@ -85,8 +85,16 @@ class Home extends Component {
             {homeAdvanceItems}
           </Row>
         </div>
-        <div className="slider">
+        {/* <div className="slider">
 
+        </div> */}
+        <div className="home-experience FBV">
+          <LineTitle title="云数据库YashanDB等你来体验" titleClass="subtitle-white" />
+          <div className="FBAC-S highlight-content m14">
+            产品亮点文案补充，可补充一些吸引用户的相关利益点，
+            产品亮点文案可补充一些吸引用户相关利益。产品亮点文案补充，产品亮点文案可补充
+          </div>
+          <button type="button" className="common-btn FBAC-S">立即体验</button>
         </div>
       </div>
     )

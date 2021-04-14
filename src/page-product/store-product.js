@@ -2,6 +2,11 @@ import { action, observable, runInAction } from 'mobx'
 
 import io from './io'
 import { message } from 'antd'
+import scene1 from '../image/scene1.png'
+import scene2 from '../image/scene2.png'
+import scene3 from '../image/scene3.png'
+import scene4 from '../image/scene4.png'
+
 
 export default class HomeStore {
   // 被观察的属性
@@ -21,6 +26,12 @@ export default class HomeStore {
     {name: '服务能力4', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', id: 4},
     {name: '服务能力5', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', id: 5},
     {name: '服务能力6', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', id: 6},
+  ]
+  @observable productScenes = [
+    {name: '场景分类1', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene1, url: './', id: 1},
+    {name: '场景分类2', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene2, url: './', id: 2},
+    {name: '场景分类3', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene3, url: './', id: 3},
+    {name: '场景分类4', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene4, url: './', id: 4},
   ]
 
   // 异步action示例

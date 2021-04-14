@@ -24,27 +24,58 @@
         width 98%
   .product-arch
     background #ffffff
-    padding 0 2rem
+    padding 1rem
     .arch-pic
-      width 50%
-      padding 2rem
       img
         width 100%
         height auto
     .arch-content
-      width 50%
       padding 2rem
       font-size 0.9rem
   .service-power
     background linear-gradient(to right, #55BDFA, #0059B3)
     color #ffffff
     padding 2rem
+    @media only screen and (max-width: 768px)
+      padding 2rem 0
     .service-title
       width 50%
+      @media only screen and (max-width: 768px)
+        width 100%
+    .service-padding
+      padding 1rem 10vw
     .service-content
       .power-item
-        border-right 0.1rem solid #ebebeb
+        border-right 0.1rem solid #e0e0e0
         margin 1rem 0rem
+        padding-left 1rem
+        @media only screen and (max-width: 768px)
+          border none
+  .product-scene
+    padding-top 2rem
+    .scene-item
+      height 23rem
+      padding 3rem
+      color #ffffff
+      background-size cover
+      background-color #6B92C2
+      background-repeat no-repeat
+      border 4px solid #fff
+  .core-value
+    padding-top 2rem
+    // .scene-row
+    //   :nth-child(odd)
+    //     background #1E67AD
+    .value-item
+      height 10rem
+      padding 3rem
+      color #ffffff
+      background-color #24A0E4
+    .value-icon
+      height 5rem
+      width 5rem
+      border 1rem solid #ffffff
+      border-radius 50%
 .highlight-content
   width 60%
   text-align center

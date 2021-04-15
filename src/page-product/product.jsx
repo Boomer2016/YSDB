@@ -55,13 +55,13 @@ class Product extends Component {
         xs={24}
         sm={24}
         md={12}
-        lg={6}
-        xl={6}
+        lg={5}
+        xl={5}
         key={item.id}
       >
         <div className="value-icon"></div>
-        <span className="pl20 pr20">{item.name}</span>
-        <span className="mini-font mt8 pl20 pr20">{item.value}</span>
+        <span className="p10">{item.name}</span>
+        <span className="mini-font fac">{item.value}</span>
       </Col>
     ))
     return (
@@ -126,7 +126,7 @@ class Product extends Component {
             YashanDB 是深圳计算科学研究院 CoD(Conquest of Data)团队完全自研的新型大数
             据分布式实时分析数据 (边框文本)
           </div>
-          <Row gutter={[16, 16]} className="pt20 scene-row">{valueItems}</Row>
+          <Row justify="space-between" className="pt20 scene-row">{valueItems}</Row>
         </div>
       </div>
     )

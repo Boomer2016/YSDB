@@ -6,6 +6,8 @@ import CommonStore from './common/store-common'
 import Frame from './frame'
 import Home from './page-home'
 import Product from './page-product'
+import Solution from './page-solution'
+import Customer from './page-customer'
 import { Provider } from 'mobx-react'
 import React from 'react'
 import ReactDom from 'react-dom'
@@ -22,6 +24,8 @@ export default class Entry extends React.Component {
             <Switch>
               <Route path="/home" component={Home} />
               <Route path="/product-system" component={Product} />
+              <Route path="/solution" component={Solution} />
+              <Route path="/customer-case" component={Customer} />
               <Redirect exact from="/" to="/home" />
             </Switch>
           </Frame>

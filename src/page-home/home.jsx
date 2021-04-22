@@ -3,9 +3,9 @@ import React, { Component } from "react"
 import { action, observable } from "mobx"
 import { inject, observer } from "mobx-react"
 import LineTitle from '../component/line-title'
-// import '../component/side-slider'
-
+import Slider from "react-slick"
 import HomeStore from "./store-home"
+import { RightOutlined, LeftOutlined } from '@ant-design/icons'
 
 const store = new HomeStore()
 
@@ -16,7 +16,19 @@ class Home extends Component {
   }
 
   render () {
-    const { productHighLights, productAdvances } = store
+    const { productHighLights, productAdvances, partners } = store
+    const settings = {
+      className: "common-slider",
+      dots: true,
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      adaptiveHeight: true,
+      autoplay: true,
+      speed: 2000,
+      autoplaySpeed: 5000,
+      rtl: true,
+    }
     const highLights = productHighLights.map((item, i) => (
       <Col
         xs={12}
@@ -46,6 +58,22 @@ class Home extends Component {
         <span className="advance-name">{item.name}</span>
         <div className="thin mini-font fac">{item.value}</div>
       </Col>
+    ))
+
+    const partnerItems = partners.map(item => (
+      <div key={item.id} className="partner-item">
+        <div className="FBV FBJC">
+          <span className="p10">{item.content}</span>
+          <span className="partner-item-name">
+            ——
+            {item.name}
+            （
+            {item.department}
+            ）
+          </span>
+        </div>
+        <img src={item.img} alt="合作伙伴" className="partner-item-src" />
+      </div>
     ))
     return (
       <div className="page-home">
@@ -85,9 +113,16 @@ class Home extends Component {
             {homeAdvanceItems}
           </Row>
         </div>
-        {/* <div className="slider">
-
-        </div> */}
+        <div className="partner-area ">
+          <LineTitle title="合作伙伴" titleClass="subtitle-font" className="slider-title" />
+          <div className="FBH FBJB FBAC">
+            <LeftOutlined className="left-icon" />
+            <Slider {...settings}>
+              {partnerItems}
+            </Slider>
+            <RightOutlined className="right-icon" />
+          </div>
+        </div>
         <div className="home-experience FBV">
           <LineTitle title="云数据库YashanDB等你来体验" titleClass="subtitle-white" />
           <div className="FBAC-S highlight-content m14">

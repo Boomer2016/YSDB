@@ -1,10 +1,10 @@
-import './about.styl'
+import './cooperation.styl'
 
 import { asyncComponent } from '../common/util'
 
 export default asyncComponent(async () => {
   try {
-    const module = await import('./about')
+    const module = await import('./cooperation')
     return module.default
   } catch (error) {
     console.log(error)

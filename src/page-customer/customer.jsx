@@ -3,6 +3,7 @@ import React, { Component } from "react"
 import { action, observable } from "mobx"
 import { inject, observer } from "mobx-react"
 import LineTitle from '../component/line-title'
+import solutionSrc from '../image/solution.png'
 
 import CustomerStore from "./store-customer"
 
@@ -61,6 +62,14 @@ class Customer extends Component {
             据分布式实时分析数据 (边框文本)
           </div>
           <Row justify="space-between" className="pt20">{caseItems}</Row>
+        </div>
+        <div className="solution-area FBV FBAC">
+          <LineTitle titleClass="subtitle-font" title="解决方案" />
+          <div className="mini-font mt10 fac">
+            YashanDB 是深圳计算科学研究院 CoD(Conquest of Data)团队完全自研的新型大数
+            据分布式实时分析数据 (边框文本)
+          </div>
+          <img src={solutionSrc} alt="解决方案" className="solution-src" />
         </div>
         <div className="customer-earns FBV FBAC">
           <LineTitle titleClass="subtitle-font" title="客户收益" />

@@ -2,6 +2,7 @@ import { action, observable, runInAction } from 'mobx'
 
 import io from './io'
 import { message } from 'antd'
+import partnerSrc from '../image/partner.png'
 
 export default class HomeStore {
   // 被观察的属性
@@ -23,6 +24,13 @@ export default class HomeStore {
     {name: '兼容并包', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', id: 6},
     {name: '兼容并包', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', id: 7},
     {name: '兼容并包', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', id: 8},
+  ]
+
+  @observable partners = [
+    {id: 1, name: '林玉冰', department: '淘宝技术部基础交易', img: partnerSrc, content: '淘宝收藏夹服务集团内50+业务方，总体收藏关系数将近千亿，并发量数十万，非常好的支持了收藏夹的读写场景，经历了多次大促高并发考'},
+    {id: 2, name: '黄柏强', department: '淘宝技术部基础交易', img: partnerSrc, content: '淘宝收藏夹服务集团内50+业务方，总体收藏关系数将近千亿，并发量数十万，非常好的支持了收藏夹的读写场景，经历了多次大促高并发考'},
+    {id: 3, name: '李玉山', department: '淘宝技术部基础交易', img: partnerSrc, content: '淘宝收藏夹服务集团内50+业务方，总体收藏关系数将近千亿，并发量数十万，非常好的支持了收藏夹的读写场景，经历了多次大促高并发考'},
+    {id: 4, name: '赵清华', department: '淘宝技术部基础交易', img: partnerSrc, content: '淘宝收藏夹服务集团内50+业务方，总体收藏关系数将近千亿，并发量数十万，非常好的支持了收藏夹的读写场景，经历了多次大促高并发考'},
   ]
 
   // 异步action示例

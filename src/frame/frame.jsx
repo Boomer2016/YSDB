@@ -2,6 +2,8 @@ import 'antd/dist/antd.less'
 import '../common/util.styl'
 import '../common/flex-box.styl'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 import { ConfigProvider } from 'antd'
 import Header from './header'

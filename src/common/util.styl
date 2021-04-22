@@ -206,10 +206,16 @@ for $n in 2 3 4 5
   font-weight 800
   font-size 2rem
   color #2E5890
+  @media only screen and (max-width: 768px)
+    font-size 1.2rem
+    font-weight 400
 .subtitle-white
   font-weight 800
   font-size 2rem
   color #ffffff
+  @media only screen and (max-width: 768px)
+    font-size 1.2rem
+    font-weight 400
 .mini-font
   font-size 0.8rem
 .thin
@@ -223,3 +229,7 @@ for $n in 2 3 4 5
   width 8rem
   height 2.5rem
   line-height 2.5rem
+.slick-next
+  display none !important
+.slick-prev
+  display none !important

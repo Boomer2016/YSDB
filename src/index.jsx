@@ -8,6 +8,8 @@ import Home from './page-home'
 import Product from './page-product'
 import Solution from './page-solution'
 import Customer from './page-customer'
+import Cooperation from './page-cooperation'
+import About from './page-about'
 import { Provider } from 'mobx-react'
 import React from 'react'
 import ReactDom from 'react-dom'
@@ -26,6 +28,8 @@ export default class Entry extends React.Component {
               <Route path="/product-system" component={Product} />
               <Route path="/solution" component={Solution} />
               <Route path="/customer-case" component={Customer} />
+              <Route path="/cooperation-ecological" component={Cooperation} />
+              <Route path="/about-us" component={About} />
               <Redirect exact from="/" to="/home" />
             </Switch>
           </Frame>

@@ -23,6 +23,49 @@
       font-weight 300
       @media only screen and (max-width: 768px)
         width 98%
+    .home-header-banner
+      width 100%
+      margin 2rem 0
+      height 15rem
+      display flex
+      justify-content center
+      align-items center
+      .banner-item
+        width 33%
+        height 80%
+        border-radius 0.5rem
+        background-color #7D9BC7
+        opacity 0.6
+        transition opacity 1s
+        display flex
+        flex-direction column
+        justify-content space-between
+        cursor pointer
+        @media only screen and (max-width: 768px)
+          height 60%
+      .banner-active
+        height 95%
+        margin-bottom 2.8%
+        margin-left -5%
+        margin-right -5%
+        z-index 99
+        padding 2rem
+        background-image url('../image/homeBannerBg.svg')
+        background-repeat no-repeat
+        background-size contain
+        background-position right bottom
+        opacity 1
+        transition margin-right 1s
+        @media only screen and (max-width: 768px)
+          height 70%
+          padding 2rem 0.2rem
+          text-align center
+      .active-content-bottom
+        font-size 1.5rem
+        width 40%
+        @media only screen and (max-width: 768px)
+          font-size 0.8rem
+          width 100%
   .home-highlight
     width 100%
     height auto
@@ -86,9 +129,9 @@
     margin 0.1rem !important
     align-items center !important
 .left-icon
-    color #0059B3
-    font-size 2rem
-    cursor pointer
+  color #0059B3
+  font-size 2rem
+  cursor pointer
 .right-icon
   color #0059B3
   font-size 2rem

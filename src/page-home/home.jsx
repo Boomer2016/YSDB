@@ -1,33 +1,63 @@
 import { Button, Modal, Row, Col } from "antd"
 import React, { Component } from "react"
-import { action, observable } from "mobx"
+import { action, observable, toJS } from "mobx"
 import { inject, observer } from "mobx-react"
 import LineTitle from '../component/line-title'
 import Slider from "react-slick"
 import HomeStore from "./store-home"
 import { RightOutlined, LeftOutlined } from '@ant-design/icons'
+import homeExpSrc from '../image/homeExp.svg'
 
 const store = new HomeStore()
 
 @observer
 class Home extends Component {
+  @observable startIndex = 0
+  slider = React.createRef()
+  timer = null
+
   componentDidMount () {
-    // store.getContent()
+    this.bannerStart()
+  }
+
+  componentWillUnmount () {
+    if (this.timer) {
+      clearInterval(this.timer)
+      this.timer = null
+    }
+  }
+
+  @action
+  bannerStart = () => {
+    this.timer = setInterval(() => {
+      this.startIndex = this.startIndex + 1
+    }, 5000)
   }
 
   render () {
-    const { productHighLights, productAdvances, partners } = store
+    const { productHighLights, productAdvances, partners, bannerData } = store
+    const activeIndex = toJS(this.startIndex) % bannerData.length
+    const showItems = bannerData.slice(activeIndex)
+    let actualShowitems = []
+    if (showItems.length === 1) {
+      actualShowitems = showItems.concat([bannerData[0], bannerData[1]])
+    } else if (showItems.length === 2) {
+      actualShowitems = showItems.concat(bannerData[0])
+    } else {
+      actualShowitems = showItems.slice(0, 3)
+    }
     const settings = {
       className: "common-slider",
-      dots: true,
+      dots: false,
       infinite: true,
       slidesToShow: 1,
       slidesToScroll: 1,
       adaptiveHeight: true,
       autoplay: true,
-      speed: 2000,
+      speed: 500,
       autoplaySpeed: 5000,
       rtl: true,
+      ref: this.slider,
     }
     const highLights = productHighLights.map((item, i) => (
       <Col
@@ -85,7 +115,14 @@ class Home extends Component {
             同时兼容 MySQL 协议和生态，迁移便捷，运维成本极低。
           </div>
           <button type="button" className="common-btn">立即开始</button>
-          <div className="home-header-banner"></div>
+          <div className="home-header-banner">
+            {actualShowitems.map((item, i) => (
+              <div key={item.id} className={`banner-item ${i === 1 ? 'banner-active' : ''}`}>
+                {i === 1 && <span>{item.title}</span>}
+                {i === 1 && <span className="active-content-bottom">{item.content}</span>}
+              </div>
+            ))}
+          </div>
         </div>
         <div className="home-highlight FBV">
           <div className="top-line"></div>
@@ -116,11 +153,11 @@ class Home extends Component {
         <div className="partner-area ">
           <LineTitle title="合作伙伴" titleClass="subtitle-font" className="slider-title" />
           <div className="FBH FBJB FBAC">
-            <LeftOutlined className="left-icon" />
+            <LeftOutlined className="left-icon" onClick={() => this.slider.current.slickPrev()} />
             <Slider {...settings}>
               {partnerItems}
             </Slider>
-            <RightOutlined className="right-icon" />
+            <RightOutlined className="right-icon" onClick={() => this.slider.current.slickNext()} />
           </div>
         </div>
         <div className="home-experience FBV">

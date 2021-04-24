@@ -9,23 +9,28 @@ const store = new FrameStore()
 
 @observer
 class Header extends React.Component {
-  @observable activeKey = 'page1'
+  @observable activeKey = '/home'
+  componentDidMount() {
+    const {pathname} = window.location
+    this.activeKey = pathname
+  }
+
   render () {
     const { history } = this.props
     const { menus } = store
     const menuItems = menus.map(item => {
       return (
-        <li className="nav-item" key={item.key}>
+        <li className="nav-item" key={item.url}>
           <span
             className={cls({
               'menu-item': true,
-              active: item.key === this.activeKey,
+              active: item.url === this.activeKey,
             })}
             onClick={() => {
               history.push({
                 pathname: item.url,
               })
-              this.activeKey = item.key
+              this.activeKey = item.url
             }}
           >
             {item.name}

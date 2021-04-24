@@ -7,6 +7,13 @@ import partnerSrc from '../image/partner.png'
 export default class HomeStore {
   // 被观察的属性
   @observable content = ''
+  @observable bannerData = [
+    {title: 'YashanDB', content: 'YashanDB职场加速器1', id: 1, index: 0},
+    {title: 'YashanDB', content: 'YashanDB职场加速器2', id: 2, index: 1},
+    {title: 'YashanDB', content: 'YashanDB职场加速器3', id: 3, index: 2},
+    {title: 'YashanDB', content: 'YashanDB职场加速器4', id: 4, index: 3},
+    {title: 'YashanDB', content: 'YashanDB职场加速器5', id: 5, index: 4},
+  ]
   @observable productHighLights = [
     {name: '数据库峰值处理能力（万次/秒）', value: 6100, id: 1},
     {name: '可支持最大节点数量（台）', value: 1500, id: 2},

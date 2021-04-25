@@ -152,8 +152,8 @@ class Home extends Component {
             {homeAdvanceItems}
           </Row>
         </div>
-        <div className="partner-area ">
-          <LineTitle title="合作伙伴" titleClass="subtitle-font" className="slider-title" />
+        <div className="partner-area">
+          <LineTitle title="合作伙伴" titleClass="subtitle-font" className="t-FBJS" />
           <div className="FBH FBJB FBAC">
             <LeftOutlined className="left-icon" onClick={() => this.slider.current.slickPrev()} />
             <Slider {...settings}>

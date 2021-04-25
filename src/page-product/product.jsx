@@ -18,7 +18,7 @@ class Product extends Component {
 
   render () {
     const { servicePowers, productScenes } = store
-     const settings = {
+    const settings = {
       infinite: true,
       speed: 500,
       slidesToShow: 4,
@@ -31,25 +31,25 @@ class Product extends Component {
             slidesToShow: 3,
             slidesToScroll: 3,
             infinite: true,
-          }
+          },
         },
         {
           breakpoint: 600,
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
-            initialSlide: 2
-          }
+            initialSlide: 2,
+          },
         },
         {
           breakpoint: 480,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-    };
+            slidesToScroll: 1,
+          },
+        },
+      ],
+    }
     const powerItems = servicePowers.map(item => (
       <Col
         className="FBV power-item"
@@ -121,7 +121,7 @@ class Product extends Component {
               lg={10}
               xl={10}
             >
-              <LineTitle titleClass="subtitle-font" title="产品简介"  className="t-FBJS" />
+              <LineTitle titleClass="subtitle-font" title="产品简介" className="t-FBJS" />
               <span className="intro-detail">
                 YashanDB 迁移服务连接的两端分别是待迁移的源业务数据库以及目标端 YashanDB 数据库，内部主要包含一站式迁移调度
                 YashanDB 迁移服务连接的两端分别是待迁移的源业务数据库以及目标端 YashanDB 数据库，内部主要包含一站式迁移调度
@@ -167,7 +167,7 @@ class Product extends Component {
         </div>
         <div className="service-power m-p2rem">
           <div className="service-title">
-            <LineTitle titleClass="subtitle-font" title="服务能力" className="t-FBJS"/>
+            <LineTitle titleClass="subtitle-font" title="服务能力" className="t-FBJS" />
           </div>
           <div className="service-padding">
             <Row gutter={16} className="service-content FBAS-C">

@@ -1,11 +1,12 @@
-import { Button, Modal, Row, Col } from "antd"
+import { Button, Col, Modal, Row } from "antd"
+import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import React, { Component } from "react"
 import { action, observable, toJS } from "mobx"
 import { inject, observer } from "mobx-react"
+
+import HomeStore from "./store-home"
 import LineTitle from '../component/line-title'
 import Slider from "react-slick"
-import HomeStore from "./store-home"
-import { RightOutlined, LeftOutlined } from '@ant-design/icons'
 import homeExpSrc from '../image/homeExp.svg'
 
 const store = new HomeStore()
@@ -46,6 +47,7 @@ class Home extends Component {
     } else {
       actualShowitems = showItems.slice(0, 3)
     }
+    console.log(actualShowitems, 'actualShowitems', activeIndex)
     const settings = {
       className: "common-slider",
       dots: false,
@@ -140,7 +142,7 @@ class Home extends Component {
         </div>
         <div className="home-advance FBV">
           <div className="FBAC-S">
-            <LineTitle title="产品亮点" titleClass="subtitle-white" />
+            <LineTitle title="产品亮点" titleClass="subtitle-font" />
           </div>
           <div className="FBAC-S highlight-content">
             产品亮点文案补充，可补充一些吸引用户的相关利益点，

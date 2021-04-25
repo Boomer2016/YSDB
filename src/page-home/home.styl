@@ -12,7 +12,7 @@
       width 65%
       text-align center
       color #ffffff
-      @media only screen and (max-width: 768px)
+      @media only screen and (max-width 768px)
         width 100%
         font-size 1.4rem
     .home-header-content
@@ -21,7 +21,7 @@
       text-align center
       font-size 1rem
       font-weight 300
-      @media only screen and (max-width: 768px)
+      @media only screen and (max-width 768px)
         width 98%
     .home-header-banner
       width 100%
@@ -41,7 +41,7 @@
         flex-direction column
         justify-content space-between
         cursor pointer
-        @media only screen and (max-width: 768px)
+        @media only screen and (max-width 768px)
           height 60%
       .banner-active
         height 95%
@@ -56,14 +56,14 @@
         background-position right bottom
         opacity 1
         transition margin-right 1s
-        @media only screen and (max-width: 768px)
+        @media only screen and (max-width 768px)
           height 70%
           padding 2rem 0.2rem
           text-align center
       .active-content-bottom
         font-size 1.5rem
         width 40%
-        @media only screen and (max-width: 768px)
+        @media only screen and (max-width 768px)
           font-size 0.8rem
           width 100%
   .home-highlight
@@ -79,7 +79,6 @@
     .bottom-line
       background-image url('../image/right-bottom-line.svg')
       background-repeat no-repeat
-      background-size contain
       height 2rem
       width 16%
     .highlight-title
@@ -104,8 +103,9 @@
   padding 0.4rem 0
 .home-advance
   width 100%
-  background #3978c2
-  color #ffffff
+  background-image url('../image/homeProd.svg')
+  background-repeat no-repeat
+  background-size cover
   padding 1rem
   .advance-icon
     height 3rem
@@ -117,7 +117,10 @@
   .advance-name
     margin 0.4rem 0
 .home-experience
-  background linear-gradient(to right, #55BDFA, #0059B3)
+  background-image url('../image/homeExp.svg')
+  background-repeat no-repeat
+  background-size cover
+  background-position-y 80%
   padding 3.5rem 0.12rem 8rem
   color #ffffff
 .common-slider
@@ -125,7 +128,7 @@
 .slider-title
   margin-bottom -2rem !important
   align-items flex-start
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width 768px)
     margin 0.1rem !important
     align-items center !important
 .left-icon
@@ -137,20 +140,23 @@
   font-size 2rem
   cursor pointer
 .partner-area
+  background-image url('../image/homePartner.svg')
+  background-repeat no-repeat
+  background-size contain
   padding 2rem
   .partner-item
     display flex !important
     width 100%
     flex-direction row !important
     justify-content space-between
-    @media only screen and (max-width: 768px)
+    @media only screen and (max-width 768px)
       flex-direction column !important
   .partner-item-content
     display flex !important
     width 60%
     height 100%
     align-items center
-    @media only screen and (max-width: 768px)
+    @media only screen and (max-width 768px)
       width 100% !important
   .partner-item-name
     margin-top 1rem
@@ -160,5 +166,5 @@
   .partner-item-src
     width 40%
     height 100%
-    @media only screen and (max-width: 768px)
+    @media only screen and (max-width 768px)
       width 100% !important

@@ -1,9 +1,11 @@
+import { Col, Row } from 'antd'
+
+import FrameStore from './store-frame'
 import React from 'react'
+import logoSrc from '../image/logo.png'
 import { observable } from 'mobx'
 import { observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
-import FrameStore from './store-frame'
-import { Row, Col } from 'antd'
 
 const store = new FrameStore()
 
@@ -29,7 +31,7 @@ class Footer extends React.Component {
       <div className="frame-footer FBV">
         <Row className="footer-main">
           <Col className="footer-logo" xs={24} sm={24} md={24} lg={8} xl={8}>
-            YashanDB
+            <img src={logoSrc} alt="YashanDB" className="common-logo" />
           </Col>
           <Col className="footer-link" xs={24} sm={24} md={16} lg={16} xl={16}>
             <Row gutter={16}>

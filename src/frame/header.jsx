@@ -1,17 +1,18 @@
+import FrameStore from './store-frame'
 import React from 'react'
+import cls from 'classnames'
+import logoSrc from '../image/logo.png'
 import { observable } from 'mobx'
 import { observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
-import FrameStore from './store-frame'
-import cls from 'classnames'
 
 const store = new FrameStore()
 
 @observer
 class Header extends React.Component {
   @observable activeKey = '/home'
-  componentDidMount() {
-    const {pathname} = window.location
+  componentDidMount () {
+    const { pathname } = window.location
     this.activeKey = pathname
   }
 
@@ -39,8 +40,10 @@ class Header extends React.Component {
       )
     })
     return (
-      <nav className="navbar navbar-expand-md navbar-dark fixed-top header-dark FBH">
-        <a className="navbar-brand nav-logo" href="#">YashanDB</a>
+      <nav className="navbar navbar-expand-md navbar-dark fixed-top header-dark FBH FBJC">
+        <div className="nav-logo">
+          <img src={logoSrc} alt="YashanDB" className="common-logo" />
+        </div>
         <button
           className="navbar-toggler"
           type="button"
@@ -52,7 +55,7 @@ class Header extends React.Component {
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <div className="collapse navbar-collapse FB1" id="navbarCollapse">
+        <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="navbar-nav mr-auto FBH FBJB nav-menu">
             {menuItems}
           </ul>

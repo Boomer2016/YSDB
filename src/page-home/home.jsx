@@ -155,11 +155,11 @@ class Home extends Component {
         <div className="partner-area">
           <LineTitle title="合作伙伴" titleClass="subtitle-font" className="t-FBJS" />
           <div className="FBH FBJB FBAC">
-            <LeftOutlined className="left-icon" onClick={() => this.slider.current.slickPrev()} />
+            {/* <LeftOutlined className="left-icon" onClick={() => this.slider.current.slickPrev()} /> */}
             <Slider {...settings}>
               {partnerItems}
             </Slider>
-            <RightOutlined className="right-icon" onClick={() => this.slider.current.slickNext()} />
+            {/* <RightOutlined className="right-icon" onClick={() => this.slider.current.slickNext()} /> */}
           </div>
         </div>
         <div className="home-experience FBV">

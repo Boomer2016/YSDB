@@ -32,6 +32,14 @@ export default class HomeStore {
     {name: '场景分类2', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene2, url: './', id: 2},
     {name: '场景分类3', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene3, url: './', id: 3},
     {name: '场景分类4', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene4, url: './', id: 4},
+    {name: '场景分类5', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene4, url: './', id: 5},
+    {name: '场景分类6', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene4, url: './', id: 6},
+  ]
+  @observable coreValues = [
+    {name: '场景分类1', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene1, url: './', id: 1},
+    {name: '场景分类2', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene2, url: './', id: 2},
+    {name: '场景分类3', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene3, url: './', id: 3},
+    {name: '场景分类4', value: '支持 MySQL 到 OceanBase MySQL 的结构迁移、全量迁移和增量。', src: scene4, url: './', id: 4},
   ]
 
   // 异步action示例

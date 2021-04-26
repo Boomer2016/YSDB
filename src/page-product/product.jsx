@@ -2,6 +2,7 @@ import { Button, Col, Modal, Row } from "antd"
 import React, { Component } from "react"
 import { action, observable } from "mobx"
 import { inject, observer } from "mobx-react"
+import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 
 import LineTitle from '../component/line-title'
 import ProductStore from "./store-product"
@@ -12,18 +13,24 @@ const store = new ProductStore()
 
 @observer
 class Product extends Component {
+  slider = React.createRef()
   componentDidMount () {
     // store.getContent()
   }
 
   render () {
-    const { servicePowers, productScenes } = store
+    const { servicePowers, productScenes, coreValues } = store
     const settings = {
+      className: "common-slider",
       infinite: true,
-      speed: 500,
       slidesToShow: 4,
-      slidesToScroll: 4,
-      css: true,
+      slidesToScroll: 1,
+      ref: this.slider,
+      adaptiveHeight: true,
+      autoplay: true,
+      speed: 500,
+      autoplaySpeed: 5000,
+      rtl: true,
       responsive: [
         {
           breakpoint: 1024,
@@ -65,19 +72,17 @@ class Product extends Component {
       </Col>
     ))
     const sceneItems = productScenes.map(item => (
-      <div
-        className="scene-item"
-        key={item.id}
-        style={{ backgroundImage: `url(${item.src})` }}
-      >
-        <div className="FB1 FBV">
-          <span className="pl20 pr20">{item.name}</span>
-          <span className="mini-font mt8 pl20 pr20">{item.value}</span>
+      <div key={item.id}>
+        <div className="scene-item" style={{ backgroundImage: `url(${item.src})` }}>
+          <div className="FB1 FBV">
+            <span className="pl20 pr20 main-color">{item.name}</span>
+            <span className="mini-font mt8 pl20">{item.value}</span>
+          </div>
+          <button className="common-btn ml20" type="button">了解更多</button>
         </div>
-        <button className="common-btn ml20" type="button">了解更多</button>
       </div>
     ))
-    const valueItems = productScenes.map(item => (
+    const valueItems = coreValues.map(item => (
       <Col
         className="FBV value-item FBAC FBJC"
         xs={24}
@@ -182,9 +187,13 @@ class Product extends Component {
             据分布式实时分析数据 (边框文本)
           </div>
           {/* <Row gutter={[16, 16]} className="pt20">{sceneItems}</Row> */}
-          <Slider {...settings}>
-            {sceneItems}
-          </Slider>
+          <div className="FBH FBJB FBAC">
+            {/* <LeftOutlined className="left-icon" onClick={() => this.slider.current.slickPrev()} /> */}
+            <Slider {...settings}>
+              {sceneItems}
+            </Slider>
+            {/* <RightOutlined className="right-icon" onClick={() => this.slider.current.slickNext()} /> */}
+          </div>
         </div>
         <div className="core-value FBV FBAC">
           <LineTitle titleClass="subtitle-font" title="核心价值" />

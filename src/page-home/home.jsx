@@ -49,7 +49,7 @@ class Home extends Component {
     }
     console.log(actualShowitems, 'actualShowitems', activeIndex)
     const settings = {
-      className: "common-slider",
+      className: "partner-slider",
       dots: false,
       infinite: true,
       slidesToShow: 1,
@@ -73,7 +73,7 @@ class Home extends Component {
       >
         <span className="subtitle-font">{item.value}</span>
         <div className="highlight-border"></div>
-        <span className="mini-font mt6">{item.name}</span>
+        <span className="mini-font mt6 fac">{item.name}</span>
       </Col>
     ))
     const homeAdvanceItems = productAdvances.map(item => (
@@ -82,12 +82,12 @@ class Home extends Component {
         xs={12}
         sm={12}
         md={12}
-        lg={6}
-        xl={6}
+        lg={5}
+        xl={5}
         className="FBV FBAC advance-item"
       >
         <div className="advance-icon"></div>
-        <span className="advance-name">{item.name}</span>
+        <span className="advance-name main-color">{item.name}</span>
         <div className="thin mini-font fac">{item.value}</div>
       </Col>
     ))
@@ -139,26 +139,27 @@ class Home extends Component {
           </Row>
         </div>
         <div className="home-advance m-p2rem">
-          <div className="FBV FBAC top-line">
+          <div className="FBV FBAC top-bird">
             <LineTitle title="产品亮点" titleClass="subtitle-font" />
-            <div className="FBAC-S sub-content">
+            <div className="FBAC-S fac mini-font">
               产品亮点文案补充，可补充一些吸引用户的相关利益点，
               产品亮点文案可补充一些吸引用户相关利益。产品亮点文案补充，产品亮点文案可补充
             </div>
-         </div>
-          <Row gutter={16} className="advance-detail FBAC-S">
+          </div>
+          <Row className="advance-detail" justify="space-between">
             {homeAdvanceItems}
           </Row>
         </div>
-        <div className="partner-area">
+        <div className="partner-area m-p2rem">
           <LineTitle title="合作伙伴" titleClass="subtitle-font" className="t-FBJS" />
           <div className="FBH FBJB FBAC">
-            <LeftOutlined className="left-icon" onClick={() => this.slider.current.slickPrev()} />
+            <LeftOutlined onClick={() => this.slider.current.slickPrev()} className="left-icon" />
             <Slider {...settings}>
               {partnerItems}
             </Slider>
             <RightOutlined className="right-icon" onClick={() => this.slider.current.slickNext()} />
           </div>
+          <div className="right-middle-line"></div>
         </div>
         <div className="home-experience FBV">
           <LineTitle title="云数据库YashanDB等你来体验" titleClass="subtitle-white" />

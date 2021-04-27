@@ -20,6 +20,10 @@ export default class HomeStore {
     {name: '其他数据库性能（万次/秒）', value: 3200, id: 3},
     {name: '其他数据库性能（万次/秒）', value: 5800, id: 4},
     {name: '其他数据库性能（万次/秒）', value: 6896, id: 5},
+     {name: '可支持最大节点数量（台）', value: 1500, id: 6},
+    // {name: '其他数据库性能（万次/秒）', value: 3200, id: 7},
+    // {name: '其他数据库性能（万次/秒）', value: 5800, id: 8},
+    // {name: '其他数据库性能（万次/秒）', value: 6896, id: 9},
   ]
 
   @observable productAdvances = [

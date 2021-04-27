@@ -69,18 +69,19 @@
   .home-highlight
     width 100%
     height auto
-    padding 1rem 0rem
+    background-image url('../image/right-bottom-line.svg')
+    background-repeat no-repeat
+    background-size 12rem
+    background-position bottom right
+    @media only screen and (max-width: 768px)
+      background-size 6rem
     .top-line
       background-image url('../image/left-top-line.svg')
       background-repeat no-repeat
-      background-size contain
-      height 2rem
-      width 16%
-    .bottom-line
-      background-image url('../image/right-bottom-line.svg')
-      background-repeat no-repeat
-      height 2rem
-      width 16%
+      background-size 12rem
+      background-position top left
+      @media only screen and (max-width: 768px)
+        background-size 6rem
     .highlight-title
       color #2E5890
       font-size 1.6rem
@@ -96,17 +97,14 @@
       height 0.1rem
       background #FF6D19
       overflow hidden
-.highlight-content
-  width 60%
-  text-align center
-  font-size 0.8rem
-  padding 0.4rem 0
 .home-advance
   width 100%
-  background-image url('../image/homeProd.png')
+  background-image url('../image/bCloud.png')
   background-repeat no-repeat
-  background-size cover
+  background-size 8rem
   background-color #FAFAF9
+  background-position top right
+  margin-top 1rem
   padding 1rem
   .advance-icon
     height 3rem

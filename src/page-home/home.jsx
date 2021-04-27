@@ -126,28 +126,26 @@ class Home extends Component {
             ))}
           </div>
         </div>
-        <div className="home-highlight FBV">
-          <div className="top-line"></div>
-          <div className="FBAC-S">
-            <LineTitle title="产品亮点" titleClass="subtitle-font" />
+        <div className="home-highlight m-p2rem">
+          <div className="FBV FBAC top-line">
+            <LineTitle title="行业典范" titleClass="subtitle-font" />
+            <div className="FBAC-S sub-content">
+              产品亮点文案补充，可补充一些吸引用户的相关利益点，
+              产品亮点文案可补充一些吸引用户相关利益。产品亮点文案补充，产品亮点文案可补充
+            </div>
           </div>
-          <div className="FBAC-S highlight-content">
-            产品亮点文案补充，可补充一些吸引用户的相关利益点，
-            产品亮点文案可补充一些吸引用户相关利益。产品亮点文案补充，产品亮点文案可补充
-          </div>
-          <Row gutter={8} className="highlight-detail FBAC-S FBJB">
+          <Row gutter={8} className="highlight-detail" justify="space-between">
             {highLights}
           </Row>
-          <div className="bottom-line FBAE-S"></div>
         </div>
-        <div className="home-advance FBV">
-          <div className="FBAC-S">
+        <div className="home-advance m-p2rem">
+          <div className="FBV FBAC top-line">
             <LineTitle title="产品亮点" titleClass="subtitle-font" />
-          </div>
-          <div className="FBAC-S highlight-content">
-            产品亮点文案补充，可补充一些吸引用户的相关利益点，
-            产品亮点文案可补充一些吸引用户相关利益。产品亮点文案补充，产品亮点文案可补充
-          </div>
+            <div className="FBAC-S sub-content">
+              产品亮点文案补充，可补充一些吸引用户的相关利益点，
+              产品亮点文案可补充一些吸引用户相关利益。产品亮点文案补充，产品亮点文案可补充
+            </div>
+         </div>
           <Row gutter={16} className="advance-detail FBAC-S">
             {homeAdvanceItems}
           </Row>
@@ -155,16 +153,16 @@ class Home extends Component {
         <div className="partner-area">
           <LineTitle title="合作伙伴" titleClass="subtitle-font" className="t-FBJS" />
           <div className="FBH FBJB FBAC">
-            {/* <LeftOutlined className="left-icon" onClick={() => this.slider.current.slickPrev()} /> */}
+            <LeftOutlined className="left-icon" onClick={() => this.slider.current.slickPrev()} />
             <Slider {...settings}>
               {partnerItems}
             </Slider>
-            {/* <RightOutlined className="right-icon" onClick={() => this.slider.current.slickNext()} /> */}
+            <RightOutlined className="right-icon" onClick={() => this.slider.current.slickNext()} />
           </div>
         </div>
         <div className="home-experience FBV">
           <LineTitle title="云数据库YashanDB等你来体验" titleClass="subtitle-white" />
-          <div className="FBAC-S highlight-content m14">
+          <div className="FBAC-S sub-content m14">
             产品亮点文案补充，可补充一些吸引用户的相关利益点，
             产品亮点文案可补充一些吸引用户相关利益。产品亮点文案补充，产品亮点文案可补充
           </div>

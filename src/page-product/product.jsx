@@ -186,13 +186,12 @@ class Product extends Component {
             YashanDB 是深圳计算科学研究院 CoD(Conquest of Data)团队完全自研的新型大数
             据分布式实时分析数据 (边框文本)
           </div>
-          {/* <Row gutter={[16, 16]} className="pt20">{sceneItems}</Row> */}
           <div className="FBH FBJB FBAC">
-            {/* <LeftOutlined className="left-icon" onClick={() => this.slider.current.slickPrev()} /> */}
+            <LeftOutlined className="left-icon" onClick={() => this.slider.current.slickPrev()} />
             <Slider {...settings}>
               {sceneItems}
             </Slider>
-            {/* <RightOutlined className="right-icon" onClick={() => this.slider.current.slickNext()} /> */}
+            <RightOutlined className="right-icon" onClick={() => this.slider.current.slickNext()} />
           </div>
         </div>
         <div className="core-value FBV FBAC">

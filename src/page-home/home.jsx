@@ -7,7 +7,6 @@ import { inject, observer } from "mobx-react"
 import HomeStore from "./store-home"
 import LineTitle from '../component/line-title'
 import Slider from "react-slick"
-import homeExpSrc from '../image/homeExp.svg'
 
 const store = new HomeStore()
 
@@ -18,6 +17,9 @@ class Home extends Component {
   timer = null
 
   componentDidMount () {
+    const {CommonStore: {menus}} = this.props
+    const indexMenu = menus.find(item => item.url === '/home')
+    store.getPageInfo(indexMenu.id)
     this.bannerStart()
   }
 
@@ -47,7 +49,7 @@ class Home extends Component {
     } else {
       actualShowitems = showItems.slice(0, 3)
     }
-    console.log(actualShowitems, 'actualShowitems', activeIndex)
+    // console.log(actualShowitems, 'actualShowitems', activeIndex)
     const settings = {
       className: "partner-slider",
       dots: false,
@@ -174,4 +176,4 @@ class Home extends Component {
   }
 }
 
-export default inject('store')(Home)
+export default inject('CommonStore')(Home)

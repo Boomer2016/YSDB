@@ -137,4 +137,4 @@ class Solution extends Component {
   }
 }
 
-export default inject('store')(Solution)
+export default inject('CommonStore')(Solution)

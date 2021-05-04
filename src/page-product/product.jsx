@@ -15,7 +15,13 @@ const store = new ProductStore()
 class Product extends Component {
   slider = React.createRef()
   componentDidMount () {
+    const {location} = this.props
     // store.getContent()
+  }
+
+  componentDidUpdate() {
+    const {location: {search}} = this.props
+    console.log(search, 'location')
   }
 
   render () {
@@ -207,4 +213,4 @@ class Product extends Component {
   }
 }
 
-export default inject('store')(Product)
+export default inject('CommonStore')(Product)

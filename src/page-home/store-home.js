@@ -1,12 +1,12 @@
 import { action, observable, runInAction } from 'mobx'
 
-import io from './io'
+import io from '../common/io-common'
 import { message } from 'antd'
 import partnerSrc from '../image/partner.png'
 
 export default class HomeStore {
   // 被观察的属性
-  @observable content = ''
+  @observable headInfo = {}
   @observable bannerData = [
     {title: 'YashanDB', content: 'YashanDB职场加速器1', id: 1, index: 0},
     {title: 'YashanDB', content: 'YashanDB职场加速器2', id: 2, index: 1},
@@ -20,7 +20,7 @@ export default class HomeStore {
     {name: '其他数据库性能（万次/秒）', value: 3200, id: 3},
     {name: '其他数据库性能（万次/秒）', value: 5800, id: 4},
     {name: '其他数据库性能（万次/秒）', value: 6896, id: 5},
-     {name: '可支持最大节点数量（台）', value: 1500, id: 6},
+    // {name: '可支持最大节点数量（台）', value: 1500, id: 6},
     // {name: '其他数据库性能（万次/秒）', value: 3200, id: 7},
     // {name: '其他数据库性能（万次/秒）', value: 5800, id: 8},
     // {name: '其他数据库性能（万次/秒）', value: 6896, id: 9},
@@ -45,13 +45,12 @@ export default class HomeStore {
   ]
 
   // 异步action示例
-  @action async getContent () {
+  @action async getPageInfo (id) {
     try {
-      const res = await io.getContent({
-        param: '1',
-      })
+      const res = await io.getPageInfo(id)
+      console.log(res)
       runInAction(() => {
-        this.content = res.story
+        this.headInfo = res
       })
     } catch (e) {
       message.error(e.message)

@@ -1,64 +1,117 @@
-import FrameStore from './store-frame'
 import React from 'react'
-import cls from 'classnames'
 import logoSrc from '../image/logo.png'
-import { observable } from 'mobx'
+import { observable, action, toJS } from 'mobx'
 import { observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
-
-const store = new FrameStore()
+import { Menu, Dropdown } from 'antd'
+import { UnorderedListOutlined } from '@ant-design/icons'
 
 @observer
 class Header extends React.Component {
-  @observable activeKey = '/home'
+  @observable activeKey = ['/home']
   componentDidMount () {
     const { pathname } = window.location
-    this.activeKey = pathname
+    this.activeKey = [pathname]
+  }
+
+  @action
+  menuClick = key => {
+    const { history, CommonStore: { menus } } = this.props
+    let pageMenus = []
+    toJS(menus).forEach(item => {
+      if (item.subList && item.subList.length) {
+        pageMenus = pageMenus.concat(
+          item.subList.map(k => (
+            {
+              ...k,
+              orignUrl: item.url,
+              parent: false,
+            }))
+        )
+      } else {
+        pageMenus.push({ ...item, orignUrl: item.url, parent: true })
+      }
+    })
+    const activeItem = pageMenus.find(item => item.url === key)
+    history.push({
+      pathname: activeItem.orignUrl,
+      search: activeItem.parent ? '' : `id=${activeItem.id}`,
+    })
+    this.activeKey = [key]
   }
 
   render () {
-    const { history } = this.props
-    const { menus } = store
-    const menuItems = menus.map(item => {
-      return (
-        <li className="nav-item" key={item.url}>
-          <span
-            className={cls({
-              'menu-item': true,
-              active: item.url === this.activeKey,
-            })}
-            onClick={() => {
-              history.push({
-                pathname: item.url,
-              })
-              this.activeKey = item.url
-            }}
-          >
-            {item.name}
-          </span>
-        </li>
-      )
-    })
+    const { CommonStore: { menus } } = this.props
+    const navItems = menus.map(item => (
+      <React.Fragment key={item.id}>
+        {item.subList.length ? (
+          <Menu.SubMenu title={item.name}>
+            {item.subList.map(k => (
+              <Menu.Item key={k.url}>
+                <span className="menu-item-name">
+                  {k.name}
+                </span>
+              </Menu.Item>
+            ))}
+          </Menu.SubMenu>
+        ) : (
+          <Menu.Item key={item.url}>
+            <span className="menu-item-name">
+              {item.name}
+            </span>
+          </Menu.Item>
+        )}
+      </React.Fragment>
+    ))
+    const cellphoneNavItems = menus.map(item => (
+      <React.Fragment key={item.id}>
+        {item.subList.length ? (
+          <Menu.ItemGroup title={item.name}>
+            {item.subList.map(k => (
+              <Menu.Item key={k.url}>
+                <span className="menu-item-name">
+                  {k.name}
+                </span>
+              </Menu.Item>
+            ))}
+          </Menu.ItemGroup>
+        ) : (
+          <Menu.Item key={item.url}>
+            <span className="menu-item-name">
+              {item.name}
+            </span>
+          </Menu.Item>
+        )}
+      </React.Fragment>
+    ))
     return (
-      <nav className="navbar navbar-expand-md navbar-dark fixed-top header-dark FBH FBJC">
+      <nav className="header-dark FBH FBAC">
         <div className="nav-logo">
           <img src={logoSrc} alt="YashanDB" className="common-logo" />
         </div>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarCollapse"
-          aria-controls="navbarCollapse"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+        <Menu
+          mode="horizontal"
+          selectedKeys={toJS(this.activeKey)}
+          theme="dark"
+          onClick={e => this.menuClick(e.key)}
+          className="nav-menu"
         >
-          <span className="navbar-toggler-icon" />
-        </button>
-        <div className="collapse navbar-collapse" id="navbarCollapse">
-          <ul className="navbar-nav mr-auto FBH FBJB nav-menu">
-            {menuItems}
-          </ul>
+          {navItems}
+        </Menu>
+        <div className="header-action FBH FBJE FBAC">
+          <Dropdown
+            overlay={(
+              <Menu
+                className="cellphone-nav-menu"
+                onClick={e => this.menuClick(e.key)}
+                selectedKeys={toJS(this.activeKey)}
+              >
+                {cellphoneNavItems}
+              </Menu>
+            )}
+          >
+            <UnorderedListOutlined className="action-icon" />
+          </Dropdown>
         </div>
       </nav>
     )

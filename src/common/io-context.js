@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const BASE_PATH = 'https://192.168.1.21:9999/'
+export const BASE_PATH = '/web'
 
 const codeMsgMap = {
   400: '发出的请求有错误，服务器没有进行新建或修改数据的操作。',
@@ -16,65 +16,48 @@ const codeMsgMap = {
   504: '网关超时。',
 }
 
-const request = axios.create({
-  timeout: 300 * 1000,
-})
+class IoContext {
+  request (params) {
+    return new Promise((resolve, reject) => {
+      const { method, data, url, config } = params
+      // 处理GET POST的请求参数
+      // `params` 是即将与请求一起发送的 URL 参数 必须是一个无格式对象(plain object)或 URLSearchParams 对象
+      // `data` 是作为请求主体被发送的数据,只适用于这些请求方法 'PUT', 'POST', 和 'PATCH'
+      const reqPrams = ['POST', 'PUT', 'PATCH'].includes(method) ? { data } : { params: data }
+      axios({
+        method,
+        url,
+        ...reqPrams,
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          'Access-Control-Allow-Origin': '*',
+          ...config,
+        },
+        // `validateStatus` 定义对于给定的HTTP 响应状态码是 resolve 或 reject  promise 。
+        // 如果 `validateStatus` 返回 `true` (或者设置为 `null` 或 `undefined`)，promise 将被 resolve; 否则，promise 将被 rejecte
+        validateStatus: status => {
+          if (status >= 400) {
+            const err = { message: codeMsgMap[status] }
+            reject(err)
+          }
+          return status < 400
+        },
+      })
+        .then(res => {
+          // 请求成功后只将data传递下去，code不为0的时候将整个错误体传递下去
+          if (res.data.code === 0) {
+            resolve(res.data.data)
+          } else if (res.headers['content-type'] !== 'application/json; charset=utf-8') {
+            resolve(res.data)
+          } else {
+            reject(res.data)
+          }
+        })
+        .catch(err => {
+          reject(err.message)
+        })
+    })
+  }
+}
 
-request.interceptors.request.use(
-  config => {
-    if (config.method === 'post') {
-      try {
-        if (config.headers['Content-Type'] === 'application/json') {
-          config.headers['Content-Type'] = 'application/json;charset=UTF-8'
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    } else if (config.method === 'get') {
-      config.params = {
-        ...config.params,
-        // sessionID,
-      }
-    }
-    return config
-  },
-  error => {
-    return Promise.reject(error)
-  },
-)
-
-/**
- *  暂定后端正常返回结构为 { hasError: boolean; data: object; errorDesc: string; errorId: string}
- */
-
-let rid = 0
-
-request.interceptors.response.use(
-  response => {
-    const { hasError, data, errorDesc } = response.data || {}
-    rid += 1
-    response.data = {
-      hasError: hasError || false,
-      data: data || {},
-      errorDesc: errorDesc || '',
-      rid,
-    }
-    // if (errorDesc === 'SESSION_EXPIRED' || errorDesc === 'SESSION_NOTFOUND') {
-    //   window.location.href = '/login';
-    // }
-    return response
-  },
-  error => {
-    const { response } = error
-    let errorDesc = ''
-    if (response) {
-      const { status } = response
-      errorDesc = codeMsgMap[status]
-    }
-    rid += 1
-    // eslint-disable-next-line prefer-promise-reject-errors
-    return Promise.reject({ hasError: true, data: {}, errorDesc, rid })
-  },
-)
-
-export default request
+export default IoContext

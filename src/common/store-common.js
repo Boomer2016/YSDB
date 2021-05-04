@@ -1,29 +1,49 @@
 import { action, configure, observable, runInAction } from 'mobx'
 
-// import io from './io'
-// import { message } from 'antd'
+import io from './io-common'
+import { message } from 'antd'
 
 configure({ isolateGlobalState: true })
-export default class CommonStore {
-  // 被观察的属性
-  @observable content = 'commonContent'
+class CommonStore {
+  // 页面菜单
+  @observable menus = []
+  @observable footerLinks = []
 
-  // 异步action示例
-  // @action async getContent () {
-  //   try {
-  //     const res = await io.getContent({
-  //       param: '1',
-  //     })
-  //     runInAction(() => {
-  //       this.content = res.story
-  //     })
-  //   } catch (e) {
-  //     message.error(e.message)
-  //   }
-  // }
+  // 获取菜单列表
+  @action async getMainNavs () {
+    try {
+      const res = await io.getMainNavs()
+      runInAction(() => {
+        this.menus = res
+      })
+      return true
+    } catch (e) {
+      message.error(e.message)
+      return false
+    }
+  }
 
-  // 更新action示例
-  @action clearContent () {
-    this.content = ''
+  // 获取底部导航
+  @action async getFooterNavs () {
+    try {
+      const res = await io.getFooterNavs()
+      runInAction(() => {
+        this.footerLinks = res
+      })
+    } catch (e) {
+      message.error(e.message)
+    }
+  }
+
+  @action async getPageInfo (id) {
+    try {
+      const res = await io.getPageInfo(id)
+      return res
+    } catch (e) {
+      message.error(e.message)
+      return false
+    }
   }
 }
+
+export default new CommonStore()

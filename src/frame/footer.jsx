@@ -1,25 +1,22 @@
 import { Col, Row } from 'antd'
 
-import FrameStore from './store-frame'
 import React from 'react'
 import logoSrc from '../image/logo.png'
 import { observable } from 'mobx'
 import { observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 
-const store = new FrameStore()
 
 @observer
 class Footer extends React.Component {
-  @observable activeKey = 'page1'
   render () {
-    const { history } = this.props
-    const { footerLinks } = store
-    const linkItems = footerLinks.map(item => (
-      <Col key={item.name} xs={8} sm={8} md={4} lg={4} xl={4} className="FBV">
-        <div className="link-item">{item.name}</div>
+    const { history, CommonStore: {footerLinks} } = this.props
+    const linkItems = footerLinks.map((item, i) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <Col key={i} xs={8} sm={8} md={4} lg={4} xl={4} className="FBV">
+        <div className="link-item">{item.groupName}</div>
         <div className="FB1 FBV mt6">
-          {item.links.map(k => (
+          {(item.navList || []).map(k => (
             <a key={k.name} className="pt8 link-name">
               {k.name}
             </a>

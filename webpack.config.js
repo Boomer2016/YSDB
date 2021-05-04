@@ -29,7 +29,7 @@ module.exports = {
     noInfo: false,
     // proxy URLs to backend development server
     proxy: {
-      '/api': 'http://localhost:6868',
+      '/web': 'http://121.43.233.147:92',
     },
   },
   entry: './src/index',
@@ -116,61 +116,6 @@ module.exports = {
           },
         ],
       },
-      // {
-      //   test: /^((?!\.color).)*((?!\.color).)\.svg$/,
-      //   include: [path.resolve(__dirname, './src/icon')],
-      //   use: [
-      //     { loader: 'svg-sprite-loader' },
-      //     {
-      //       loader: 'svgo-loader',
-      //       options: {
-      //         plugins: [
-      //           { removeTitle: true },
-      //           { convertColors: { shorthex: true } },
-      //           { convertPathData: true },
-      //           { removeComments: true },
-      //           { removeDesc: true },
-      //           { removeUselessDefs: true },
-      //           { removeEmptyAttrs: true },
-      //           { removeHiddenElems: true },
-      //           { removeEmptyText: true },
-      //           { removeUselessStrokeAndFill: true },
-      //           { moveElemsAttrsToGroup: true },
-      //           { removeStyleElement: true },
-      //           { cleanupEnableBackground: true },
-      //           { removeAttrs: { attrs: '(stroke|fill)' } },
-      //         ],
-      //       },
-      //     },
-      //   ],
-      // },
-      // {
-      //   test: /[A-Za-z0-9-.]+\.color\.svg$/,
-      //   include: [path.resolve(__dirname, './src/icon')],
-      //   use: [
-      //     { loader: 'svg-sprite-loader' },
-      //     {
-      //       loader: 'svgo-loader',
-      //       options: {
-      //         plugins: [
-      //           { removeTitle: true },
-      //           { convertColors: { shorthex: true } },
-      //           { convertPathData: true },
-      //           { removeComments: true },
-      //           { removeDesc: true },
-      //           { removeUselessDefs: true },
-      //           { removeEmptyAttrs: true },
-      //           { removeHiddenElems: true },
-      //           { removeEmptyText: true },
-      //           { removeUselessStrokeAndFill: true },
-      //           { moveElemsAttrsToGroup: true },
-      //           { removeStyleElement: true },
-      //           { cleanupEnableBackground: true },
-      //         ],
-      //       },
-      //     },
-      //   ],
-      // },
     ],
   },
   plugins: [

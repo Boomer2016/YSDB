@@ -10,22 +10,39 @@ import Header from './header'
 import Footer from './footer'
 import React from 'react'
 import zhCN from 'antd/lib/locale-provider/zh_CN'
+import { inject, observer } from 'mobx-react'
+import { toJS, observable } from 'mobx'
 
-// 公用的样式模块
-export default class Frame extends React.Component {
+
+@inject('CommonStore')
+@observer
+class Frame extends React.Component {
+  @observable couldRender = false
+  componentDidMount() {
+    const { CommonStore } = this.props
+    CommonStore.getMainNavs().then(res => {
+      if (res) this.couldRender = true
+    })
+    CommonStore.getFooterNavs()
+  }
   render () {
-    const { children } = this.props
-
+    const { children, CommonStore } = this.props
     return (
       <ConfigProvider locale={zhCN}>
-        <div>
-          <Header />
-          <main role="main">
-            {children}
-          </main>
-          <Footer />
+        <div className="FBV frame">
+          <Header CommonStore={CommonStore} />
+          <div className="FB1 frame-main">
+            {this.couldRender && (
+              <main role="main">
+                {children}
+              </main>
+            )}
+            <Footer CommonStore={CommonStore} />
+          </div>
         </div>
       </ConfigProvider>
     )
   }
 }
+
+export default Frame

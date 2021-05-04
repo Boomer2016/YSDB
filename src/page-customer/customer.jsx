@@ -84,4 +84,4 @@ class Customer extends Component {
   }
 }
 
-export default inject('store')(Customer)
+export default inject('CommonStore')(Customer)

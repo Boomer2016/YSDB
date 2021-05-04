@@ -74,4 +74,4 @@ class Cooperation extends Component {
   }
 }
 
-export default inject('store')(Cooperation)
+export default inject('CommonStore')(Cooperation)

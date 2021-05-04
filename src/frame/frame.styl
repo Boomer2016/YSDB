@@ -1,31 +1,58 @@
 
 #root
   width 100%
-  min-height 75rem
+  height 100vh
   overflow hidden
   font-family 'Microsoft YaHei'
+.frame
+  height 100%
+.frame-main
+  overflow auto
 .header-dark
   background #001322
   font-weight 300
   height 3rem
-  .menu-item
-    color #ffffff !important
-    font-size 0.9rem
-    padding-bottom 0.2rem
-    cursor pointer
-    margin 0.8rem
-    &:hover
-      border-bottom 0.1rem solid rgba(255, 255, 255, 0.8)
-  .active
-    border-bottom 0.1rem solid rgba(255, 255, 255, 0.8)
+  width 100%
   .nav-logo
-    width 25vw
+    width 20vw
+    @media only screen and (max-width: 768px)
+      width 50vw
   .nav-menu
-    width 50vw
-    margin-right 25vw
+    width 60vw
+    @media only screen and (max-width: 768px)
+      display none
+    .ant-menu-item-selected, .ant-menu-item-active
+      background none !important
+      .menu-item-name
+        padding-bottom 0.2rem
+        border-bottom 0.1rem solid #fff
 .common-logo
   height 2rem
   padding-left 2rem
+.header-action
+  width 20vw
+  padding-right 1rem
+  @media only screen and (max-width: 768px)
+    width 50vw
+  .action-icon
+    cursor pointer
+    color #fff
+    display none
+    @media only screen and (max-width: 768px)
+      display block
+.cellphone-nav-menu
+  width 100vw
+  height calc(100vh - 4rem)
+  overflow auto
+  .ant-dropdown-menu-item
+    padding 1rem
+    border-bottom 0.1rem solid #e0e0e0
+  .ant-dropdown-menu-submenu
+    padding 1rem
+    border-bottom 0.1rem solid #e0e0e0
+  .ant-dropdown-menu-item-group-title
+    padding 1rem
+    border-bottom 0.1rem solid #e0e0e0
 .frame-footer
   background #001322
   width 100%
@@ -38,12 +65,12 @@
       font-weight 500
       font-size 1.4rem
       padding-top 4rem
-      @media only screen and (max-width 768px)
+      @media only screen and (max-width: 768px)
         text-align center
         padding 1rem
     .footer-link
       padding 4rem 2rem
-      @media only screen and (max-width 768px)
+      @media only screen and (max-width: 768px)
         padding 1rem
       .link-item
         font-size 1.2rem
@@ -57,6 +84,6 @@
     padding 1.6rem 0rem 1.6rem 10vw
     font-size 0.9rem
     color rgba(255, 255, 255, 0.65)
-    @media only screen and (max-width 768px)
+    @media only screen and (max-width: 768px)
       padding 1rem
       text-align center

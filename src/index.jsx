@@ -9,6 +9,7 @@ import Product from './page-product'
 import Solution from './page-solution'
 import Customer from './page-customer'
 import Cooperation from './page-cooperation'
+import NotFound from './page-not-found'
 import About from './page-about'
 import { Provider } from 'mobx-react'
 import React from 'react'
@@ -16,7 +17,6 @@ import ReactDom from 'react-dom'
 
 require('es6-symbol/implement')
 
-const store = new CommonStore()
 export default class Entry extends React.Component {
   render () {
     return (
@@ -25,11 +25,12 @@ export default class Entry extends React.Component {
           <Frame>
             <Switch>
               <Route path="/home" component={Home} />
-              <Route path="/product-system" component={Product} />
+              <Route path="/product" component={Product} />
               <Route path="/solution" component={Solution} />
-              <Route path="/customer-case" component={Customer} />
-              <Route path="/cooperation-ecological" component={Cooperation} />
-              <Route path="/about-us" component={About} />
+              <Route path="/customers" component={Customer} />
+              <Route path="/cooperation" component={Cooperation} />
+              <Route path="/aboutus" component={About} />
+              <Route component={NotFound} />
               <Redirect exact from="/" to="/home" />
             </Switch>
           </Frame>
@@ -40,7 +41,7 @@ export default class Entry extends React.Component {
 }
 
 ReactDom.render(
-  <Provider store={store}>
+  <Provider CommonStore={CommonStore}>
     <Entry />
   </Provider>,
   document.getElementById('root')

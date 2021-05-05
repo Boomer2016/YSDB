@@ -29,7 +29,14 @@ module.exports = {
     noInfo: false,
     // proxy URLs to backend development server
     proxy: {
-      '/web': 'http://121.43.233.147:92',
+      '/web/': {
+        target: 'http://121.43.233.147:92',
+        changeOrigin: true,
+      },
+      '/docfile/': {
+        target: 'http://121.43.233.147',
+        changeOrigin: true,
+      },
     },
   },
   entry: './src/index',

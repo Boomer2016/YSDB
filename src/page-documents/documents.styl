@@ -1,0 +1,61 @@
+.page-documents
+  .documents-header
+    width 100%
+    height 25rem
+    background-size cover
+    background-repeat no-repeat
+    background-image url('../image/docBg.png')
+    background-position 20%
+    color #ffffff
+    padding-left 10vw
+  .head-desc
+    padding 1rem 0 2.5rem 0
+  .head-title
+    color #ffffff
+  .doc-serch
+    width 30vw
+    @media only screen and (max-width: 768px)
+      width 20rem
+    .ant-btn-primary
+      background linear-gradient(to right, rgba(148, 108, 0, 1), #bba769)
+      border none
+  .doc-main
+    height 100vh
+    background-size 14rem
+    background-repeat no-repeat
+    background-image url('../image/docMontain.png')
+    background-position bottom left
+    @media only screen and (max-width: 768px)
+      background-size 6rem
+    .main-left
+      background-size 6rem
+      background-repeat no-repeat
+      background-image url('../image/threeBird.png')
+      background-position top left
+      height 100%
+      padding 2rem
+      width 25vw
+      @media only screen and (max-width: 768px)
+        width 40vw
+        padding 0.2rem
+        background-size 3rem
+        padding-top 2rem
+      .ant-select, .ant-select-open, .ant-select-focused
+        border-radius 2rem
+        border 0.1rem solid #e0e0e0
+        background #e0e0e0
+      .ant-select:not(.ant-select-customize-input) .ant-select-selector
+        border none
+        border-radius 2rem
+        border 0.1rem solid #e0e0e0
+        background #e0e0e0
+    .tree-main
+      background #e0e0e0
+      overflow auto
+      margin 1rem 0 4rem 0
+      padding 1rem
+      .ant-tree
+        background #e0e0e0
+    .doc-empty
+      display flex
+      justify-content center

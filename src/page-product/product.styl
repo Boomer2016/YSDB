@@ -69,6 +69,20 @@
       .item-title
         color #2e5890
   .product-scene
+    background-size 20rem
+    background-repeat no-repeat
+    background-image url('../image/waveLine.png')
+    background-position top right
+    @media only screen and (max-width: 768px)
+      background-size 6rem
+    .subBg
+      background-size 4rem
+      background-repeat no-repeat
+      background-image url('../image/topBird.png')
+      background-position 20%
+      @media only screen and (max-width: 768px)
+        background-size 2rem
+        background-position top left
     .scene-item
       width 22vw
       height 26.54vw
@@ -84,11 +98,25 @@
         width 90vw
         height 106vw
   .core-value
-    padding-top 2rem
+    background-size 10rem
+    background-repeat no-repeat
+    background-image url('../image/montainSea.png')
+    background-position top right
+    position relative
+    @media only screen and (max-width: 768px)
+      background-size 4rem
+    .subBg
+      background-size 10rem
+      background-repeat no-repeat
+      background-image url('../image/left-top-line.svg')
+      background-position top left
+      @media only screen and (max-width: 768px)
+        background-size 4rem
     .value-item
       height 17rem
       padding 1rem
       color #ffffff
+      margin 1rem 0rem
       background-color #24A0E4
       &:nth-of-type(odd)
         background #1E67AD
@@ -99,6 +127,20 @@
       width 3rem
       background #ffffff
       border-radius 50%
+    .core-bottom
+      background-size 20rem
+      background-repeat no-repeat
+      background-image url('../image/waveLine.png')
+      background-position bottom left
+      background-color #EBEBEB
+      position absolute
+      width 100%
+      height 45%
+      top 55%
+      left 0
+      z-index -1
+      @media only screen and (max-width: 768px)
+        background-size 10rem
 .product-advance
   width 100%
   background #3978c2
@@ -113,8 +155,3 @@
     padding 1.2rem 0
   .advance-name
     margin 0.4rem 0
-.product-experience
-  background linear-gradient(to right, #55BDFA, #0059B3)
-  padding 3.5rem 0.12rem 8rem
-  color #ffffff
-

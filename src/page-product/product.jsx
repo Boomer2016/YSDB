@@ -187,7 +187,7 @@ class Product extends Component {
           </div>
         </div>
         <div className="product-scene FBV FBAC m-p2rem">
-          <LineTitle titleClass="subtitle-font" title="产品场景" />
+          <LineTitle titleClass="subtitle-font" title="产品场景" className="subBg FBJC" />
           <div className="product-header-content mini-font m-p2rem">
             YashanDB 是深圳计算科学研究院 CoD(Conquest of Data)团队完全自研的新型大数
             据分布式实时分析数据 (边框文本)
@@ -200,13 +200,14 @@ class Product extends Component {
             <RightOutlined className="right-icon" onClick={() => this.slider.current.slickNext()} />
           </div>
         </div>
-        <div className="core-value FBV FBAC">
-          <LineTitle titleClass="subtitle-font" title="核心价值" />
+        <div className="core-value FBV FBAC m-p2rem">
+          <LineTitle titleClass="subtitle-font" title="核心价值" className="subBg FBJC" />
           <div className="product-header-content mini-font mt10">
             YashanDB 是深圳计算科学研究院 CoD(Conquest of Data)团队完全自研的新型大数
             据分布式实时分析数据 (边框文本)
           </div>
-          <Row justify="space-between" className="pt20 scene-row">{valueItems}</Row>
+          <Row justify="space-between" className="scene-row">{valueItems}</Row>
+          <div className="core-bottom"></div>
         </div>
       </div>
     )

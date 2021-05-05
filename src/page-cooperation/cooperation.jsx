@@ -26,7 +26,7 @@ class Cooperation extends Component {
           </div>
           <button type="button" className="common-btn">了解更多</button>
         </div>
-        <div className="contact-area">
+        <div className="contact-area m-p2rem">
           <Row justify="space-between">
             <Col
               xs={24}
@@ -34,7 +34,7 @@ class Cooperation extends Component {
               md={11}
               lg={11}
               xl={11}
-              className="FBV FBAC"
+              className="FBV FBAC leftBg"
             >
               <LineTitle titleClass="subtitle-font" title="微信公众号" />
               <span className="mini-font m10">

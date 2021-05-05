@@ -42,29 +42,33 @@ export default class About extends Component {
           </div>
           <button type="button" className="common-btn">了解更多</button>
         </div>
-        <Row justify="space-between" className="about-content">
-          <Col
-            xs={24}
-            sm={24}
-            md={11}
-            lg={11}
-            xl={11}
-            className="FBV FBAC"
-          >
-            <LineTitle titleClass="subtitle-font" title="公司风采" />
-            <img src={aboutCompSrc} alt="公司" className="comp-src" />
-          </Col>
-          <Col
-            xs={24}
-            sm={24}
-            md={11}
-            lg={11}
-            xl={11}
-          >
-            <LineTitle titleClass="subtitle-font" title="媒体报道" />
-            {newsItems}
-          </Col>
-        </Row>
+        <div className="about-content m-p2rem">
+          <Row justify="space-between">
+            <Col
+              xs={24}
+              sm={24}
+              md={11}
+              lg={11}
+              xl={11}
+              className="FBV FBAC"
+            >
+              <div className="leftBg">
+                <LineTitle titleClass="subtitle-font" title="公司风采" />
+                <img src={aboutCompSrc} alt="公司" className="comp-src" />
+              </div>
+            </Col>
+            <Col
+              xs={24}
+              sm={24}
+              md={11}
+              lg={11}
+              xl={11}
+            >
+              <LineTitle titleClass="subtitle-font" title="媒体报道" />
+              {newsItems}
+            </Col>
+          </Row>
+        </div>
       </div>
     )
   }

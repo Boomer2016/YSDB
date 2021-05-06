@@ -1,14 +1,14 @@
-import { Button, Col, Modal, Row } from "antd"
+import { Col, Row } from "antd"
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import React, { Component } from "react"
 import { action, observable, toJS } from "mobx"
 import { inject, observer } from "mobx-react"
 
-import HomeStore from "./store-home"
 import LineTitle from '../component/line-title'
 import Slider from "react-slick"
-
-const store = new HomeStore()
+import MODULE_CODE from './config'
+import { getModInfo, getImgSrc } from '../common/util'
+import { Link } from "react-router-dom"
 
 @observer
 class Home extends Component {
@@ -17,9 +17,9 @@ class Home extends Component {
   timer = null
 
   componentDidMount () {
-    const {CommonStore: {menus}} = this.props
-    const indexMenu = menus.find(item => item.url === '/home')
-    store.getPageInfo(indexMenu.id)
+    const { CommonStore } = this.props
+    const indexMenu = CommonStore.menus.find(item => item.url === '/home')
+    CommonStore.getPageInfo(indexMenu.id)
     this.bannerStart()
   }
 
@@ -38,7 +38,9 @@ class Home extends Component {
   }
 
   render () {
-    const { productHighLights, productAdvances, partners, bannerData } = store
+    const { CommonStore: {pageInfo = []} } = this.props
+    const { FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH } = MODULE_CODE
+    const bannerData = getModInfo(pageInfo, SECOND, 'subList')
     const activeIndex = toJS(this.startIndex) % bannerData.length
     const showItems = bannerData.slice(activeIndex)
     let actualShowitems = []
@@ -63,7 +65,7 @@ class Home extends Component {
       rtl: true,
       ref: this.slider,
     }
-    const highLights = productHighLights.map((item, i) => (
+    const highLights = getModInfo(pageInfo, THIRD, 'subList').map((item, i) => (
       <Col
         xs={12}
         sm={12}
@@ -73,12 +75,12 @@ class Home extends Component {
         className={`FBV FBAC ${i ? 'detail-item' : ''}`}
         key={item.id}
       >
-        <span className="subtitle-font">{item.value}</span>
+        <span className="subtitle-font">{item.content}</span>
         <div className="highlight-border"></div>
-        <span className="mini-font mt6 fac">{item.name}</span>
+        <span className="mini-font mt6 fac">{item.title}</span>
       </Col>
     ))
-    const homeAdvanceItems = productAdvances.map(item => (
+    const homeAdvanceItems = getModInfo(pageInfo, FOURTH, 'subList').map(item => (
       <Col
         key={item.id}
         xs={12}
@@ -88,37 +90,38 @@ class Home extends Component {
         xl={5}
         className="FBV FBAC advance-item"
       >
-        <div className="advance-icon"></div>
-        <span className="advance-name main-color">{item.name}</span>
-        <div className="thin mini-font fac">{item.value}</div>
+        <div className="advance-icon">
+          <img src={getImgSrc(item.imageId)} alt="" />
+        </div>
+        <span className="advance-name main-color">{item.title}</span>
+        <div className="thin mini-font fac">{item.content}</div>
       </Col>
     ))
 
-    const partnerItems = partners.map(item => (
+    const partnerItems = getModInfo(pageInfo, FIFTH, 'subList').map(item => (
       <div key={item.id} className="partner-item">
         <div className="FBV FBJC">
           <span className="p10">{item.content}</span>
           <span className="partner-item-name">
             ——
-            {item.name}
-            （
-            {item.department}
-            ）
+            {item.title}
           </span>
         </div>
-        <img src={item.img} alt="合作伙伴" className="partner-item-src" />
+        <img src={getImgSrc(item.imageId)} alt="合作伙伴" className="partner-item-src" />
       </div>
     ))
     return (
       <div className="page-home">
         <div className="home-header FBV FBAC">
-          <h1 className="home-header-title">YashanDB - SQL at SCALE</h1>
+          <h1 className="home-header-title">{getModInfo(pageInfo, FIRST, 'title')}</h1>
           <div className="home-header-content mini-font">
-            YashanDB是一款定位于在线事务处理/在线分析处理（HTAP: Hybrid Transactional/Analytical Processing）
-            的融合型数据库产品，实现了一键水平伸缩，强一致性的多副本数据安全，分布式事务，实时OLAP等重要特性。
-            同时兼容 MySQL 协议和生态，迁移便捷，运维成本极低。
+            {getModInfo(pageInfo, FIRST, 'content')}
           </div>
-          <button type="button" className="common-btn">立即开始</button>
+          <button type="button" className="common-btn">
+            <Link to={getModInfo(pageInfo, FIRST, 'buttonUrl')}>
+              {getModInfo(pageInfo, FIRST, 'buttonTxt')}
+            </Link>
+          </button>
           <div className="home-header-banner">
             {actualShowitems.map((item, i) => (
               <div key={item.id} className={`banner-item ${i === 1 ? 'banner-active' : ''}`}>
@@ -130,10 +133,9 @@ class Home extends Component {
         </div>
         <div className="home-highlight m-p2rem">
           <div className="FBV FBAC top-line">
-            <LineTitle title="行业典范" titleClass="subtitle-font" />
+            <LineTitle title={getModInfo(pageInfo, THIRD, 'title')} titleClass="subtitle-font" />
             <div className="FBAC-S sub-content">
-              产品亮点文案补充，可补充一些吸引用户的相关利益点，
-              产品亮点文案可补充一些吸引用户相关利益。产品亮点文案补充，产品亮点文案可补充
+              {getModInfo(pageInfo, THIRD, 'content')}
             </div>
           </div>
           <Row gutter={8} className="highlight-detail" justify="space-between">
@@ -142,10 +144,9 @@ class Home extends Component {
         </div>
         <div className="home-advance m-p2rem">
           <div className="FBV FBAC top-bird">
-            <LineTitle title="产品亮点" titleClass="subtitle-font" />
+            <LineTitle title={getModInfo(pageInfo, FOURTH, 'title')} titleClass="subtitle-font" />
             <div className="FBAC-S fac mini-font">
-              产品亮点文案补充，可补充一些吸引用户的相关利益点，
-              产品亮点文案可补充一些吸引用户相关利益。产品亮点文案补充，产品亮点文案可补充
+              {getModInfo(pageInfo, FOURTH, 'content')}
             </div>
           </div>
           <Row className="advance-detail" justify="space-between">
@@ -153,7 +154,7 @@ class Home extends Component {
           </Row>
         </div>
         <div className="partner-area m-p2rem">
-          <LineTitle title="合作伙伴" titleClass="subtitle-font" className="t-FBJS" />
+          <LineTitle title={getModInfo(pageInfo, FIFTH, 'title')} titleClass="subtitle-font" className="t-FBJS" />
           <div className="FBH FBJB FBAC">
             <LeftOutlined onClick={() => this.slider.current.slickPrev()} className="left-icon" />
             <Slider {...settings}>
@@ -164,12 +165,15 @@ class Home extends Component {
           <div className="right-middle-line"></div>
         </div>
         <div className="home-experience FBV">
-          <LineTitle title="云数据库YashanDB等你来体验" titleClass="subtitle-white" />
+          <LineTitle title={getModInfo(pageInfo, SIXTH, 'title')} titleClass="subtitle-white" />
           <div className="FBAC-S sub-content m14">
-            产品亮点文案补充，可补充一些吸引用户的相关利益点，
-            产品亮点文案可补充一些吸引用户相关利益。产品亮点文案补充，产品亮点文案可补充
+            {getModInfo(pageInfo, SIXTH, 'content')}
           </div>
-          <button type="button" className="common-btn FBAC-S">立即体验</button>
+          <button type="button" className="common-btn FBAC-S">
+            <Link to={getModInfo(pageInfo, SIXTH, 'buttonUrl')}>
+              {getModInfo(pageInfo, SIXTH, 'buttonTxt')}
+            </Link>
+          </button>
         </div>
       </div>
     )

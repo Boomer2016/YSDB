@@ -19,4 +19,17 @@ export default class DocumentsStore {
       return false
     }
   }
+
+  @action async searchDoc (keyword) {
+    try {
+      const res = await io.searchDoc({keyword})
+      // runInAction(() => {
+      //   this.docTree = res
+      // })
+      return res
+    } catch (e) {
+      message.error(e.message)
+      return false
+    }
+  }
 }

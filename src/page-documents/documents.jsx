@@ -1,4 +1,4 @@
-import { Button, Modal, Row, Col, Input, Tree, Select } from 'antd'
+import { Input, Tree, Select } from 'antd'
 import React, { Component } from "react"
 import { action, observable, toJS } from "mobx"
 
@@ -61,10 +61,6 @@ export default class Documents extends Component {
 
   @action
   iframeLoad = () => {
-    // var mainDom = document.getElementById('iframe')
-    // function test(){
-    //   console.log(mainDom.contentWindow.location, 1111)
-    // }
     const { current } = this.docRef
     if (current) {
       const { pathname } = current.contentWindow.location
@@ -73,9 +69,8 @@ export default class Documents extends Component {
   }
 
   render () {
-    const { docTree } = store
+    const { docTree, searchDoc } = store
     const treeData = this.selectV && docTree.length ? this.getTreeNode() : []
-    console.log(toJS(this.selectedKeys))
     return (
       <div className="page-documents">
         <div className="documents-header FBV FBAS FBJC">
@@ -88,6 +83,10 @@ export default class Documents extends Component {
             enterButton="搜索文档"
             size="large"
             className="doc-serch"
+            onSearch={v => {
+              console.log(v, 111)
+              searchDoc(v)
+            }}
           />
         </div>
         <div className="FBH doc-main">

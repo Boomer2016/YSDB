@@ -10,6 +10,14 @@ const ioDocuments = {
       method: 'GET',
     })
   },
+  searchDoc: (data, config = {}) => {
+    return io.request({
+      ...config,
+      data,
+      url: `${BASE_PATH}/Doc/Search`,
+      method: 'GET',
+    })
+  },
 }
 
 export default ioDocuments

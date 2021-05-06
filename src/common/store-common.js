@@ -8,6 +8,7 @@ class CommonStore {
   // 页面菜单
   @observable menus = []
   @observable footerLinks = []
+  @observable pageInfo = []
 
   // 获取菜单列表
   @action async getMainNavs () {
@@ -38,10 +39,11 @@ class CommonStore {
   @action async getPageInfo (id) {
     try {
       const res = await io.getPageInfo(id)
-      return res
+      runInAction(() => {
+        this.pageInfo = res
+      })
     } catch (e) {
       message.error(e.message)
-      return false
     }
   }
 }

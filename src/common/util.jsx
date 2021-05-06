@@ -43,3 +43,12 @@ export function getUrlParam (name, type) {
 }
 
 export function noop () { }
+
+// 根据code获取模块信息
+export const getModInfo = (pageInfo = [], code, key) => {
+  const findItem = pageInfo.length ? pageInfo.find(item => item.code === code) : { buttonUrl: '/cooperation', subList: [] }
+  return findItem[key]
+}
+
+// 根据code获取模块信息
+export const getImgSrc = imgId => `/doc/Image/Download?id=${imgId}`

@@ -51,11 +51,11 @@ app.use(
 )
 
 app.use(async (ctx, next) => {
-  if (/^\/apiserver/.test(ctx.url)) {
+  if (/^\/doc/.test(ctx.url)) {
     return next()
   }
 
-  if (/^\/apimonitor/.test(ctx.url)) {
+  if (/^\/web/.test(ctx.url)) {
     return next()
   }
 
@@ -73,17 +73,25 @@ app.use(async (ctx, next) => {
 
 app.use(
   proxy({
-    host: `http://${webConf.monitorServer}`,
-    match: /^\/apimonitor\//,
-    map: paths => paths.replace('/apimonitor', ''),
+    host: `http://${webConf.docServer}`,
+    match: /^\/doc\//,
+    // map: paths => paths.replace('/doc', ''),
   }),
 )
 
 app.use(
   proxy({
-    host: `http://${webConf.apiServer}`,
-    match: /^\/apiserver\//,
-    map: paths => paths.replace('/apiserver', ''),
+    host: `http://${webConf.webServer}`,
+    match: /^\/web\//,
+    // map: paths => paths.replace('/web', ''),
+  }),
+)
+
+app.use(
+  proxy({
+    host: `http://${webConf.docfileServer}`,
+    match: /^\/docfile\//,
+    // map: paths => paths.replace('/docfile', ''),
   }),
 )
 
@@ -94,7 +102,7 @@ app.on('error', (err, ctx) => {
 
 const server = app.listen(webConf.port, () => {
   console.log(`server starting at port ${webConf.port}`)
-  console.log(`api server ${webConf.apiServer}`)
+  console.log(`api server ${webConf.webServer}`)
 })
 
 server.timeout = 0

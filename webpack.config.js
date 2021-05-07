@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const safeParser = require('postcss-safe-parser')
 const pkg = require('./package.json')
 
@@ -152,20 +151,20 @@ if (process.env.NODE_ENV !== 'development') {
       chunkFilename: '[name].chunk.css',
     }),
     // 复制public文件夹下的文件到dist/public目录下，copy-webpack-plugin的版本有限制的，目前工程下，不能为最新版，降级到6.x才行
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'asset'),
-          to: path.resolve(__dirname, 'dist/web/asset'),
-          toType: 'dir',
-        },
-        {
-          from: path.resolve(__dirname, 'server/config.js'),
-          to: path.resolve(__dirname, 'dist/config.js'),
-          toType: 'file',
-        },
-      ],
-    }),
+    // new CopyWebpackPlugin({
+    //   patterns: [
+    //     {
+    //       from: path.resolve(__dirname, 'asset'),
+    //       to: path.resolve(__dirname, 'dist/web/asset'),
+    //       toType: 'dir',
+    //     },
+    //     {
+    //       from: path.resolve(__dirname, 'server/config.js'),
+    //       to: path.resolve(__dirname, 'dist/config.js'),
+    //       toType: 'file',
+    //     },
+    //   ],
+    // }),
     /**
      * ! 一般不需要开启, 默认打包出来的 stats.json 文件会随着项目增大而变大
      *   如果发现项目中出现某些文件打包很大时, 执行 npm run build 之后执行 npm run analyzer 进行文件分析和打包优化

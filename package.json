@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "cross-env CLIENT_ENV=development NODE_ENV=development webpack-dev-server --config webpack.config.js --color",
-    "build": "cross-env CLIENT_ENV=production NODE_ENV=production webpack --config webpack.config.js --color & npm run node-server",
+    "build": "cross-env CLIENT_ENV=production NODE_ENV=production webpack --config webpack.config.js --color",
     "node-server": "cross-env NODE_ENV=production webpack --config webpack.server.config.js",
     "deploy": "scp -r dist root@47.100.31.199:~/web/goldenscope"
   },

@@ -1,0 +1,48 @@
+[2021-05-07T21:17:31.868] [ERROR] error - {
+  method: 'GET',
+  url: '/',
+  body: undefined,
+  costTime: undefined,
+  err: [Error: ENOENT: no such file or directory, open '/Users/zhihu/myself/ysdb/YSDB/dist/web/index.html'] {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/zhihu/myself/ysdb/YSDB/dist/web/index.html'
+  }
+}
+[2021-05-07T21:17:31.999] [ERROR] error - {
+  method: 'GET',
+  url: '/favicon.ico',
+  body: undefined,
+  costTime: undefined,
+  err: [Error: ENOENT: no such file or directory, open '/Users/zhihu/myself/ysdb/YSDB/dist/web/index.html'] {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/zhihu/myself/ysdb/YSDB/dist/web/index.html'
+  }
+}
+[2021-05-07T21:17:33.548] [ERROR] error - {
+  method: 'GET',
+  url: '/',
+  body: undefined,
+  costTime: undefined,
+  err: [Error: ENOENT: no such file or directory, open '/Users/zhihu/myself/ysdb/YSDB/dist/web/index.html'] {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/zhihu/myself/ysdb/YSDB/dist/web/index.html'
+  }
+}
+[2021-05-07T21:17:34.430] [ERROR] error - {
+  method: 'GET',
+  url: '/',
+  body: undefined,
+  costTime: undefined,
+  err: [Error: ENOENT: no such file or directory, open '/Users/zhihu/myself/ysdb/YSDB/dist/web/index.html'] {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/zhihu/myself/ysdb/YSDB/dist/web/index.html'
+  }
+}

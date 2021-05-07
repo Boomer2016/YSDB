@@ -59,6 +59,9 @@ app.use(async (ctx, next) => {
     return next()
   }
 
+  if (/^\/docfile/.test(ctx.url)) {
+    return next()
+  }
   // if (/^\/assets/.test(ctx.url)) {
   //   return next();
   // }

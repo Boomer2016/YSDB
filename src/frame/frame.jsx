@@ -5,20 +5,20 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 
+import { inject, observer } from 'mobx-react'
+import { observable, toJS } from 'mobx'
+
 import { ConfigProvider } from 'antd'
-import Header from './header'
 import Footer from './footer'
+import Header from './header'
 import React from 'react'
 import zhCN from 'antd/lib/locale-provider/zh_CN'
-import { inject, observer } from 'mobx-react'
-import { toJS, observable } from 'mobx'
-
 
 @inject('CommonStore')
 @observer
 class Frame extends React.Component {
   @observable couldRender = false
-  componentDidMount() {
+  componentDidMount () {
     const { CommonStore } = this.props
     CommonStore.getMainNavs().then(res => {
       if (res) this.couldRender = true

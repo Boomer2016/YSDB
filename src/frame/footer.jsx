@@ -6,11 +6,10 @@ import { observable } from 'mobx'
 import { observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 
-
 @observer
 class Footer extends React.Component {
   render () {
-    const { history, CommonStore: {footerLinks} } = this.props
+    const { history, CommonStore: { footerLinks } } = this.props
     const linkItems = footerLinks.map((item, i) => (
       // eslint-disable-next-line react/no-array-index-key
       <Col key={i} xs={8} sm={8} md={4} lg={4} xl={4} className="FBV">

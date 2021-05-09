@@ -14,9 +14,16 @@ const store = new SolutionStore()
 @observer
 class Solution extends Component {
   slider = React.createRef()
+
+  componentWillMount() {
+    const { CommonStore } = this.props
+    CommonStore.setPageModules([])
+  }
+
   componentDidMount () {
-    console.log(this.props, 1111)
-    // store.getContent()
+    const { CommonStore } = this.props
+    CommonStore.getPageInfo(CommonStore.ACTIVE_PAGE.id)
+    this.bannerStart()
   }
 
   render () {

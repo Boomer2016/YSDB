@@ -62,9 +62,6 @@ app.use(async (ctx, next) => {
   if (/^\/docfile/.test(ctx.url)) {
     return next()
   }
-  // if (/^\/assets/.test(ctx.url)) {
-  //   return next();
-  // }
 
   // const fileName = /\.html$/.test(ctx.url)
   ctx.request.header['cache-control'] = 'no-store'

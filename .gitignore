@@ -7,12 +7,8 @@ jsconfig.json
 .tags
 .tags1
 __tmp
-dist
-dist-private
-resource
-static-cache
+dist/
 package-lock.json
-tgz
 .vscode
 .history
 logs

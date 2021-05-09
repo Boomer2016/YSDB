@@ -1,6 +1,7 @@
 /* eslint react/destructuring-assignment: off */
 
 import React from 'react'
+import { toJS } from 'mobx'
 
 export function asyncComponent (getComponent) {
   return class AsyncComponent extends React.Component {
@@ -47,7 +48,8 @@ export function noop () { }
 // 根据code获取模块信息
 export const getModInfo = (pageInfo = [], code, key) => {
   const findItem = pageInfo.length ? pageInfo.find(item => item.code === code) : { buttonUrl: '/cooperation', subList: [] }
-  return findItem[key]
+  // console.log(toJS(pageInfo), 'pageInfo', toJS(findItem))
+  return findItem && findItem[key]
 }
 
 // 根据code获取模块信息

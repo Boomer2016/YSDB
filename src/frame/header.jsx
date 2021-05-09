@@ -15,37 +15,32 @@ class Header extends React.Component {
   }
 
   @action
-  menuClick = key => {
-    const { history, CommonStore: { menus } } = this.props
-    let pageMenus = []
-    toJS(menus).forEach(item => {
-      if (item.subList && item.subList.length) {
-        pageMenus = pageMenus.concat(
-          item.subList.map(k => (
-            {
-              ...k,
-              orignUrl: item.url,
-              parent: false,
-            }))
-        )
-      } else {
-        pageMenus.push({ ...item, orignUrl: item.url, parent: true })
-      }
-    })
-    const activeItem = pageMenus.find(item => item.url === key)
-    history.push({
-      pathname: activeItem.orignUrl,
-      search: activeItem.parent ? '' : `id=${activeItem.id}`,
-    })
-    this.activeKey = [key]
+  menuClick = e => {
+    const { history, CommonStore } = this.props
+    if (e.keyPath && e.keyPath.length === 2) {
+      const activeItem = CommonStore.PAGES.find(item => item.url === e.keyPath[1])
+      const activeSubItem = (activeItem.subList || []).find(item => item.url === e.keyPath[0])
+      CommonStore.setActivePage(activeSubItem)
+      history.push({
+        pathname: activeItem.url,
+        search: `id=${activeSubItem.id}`,
+      })
+    } else if (e.keyPath && e.keyPath.length === 1) {
+      const activePage = CommonStore.PAGES.find(item => item.url === e.keyPath[0])
+      history.push({
+        pathname: activePage.url,
+      })
+      CommonStore.setActivePage(activePage)
+    }
+    this.activeKey = [e.key]
   }
 
   render () {
-    const { CommonStore: { menus } } = this.props
-    const navItems = menus.map(item => (
+    const { CommonStore } = this.props
+    const navItems = CommonStore.PAGES.map(item => (
       <React.Fragment key={item.id}>
         {item.subList.length ? (
-          <Menu.SubMenu title={item.name}>
+          <Menu.SubMenu title={item.name} key={item.url}>
             {item.subList.map(k => (
               <Menu.Item key={k.url}>
                 <span className="menu-item-name">
@@ -63,7 +58,7 @@ class Header extends React.Component {
         )}
       </React.Fragment>
     ))
-    const cellphoneNavItems = menus.map(item => (
+    const cellphoneNavItems = CommonStore.PAGES.map(item => (
       <React.Fragment key={item.id}>
         {item.subList.length ? (
           <Menu.ItemGroup title={item.name}>
@@ -93,7 +88,7 @@ class Header extends React.Component {
           mode="horizontal"
           selectedKeys={toJS(this.activeKey)}
           theme="dark"
-          onClick={e => this.menuClick(e.key)}
+          onClick={e => this.menuClick(e)}
           className="nav-menu"
         >
           {navItems}
@@ -103,7 +98,7 @@ class Header extends React.Component {
             overlay={(
               <Menu
                 className="cellphone-nav-menu"
-                onClick={e => this.menuClick(e.key)}
+                onClick={e => this.menuClick(e)}
                 selectedKeys={toJS(this.activeKey)}
               >
                 {cellphoneNavItems}

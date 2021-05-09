@@ -10,8 +10,8 @@ import { withRouter } from 'react-router-dom'
 @observer
 class Footer extends React.Component {
   render () {
-    const { history, CommonStore: {footerLinks} } = this.props
-    const linkItems = footerLinks.map((item, i) => (
+    const { history, CommonStore } = this.props
+    const linkItems = CommonStore.FOOTER_LINKS.map((item, i) => (
       // eslint-disable-next-line react/no-array-index-key
       <Col key={i} xs={8} sm={8} md={4} lg={4} xl={4} className="FBV">
         <div className="link-item">{item.groupName}</div>

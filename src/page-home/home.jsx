@@ -16,10 +16,14 @@ class Home extends Component {
   slider = React.createRef()
   timer = null
 
+  componentWillMount() {
+    const { CommonStore } = this.props
+    CommonStore.setPageModules([])
+  }
+
   componentDidMount () {
     const { CommonStore } = this.props
-    const indexMenu = CommonStore.menus.find(item => item.url === '/home')
-    CommonStore.getPageInfo(indexMenu.id)
+    CommonStore.getPageInfo(CommonStore.ACTIVE_PAGE.id)
     this.bannerStart()
   }
 
@@ -38,10 +42,10 @@ class Home extends Component {
   }
 
   render () {
-    const { CommonStore: {pageInfo = []} } = this.props
+    const { CommonStore: {PAGE_MODULES = []} } = this.props
     const { FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH } = MODULE_CODE
-    const bannerData = getModInfo(pageInfo, SECOND, 'subList')
-    const activeIndex = toJS(this.startIndex) % bannerData.length
+    const bannerData = getModInfo(PAGE_MODULES, SECOND, 'subList')
+    const activeIndex = bannerData.length ? toJS(this.startIndex) % bannerData.length : 0
     const showItems = bannerData.slice(activeIndex)
     let actualShowitems = []
     if (showItems.length === 1) {
@@ -65,7 +69,7 @@ class Home extends Component {
       rtl: true,
       ref: this.slider,
     }
-    const highLights = getModInfo(pageInfo, THIRD, 'subList').map((item, i) => (
+    const highLights = getModInfo(PAGE_MODULES, THIRD, 'subList').map((item, i) => (
       <Col
         xs={12}
         sm={12}
@@ -73,16 +77,16 @@ class Home extends Component {
         lg={4}
         xl={4}
         className={`FBV FBAC ${i ? 'detail-item' : ''}`}
-        key={item.id}
+        key={item.code}
       >
         <span className="subtitle-font">{item.content}</span>
         <div className="highlight-border"></div>
         <span className="mini-font mt6 fac">{item.title}</span>
       </Col>
     ))
-    const homeAdvanceItems = getModInfo(pageInfo, FOURTH, 'subList').map(item => (
+    const homeAdvanceItems = getModInfo(PAGE_MODULES, FOURTH, 'subList').map(item => (
       <Col
-        key={item.id}
+        key={item.code}
         xs={12}
         sm={12}
         md={12}
@@ -98,8 +102,8 @@ class Home extends Component {
       </Col>
     ))
 
-    const partnerItems = getModInfo(pageInfo, FIFTH, 'subList').map(item => (
-      <div key={item.id} className="partner-item">
+    const partnerItems = getModInfo(PAGE_MODULES, FIFTH, 'subList').map(item => (
+      <div key={item.code} className="partner-item">
         <div className="FBV FBJC">
           <span className="p10">{item.content}</span>
           <span className="partner-item-name">
@@ -110,21 +114,26 @@ class Home extends Component {
         <img src={getImgSrc(item.imageId)} alt="合作伙伴" className="partner-item-src" />
       </div>
     ))
+
     return (
       <div className="page-home">
         <div className="home-header FBV FBAC">
-          <h1 className="home-header-title">{getModInfo(pageInfo, FIRST, 'title')}</h1>
+          <h1 className="home-header-title">{getModInfo(PAGE_MODULES, FIRST, 'title')}</h1>
           <div className="home-header-content mini-font">
-            {getModInfo(pageInfo, FIRST, 'content')}
+            {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
           <button type="button" className="common-btn">
-            <Link to={getModInfo(pageInfo, FIRST, 'buttonUrl')}>
-              {getModInfo(pageInfo, FIRST, 'buttonTxt')}
+            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl')}>
+              {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
             </Link>
           </button>
           <div className="home-header-banner">
             {actualShowitems.map((item, i) => (
-              <div key={item.id} className={`banner-item ${i === 1 ? 'banner-active' : ''}`}>
+              <div
+                key={item.code}
+                className={`banner-item ${i === 1 ? 'banner-active' : ''}`}
+                style={{backgroundImage: `url(${getImgSrc(item.imageId)})`}}
+              >
                 {i === 1 && <span>{item.title}</span>}
                 {i === 1 && <span className="active-content-bottom">{item.content}</span>}
               </div>
@@ -133,9 +142,9 @@ class Home extends Component {
         </div>
         <div className="home-highlight m-p2rem">
           <div className="FBV FBAC top-line">
-            <LineTitle title={getModInfo(pageInfo, THIRD, 'title')} titleClass="subtitle-font" />
+            <LineTitle title={getModInfo(PAGE_MODULES, THIRD, 'title')} titleClass="subtitle-font" />
             <div className="FBAC-S sub-content">
-              {getModInfo(pageInfo, THIRD, 'content')}
+              {getModInfo(PAGE_MODULES, THIRD, 'content')}
             </div>
           </div>
           <Row gutter={8} className="highlight-detail" justify="space-between">
@@ -144,9 +153,9 @@ class Home extends Component {
         </div>
         <div className="home-advance m-p2rem">
           <div className="FBV FBAC top-bird">
-            <LineTitle title={getModInfo(pageInfo, FOURTH, 'title')} titleClass="subtitle-font" />
+            <LineTitle title={getModInfo(PAGE_MODULES, FOURTH, 'title')} titleClass="subtitle-font" />
             <div className="FBAC-S fac mini-font">
-              {getModInfo(pageInfo, FOURTH, 'content')}
+              {getModInfo(PAGE_MODULES, FOURTH, 'content')}
             </div>
           </div>
           <Row className="advance-detail" justify="space-between">
@@ -154,7 +163,7 @@ class Home extends Component {
           </Row>
         </div>
         <div className="partner-area m-p2rem">
-          <LineTitle title={getModInfo(pageInfo, FIFTH, 'title')} titleClass="subtitle-font" className="t-FBJS" />
+          <LineTitle title={getModInfo(PAGE_MODULES, FIFTH, 'title')} titleClass="subtitle-font" className="t-FBJS" />
           <div className="FBH FBJB FBAC">
             <LeftOutlined onClick={() => this.slider.current.slickPrev()} className="left-icon" />
             <Slider {...settings}>
@@ -165,13 +174,13 @@ class Home extends Component {
           <div className="right-middle-line"></div>
         </div>
         <div className="home-experience FBV">
-          <LineTitle title={getModInfo(pageInfo, SIXTH, 'title')} titleClass="subtitle-white" />
+          <LineTitle title={getModInfo(PAGE_MODULES, SIXTH, 'title')} titleClass="subtitle-white" />
           <div className="FBAC-S sub-content m14">
-            {getModInfo(pageInfo, SIXTH, 'content')}
+            {getModInfo(PAGE_MODULES, SIXTH, 'content')}
           </div>
           <button type="button" className="common-btn FBAC-S">
-            <Link to={getModInfo(pageInfo, SIXTH, 'buttonUrl')}>
-              {getModInfo(pageInfo, SIXTH, 'buttonTxt')}
+            <Link to={getModInfo(PAGE_MODULES, SIXTH, 'buttonUrl')}>
+              {getModInfo(PAGE_MODULES, SIXTH, 'buttonTxt')}
             </Link>
           </button>
         </div>

@@ -1,31 +1,31 @@
-import { Button, Col, Modal, Row } from "antd"
+import { Col, Row } from "antd"
 import React, { Component } from "react"
-import { action, observable } from "mobx"
 import { inject, observer } from "mobx-react"
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 
 import LineTitle from '../component/line-title'
-import ProductStore from "./store-product"
-import archPic from '../image/productarch.png'
 import Slider from "react-slick"
-
-const store = new ProductStore()
+import MODULE_CODE from './config'
+import { getModInfo, getImgSrc } from '../common/util'
+import { Link } from "react-router-dom"
 
 @observer
 class Product extends Component {
   slider = React.createRef()
-  componentDidMount () {
-    const {location} = this.props
-    // store.getContent()
+
+  componentWillMount() {
+    const { CommonStore } = this.props
+    CommonStore.setPageModules([])
   }
 
-  componentDidUpdate() {
-    const {location: {search}} = this.props
-    console.log(search, 'location')
+  componentDidMount () {
+    const { CommonStore } = this.props
+    CommonStore.getPageInfo(CommonStore.ACTIVE_PAGE.id)
   }
 
   render () {
-    const { servicePowers, productScenes, coreValues } = store
+    const { CommonStore: {PAGE_MODULES = []} } = this.props
+    const { FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH } = MODULE_CODE
     const settings = {
       className: "common-slider",
       infinite: true,
@@ -63,7 +63,7 @@ class Product extends Component {
         },
       ],
     }
-    const powerItems = servicePowers.map(item => (
+    const powerItems = getModInfo(PAGE_MODULES, FOURTH, 'subList').map(item => (
       <Col
         className="FBV power-item"
         xs={24}
@@ -71,24 +71,29 @@ class Product extends Component {
         md={12}
         lg={8}
         xl={8}
-        key={item.id}
+        key={item.code}
       >
-        <h5 className="pl20 pr20 item-title">{item.name}</h5>
-        <span className="mini-font mt8 pl20 pr20">{item.value}</span>
+        <h5 className="pl20 pr20 item-title">{item.title}</h5>
+        <span className="mini-font mt8 pl20 pr20">{item.content}</span>
       </Col>
     ))
-    const sceneItems = productScenes.map(item => (
-      <div key={item.id}>
-        <div className="scene-item" style={{ backgroundImage: `url(${item.src})` }}>
+    const sceneItems = getModInfo(PAGE_MODULES, FIFTH, 'subList').map(item => (
+      <div key={item.code}>
+        <div className="scene-item" style={{ backgroundImage: `url(${getImgSrc(item.imageId)})` }}>
           <div className="FB1 FBV">
-            <span className="pl20 pr20 main-color">{item.name}</span>
-            <span className="mini-font mt8 pl20">{item.value}</span>
+            <span className="pl20 pr20 main-color">{item.title}</span>
+            <span className="mini-font mt8 pl20">{item.content}</span>
           </div>
-          <button className="common-btn ml20" type="button">了解更多</button>
+          <button
+            className="common-btn ml20"
+            type="button"
+          >
+            <Link to={item.buttonUrl}>{item.buttonTxt}</Link>
+          </button>
         </div>
       </div>
     ))
-    const valueItems = coreValues.map(item => (
+    const valueItems = getModInfo(PAGE_MODULES, SIXTH, 'subList').map(item => (
       <Col
         className="FBV value-item FBAC FBJC"
         xs={24}
@@ -96,30 +101,31 @@ class Product extends Component {
         md={12}
         lg={5}
         xl={5}
-        key={item.id}
+        key={item.code}
       >
         <div className="value-icon"></div>
-        <span className="p10">{item.name}</span>
-        <span className="mini-font fac">{item.value}</span>
+        <span className="p10 mini-font">{item.title}</span>
+        <span className="mini-font fac">{item.content}</span>
       </Col>
     ))
     return (
       <div className="page-product">
         <div className="product-header FBV FBAC FBJC ">
-          <h1 className="product-header-title">YashanDB 产品体系</h1>
+          <h1 className="product-header-title">
+            {getModInfo(PAGE_MODULES, FIRST, 'title')}
+          </h1>
           <div className="product-header-content mini-font">
-            YashanDB 是深圳计算科学研究院 CoD(Conquest of Data)团队完全自研的新型大数
-            据分布式实时分析数据 (边框文本)
+            {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
           <button
             type="button"
             className="common-btn"
             onClick={() => {
               const { history } = this.props
-              history.push('./cooperation-ecological')
+              history.push(getModInfo(PAGE_MODULES, FIRST, 'buttonUrl'))
             }}
           >
-            了解更多
+            {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
           </button>
         </div>
         <div className="product-area m-p2rem">
@@ -132,10 +138,9 @@ class Product extends Component {
               lg={10}
               xl={10}
             >
-              <LineTitle titleClass="subtitle-font" title="产品简介" className="t-FBJS" />
+              <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, SECOND, 'title')} className="t-FBJS" />
               <span className="intro-detail">
-                YashanDB 迁移服务连接的两端分别是待迁移的源业务数据库以及目标端 YashanDB 数据库，内部主要包含一站式迁移调度
-                YashanDB 迁移服务连接的两端分别是待迁移的源业务数据库以及目标端 YashanDB 数据库，内部主要包含一站式迁移调度
+                {getModInfo(PAGE_MODULES, SECOND, 'content')}
               </span>
             </Col>
             <Col
@@ -146,7 +151,7 @@ class Product extends Component {
               xl={14}
               className="intro-pic fac"
             >
-              <img src={archPic} alt="产品简介" />
+              <img src={getImgSrc(getModInfo(PAGE_MODULES, SECOND, 'imageId'))} alt="产品简介" />
             </Col>
           </Row>
           <Row gutter={8} className="arch-area m-p2rem">
@@ -158,7 +163,7 @@ class Product extends Component {
               xl={12}
               className="arch-pic fac"
             >
-              <img src={archPic} alt="产品架构" />
+              <img src={getImgSrc(getModInfo(PAGE_MODULES, THIRD, 'imageId'))} alt="产品架构" />
             </Col>
             <Col
               className="arch-content FBV"
@@ -168,17 +173,16 @@ class Product extends Component {
               lg={12}
               xl={12}
             >
-              <LineTitle titleClass="subtitle-font" title="产品架构" className="t-FBJS" />
+              <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, THIRD, 'title')} className="t-FBJS" />
               <span className="intro-detail">
-                YashanDB 迁移服务连接的两端分别是待迁移的源业务数据库以及目标端 YashanDB 数据库，内部主要包含一站式迁移调度
-                YashanDB 迁移服务连接的两端分别是待迁移的源业务数据库以及目标端 YashanDB 数据库，内部主要包含一站式迁移调度
+                {getModInfo(PAGE_MODULES, THIRD, 'content')}
               </span>
             </Col>
           </Row>
         </div>
         <div className="service-power m-p2rem">
           <div className="service-title">
-            <LineTitle titleClass="subtitle-font" title="服务能力" className="t-FBJS" />
+            <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, FOURTH, 'title')} className="t-FBJS" />
           </div>
           <div className="service-padding">
             <Row gutter={16} className="service-content FBAS-C">
@@ -187,10 +191,9 @@ class Product extends Component {
           </div>
         </div>
         <div className="product-scene FBV FBAC m-p2rem">
-          <LineTitle titleClass="subtitle-font" title="产品场景" className="subBg FBJC" />
+          <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, FIFTH, 'title')} className="subBg FBJC" />
           <div className="product-header-content mini-font m-p2rem">
-            YashanDB 是深圳计算科学研究院 CoD(Conquest of Data)团队完全自研的新型大数
-            据分布式实时分析数据 (边框文本)
+            {getModInfo(PAGE_MODULES, FIFTH, 'content')}
           </div>
           <div className="FBH FBJB FBAC">
             <LeftOutlined className="left-icon" onClick={() => this.slider.current.slickPrev()} />
@@ -201,10 +204,9 @@ class Product extends Component {
           </div>
         </div>
         <div className="core-value FBV FBAC m-p2rem">
-          <LineTitle titleClass="subtitle-font" title="核心价值" className="subBg FBJC" />
+          <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, SIXTH, 'title')} className="subBg FBJC" />
           <div className="product-header-content mini-font mt10">
-            YashanDB 是深圳计算科学研究院 CoD(Conquest of Data)团队完全自研的新型大数
-            据分布式实时分析数据 (边框文本)
+            {getModInfo(PAGE_MODULES, SIXTH, 'content')}
           </div>
           <Row justify="space-between" className="scene-row">{valueItems}</Row>
           <div className="core-bottom"></div>

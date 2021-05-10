@@ -12,6 +12,7 @@ import { Link } from "react-router-dom"
 @observer
 class Product extends Component {
   slider = React.createRef()
+  introSlider = React.createRef()
 
   componentWillMount() {
     const { CommonStore } = this.props
@@ -63,6 +64,27 @@ class Product extends Component {
         },
       ],
     }
+    const introSettings = {
+      className: "intro-slider",
+      dots: false,
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      adaptiveHeight: true,
+      autoplay: true,
+      speed: 500,
+      autoplaySpeed: 5000,
+      rtl: true,
+      ref: this.introSlider,
+    }
+    const partnerItems = getModInfo(PAGE_MODULES, SECOND, 'subList').map(item => (
+      <div key={item.code} className="intro-item">
+        <div className="FBH FBJC intro-item-content">
+          {item.content}
+        </div>
+        <img src={getImgSrc(item.imageId)} alt="产品简介" className="intro-item-src" />
+      </div>
+    ))
     const powerItems = getModInfo(PAGE_MODULES, FOURTH, 'subList').map(item => (
       <Col
         className="FBV power-item"
@@ -128,32 +150,17 @@ class Product extends Component {
             {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
           </button>
         </div>
+        <div className="product-intro m-p2rem">
+          <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, SECOND, 'title')} className="t-FBJS" />
+          <div className="FBH FBJB FBAC">
+            <LeftOutlined onClick={() => this.introSlider.current.slickPrev()} className="left-icon" />
+            <Slider {...introSettings}>
+              {partnerItems}
+            </Slider>
+            <RightOutlined className="right-icon" onClick={() => this.introSlider.current.slickNext()} />
+          </div>
+        </div>
         <div className="product-area m-p2rem">
-          <Row gutter={8}>
-            <Col
-              className="intro-content FBV m-p2rem"
-              xs={24}
-              sm={24}
-              md={10}
-              lg={10}
-              xl={10}
-            >
-              <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, SECOND, 'title')} className="t-FBJS" />
-              <span className="intro-detail">
-                {getModInfo(PAGE_MODULES, SECOND, 'content')}
-              </span>
-            </Col>
-            <Col
-              xs={24}
-              sm={24}
-              md={14}
-              lg={14}
-              xl={14}
-              className="intro-pic fac"
-            >
-              <img src={getImgSrc(getModInfo(PAGE_MODULES, SECOND, 'imageId'))} alt="产品简介" />
-            </Col>
-          </Row>
           <Row gutter={8} className="arch-area m-p2rem">
             <Col
               xs={24}

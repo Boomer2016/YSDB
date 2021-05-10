@@ -1,30 +1,41 @@
-import { Button, Modal, Row, Col } from "antd"
+import { Row, Col } from "antd"
 import React, { Component } from "react"
-import { action, observable } from "mobx"
 import { inject, observer } from "mobx-react"
 import LineTitle from '../component/line-title'
-import qrcordSrc from '../image/qr-cord.png'
+import MODULE_CODE from './config'
+import { getModInfo, getImgSrc } from '../common/util'
+import { Link } from "react-router-dom"
 
-import CooperationStore from "./store-cooperation"
-
-const store = new CooperationStore()
 
 @observer
 class Cooperation extends Component {
+  componentWillMount() {
+    const { CommonStore } = this.props
+    CommonStore.setPageModules([])
+  }
+
   componentDidMount () {
-    // store.getContent()
+    const { CommonStore } = this.props
+    CommonStore.getPageInfo(CommonStore.ACTIVE_PAGE.id)
   }
 
   render () {
+    const { CommonStore: {PAGE_MODULES = []} } = this.props
+    const { FIRST, SECOND, THIRD, FOURTH } = MODULE_CODE
     return (
       <div className="page-cooperation">
         <div className="cooperation-header FBV FBAC">
-          <h1 className="cooperation-header-title">联系我们</h1>
+          <h1 className="cooperation-header-title">
+            {getModInfo(PAGE_MODULES, FIRST, 'title')}
+          </h1>
           <div className="cooperation-header-content mini-font">
-          欢迎联系我们洽谈合作,欢迎联系我们洽谈合作,欢迎联系我们洽谈合作,
-          欢迎联系我们洽谈合作,欢迎联系我们洽谈合作,欢迎联系我们洽谈
+            {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
-          <button type="button" className="common-btn">了解更多</button>
+          <button type="button" className="common-btn">
+            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl')}>
+              {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
+            </Link>
+          </button>
         </div>
         <div className="contact-area m-p2rem">
           <Row justify="space-between">
@@ -36,12 +47,11 @@ class Cooperation extends Component {
               xl={11}
               className="FBV FBAC leftBg"
             >
-              <LineTitle titleClass="subtitle-font" title="微信公众号" />
+              <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, SECOND, 'title')} />
               <span className="mini-font m10">
-                欢迎扫码关注我们公众号，公众号简介内容文案，公众号简介内容文案，
-                公众号简介内容文案，公众号简介内容文案。
+                {getModInfo(PAGE_MODULES, SECOND, 'content')}
               </span>
-              <img src={qrcordSrc} alt="二维码" className="qr-cord" />
+              <img src={getImgSrc(getModInfo(PAGE_MODULES, SECOND, 'imageId'))} alt="二维码" className="qr-cord" />
             </Col>
             <Col
               xs={23}
@@ -51,22 +61,23 @@ class Cooperation extends Component {
               xl={11}
               className="FBV"
             >
-              <LineTitle titleClass="subtitle-font" title="联系方式" />
+              <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, THIRD, 'title')} />
               <span className="mini-font m10">
-                欢迎联系我们，欢迎联系我们，欢迎联系我们，
-                欢迎联系我们，欢迎联系我们。
+                {getModInfo(PAGE_MODULES, THIRD, 'content')}
               </span>
-              <span className="contact-name">电话</span>
-              <span className="contact-value">189-1356-0000</span>
-              <span className="contact-name">邮箱</span>
-              <span className="contact-value">8888@gmail.com</span>
+              {getModInfo(PAGE_MODULES, THIRD, 'subList').map(item => (
+                <div key={item.code} className="mt14">
+                  <span className="contact-name">{item.title}</span>
+                  <span className="contact-value">{item.content}</span>
+                </div>
+              ))}
             </Col>
           </Row>
         </div>
         <div className="FBV FBAC">
-          <LineTitle titleClass="subtitle-font" title="我们在哪" />
+          <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, FOURTH, 'title')} />
           <span className="mini-font m10">
-            补充地图信息，补充地图信息，补充地图信息，补充地图信息，补充地图信息，补充地图信息
+            {getModInfo(PAGE_MODULES, FOURTH, 'content')}
           </span>
         </div>
       </div>

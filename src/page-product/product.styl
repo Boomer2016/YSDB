@@ -24,21 +24,36 @@
       font-weight 300
       @media only screen and (max-width: 768px)
         width 98%
-  .product-area
-    background #ffffff
-    .intro-content
+  .product-intro
+    .intro-item
+      display flex !important
+      width 100%
+      flex-direction row !important
+      justify-content space-between
+      @media only screen and (max-width: 768px)
+        flex-direction column !important
+    .intro-item-src
+      width 40%
+      height auto
+      margin-right 8%
+      @media only screen and (max-width: 768px)
+        width 100%
+    .intro-item-content
+      padding-top 2rem
+      width 50%
       background-size 8rem
       background-repeat no-repeat
       background-image url('../image/prodIntro.png')
       background-position bottom left
+      @media only screen and (max-width: 768px)
+        width 100%
+  .product-area
+    background rgb(247, 248, 249)
     .intro-detail
       padding 1rem 10%
       @media only screen and (max-width: 768px)
         padding 1rem 0.1rem
-    .arch-area
-      margin-top 2rem
-      background rgb(247, 248, 249)
-    .arch-pic, .intro-pic
+    .arch-pic
       img
         width 80%
         height auto
@@ -155,3 +170,7 @@
     padding 1.2rem 0
   .advance-name
     margin 0.4rem 0
+.intro-slider
+  width 90vw
+  @media only screen and (max-width: 768px)
+    width 80vw

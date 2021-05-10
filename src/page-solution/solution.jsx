@@ -1,15 +1,12 @@
-import { Button, Modal, Row, Col, Avatar } from "antd"
-import { AntDesignOutlined, LeftOutlined, RightOutlined} from '@ant-design/icons'
+import { Row, Col, Avatar } from "antd"
+import { LeftOutlined, RightOutlined} from '@ant-design/icons'
 import React, { Component } from "react"
-import { action, observable } from "mobx"
 import { inject, observer } from "mobx-react"
 import LineTitle from '../component/line-title'
-import archPic from '../image/productarch.png'
 import Slider from "react-slick"
-
-import SolutionStore from "./store-solution"
-
-const store = new SolutionStore()
+import MODULE_CODE from './config'
+import { getModInfo, getImgSrc } from '../common/util'
+import { Link } from "react-router-dom"
 
 @observer
 class Solution extends Component {
@@ -23,12 +20,12 @@ class Solution extends Component {
   componentDidMount () {
     const { CommonStore } = this.props
     CommonStore.getPageInfo(CommonStore.ACTIVE_PAGE.id)
-    this.bannerStart()
   }
 
   render () {
-    const { advantages = [], painPoints = [], solutions } = store
-    const painPointsItems = painPoints.map(item => (
+    const { CommonStore: {PAGE_MODULES = []} } = this.props
+    const { FIRST, SECOND, THIRD, FOURTH, FIFTH } = MODULE_CODE
+    const painPointsItems = getModInfo(PAGE_MODULES, SECOND, 'subList').map(item => (
       <Col
         className="FBV point-item"
         xs={24}
@@ -36,13 +33,13 @@ class Solution extends Component {
         md={12}
         lg={7}
         xl={7}
-        key={item.id}
+        key={item.code}
       >
-        <span className="pt10 pl20">{item.name}</span>
-        <span className="mini-font mt8 pl20 pr20">{item.value}</span>
+        <span className="pt10 pl20">{item.title}</span>
+        <span className="mini-font mt8 pl20 pr20">{item.content}</span>
       </Col>
     ))
-    const advantageItems = advantages.map(item => (
+    const advantageItems = getModInfo(PAGE_MODULES, FOURTH, 'subList').map(item => (
       <Col
         className="FBV FBAC p8"
         xs={12}
@@ -50,14 +47,14 @@ class Solution extends Component {
         md={10}
         lg={5}
         xl={5}
-        key={item.id}
+        key={item.code}
       >
         <Avatar
           size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
-          icon={<AntDesignOutlined />}
+          src={getImgSrc(item.imageId)}
         />
-        <span className="fac p10">{item.name}</span>
-        <span className="mini-font fac">{item.value}</span>
+        <span className="fac p10">{item.title}</span>
+        <span className="mini-font fac">{item.content}</span>
       </Col>
     ))
     const settings = {
@@ -73,20 +70,22 @@ class Solution extends Component {
       rtl: true,
       ref: this.slider,
     }
-    const solutionItems = solutions.map(item => (
-      <div className="case-main" key={item.id}>
+    const solutionItems = getModInfo(PAGE_MODULES, FIFTH, 'subList').map(item => (
+      <div className="case-main" key={item.code}>
         <div className="subBg">
-          <LineTitle titleClass="subtitle-font" title={item.name} />
+          <LineTitle titleClass="subtitle-font" title={item.title} />
         </div>
         <div className="solotion-item-content">
           <div className="case-pic">
-            <img src={item.src} alt={item.name} />
+            <img src={getImgSrc(item.imageId)} alt={item.content} />
           </div>
-          <div className="FBV FBJB">
+          <div className="FBV FBJB case-content">
             <span className="mini-font">
               {item.content}
             </span>
-            <button type="button" className="common-btn">了解更多</button>
+            <button type="button" className="common-btn">
+              <Link to={item.buttonUrl}>{item.buttonTxt}</Link>
+            </button>
           </div>
         </div>
       </div>
@@ -94,19 +93,23 @@ class Solution extends Component {
     return (
       <div className="page-solution">
         <div className="solution-header FBV FBAC FBJC">
-          <h1 className="solution-header-title">金融及解决方案</h1>
+          <h1 className="solution-header-title">
+            {getModInfo(PAGE_MODULES, FIRST, 'title')}
+          </h1>
           <div className="solution-header-content mini-font">
-            YashanDB 是深圳计算科学研究院 CoD(Conquest of Data)团队完全自研的新型大数
-            据分布式实时分析数据 (边框文本)
+            {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
-          <button type="button" className="common-btn">了解更多</button>
+          <button type="button" className="common-btn">
+            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl')}>
+              {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
+            </Link>
+          </button>
         </div>
         <div className="pain-points FBV FBAC m-p2rem">
           <div className="subBg">
-            <LineTitle titleClass="subtitle-font" title="痛点描述" />
+            <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, SECOND, 'title')} />
             <div className="solution-header-content mini-font mt10 fac">
-            YashanDB 是深圳计算科学研究院 CoD(Conquest of Data)团队完全自研的新型大数
-            据分布式实时分析数据 (边框文本)
+              {getModInfo(PAGE_MODULES, SECOND, 'content')}
             </div>
           </div>
           <Row justify="space-between" className="points-row">{painPointsItems}</Row>
@@ -120,7 +123,7 @@ class Solution extends Component {
             xl={10}
             className="solution-pic"
           >
-            <img src={archPic} alt="解决方案" />
+            <img src={getImgSrc(getModInfo(PAGE_MODULES, THIRD, 'imageId'))} alt="解决方案" />
           </Col>
           <Col
             className="FBV"
@@ -130,19 +133,17 @@ class Solution extends Component {
             lg={12}
             xl={12}
           >
-            <LineTitle titleClass="subtitle-font" title="解决方案" />
+            <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, THIRD, 'title')} />
             <span className="p10 mini-font">
-              YashanDB 迁移服务连接的两端分别是待迁移的源业务数据库以及目标端 YashanDB 数据库，内部主要包含一站式迁移调度
-              YashanDB 迁移服务连接的两端分别是待迁移的源业务数据库以及目标端 YashanDB 数据库，内部主要包含一站式迁移调度
+              {getModInfo(PAGE_MODULES, THIRD, 'content')}
             </span>
           </Col>
         </Row>
         <div className="advantage-area FBV FBAC m-p2rem">
           <div className="subBg FBV FBAC">
-            <LineTitle titleClass="subtitle-font" title="优势描述" />
+            <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, FOURTH, 'title')} />
             <div className="solution-header-content mini-font mt10">
-            YashanDB 是深圳计算科学研究院 CoD(Conquest of Data)团队完全自研的新型大数
-            据分布式实时分析数据 (边框文本)
+              {getModInfo(PAGE_MODULES, FOURTH, 'content')}
             </div>
           </div>
           <Row justify="space-between" className="pt20">{advantageItems}</Row>

@@ -1,9 +1,10 @@
+/* eslint-disable radix */
 import { Row, Col } from "antd"
 import React, { Component } from "react"
 import { inject, observer } from "mobx-react"
 import LineTitle from '../component/line-title'
 import MODULE_CODE from './config'
-import { getModInfo, getImgSrc } from '../common/util'
+import { getModInfo, getImgSrc, getMapSrc } from '../common/util'
 import { Link } from "react-router-dom"
 
 
@@ -22,6 +23,9 @@ class Cooperation extends Component {
   render () {
     const { CommonStore: {PAGE_MODULES = []} } = this.props
     const { FIRST, SECOND, THIRD, FOURTH } = MODULE_CODE
+    const width = document.body.clientWidth
+    const mapWidth = parseInt(width * 0.9 / 2)
+    const mapHeight = parseInt(mapWidth / 4)
     return (
       <div className="page-cooperation">
         <div className="cooperation-header FBV FBAC">
@@ -74,11 +78,14 @@ class Cooperation extends Component {
             </Col>
           </Row>
         </div>
-        <div className="FBV FBAC">
-          <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, FOURTH, 'title')} />
-          <span className="mini-font m10">
+        <div className="FBV location-bg">
+          <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, FOURTH, 'title')} className="FBJS" />
+          <span className="mini-font m10 location-content">
             {getModInfo(PAGE_MODULES, FOURTH, 'content')}
           </span>
+          <div className="FBAC-S">
+            <img src={getMapSrc(mapWidth, mapHeight)} alt="" />
+          </div>
         </div>
       </div>
     )

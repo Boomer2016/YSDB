@@ -53,7 +53,9 @@ export const getModInfo = (pageInfo = [], code, key) => {
 }
 
 // 根据code获取模块信息
-export const getImgSrc = imgId => `/doc/Image/Download?id=${imgId}`
+export const getImgSrc = imgId => {
+  return imgId ? `/doc/Image/Download?id=${imgId}` : '/'
+}
 
 // 获取高德地图图片
 // https://restapi.amap.com/v3/staticmap?location=114.026487,22.62078&zoom=13&size=&markers=mid,,A:114.026487,22.62078&key=b246b0abedb8d7d478a45362cff2c518

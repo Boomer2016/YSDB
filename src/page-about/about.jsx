@@ -1,46 +1,52 @@
-import { Button, Modal, Row, Col } from 'antd'
+import { Col, List, Row } from 'antd'
 import React, { Component } from "react"
-import { action, observable } from "mobx"
+import { getImgSrc, getModInfo } from '../common/util'
+import { inject, observer } from "mobx-react"
 
 import AboutStore from "./store-about"
-import { observer } from "mobx-react"
-import aboutCompSrc from "../image/about-comp.png"
 import LineTitle from '../component/line-title'
+import { Link } from "react-router-dom"
+import MODULE_CODE from './config'
 
 const store = new AboutStore()
 
+@inject('CommonStore')
 @observer
 export default class About extends Component {
+  componentWillMount () {
+    const { CommonStore } = this.props
+    CommonStore.setPageModules([])
+  }
+
   componentDidMount () {
-    // store.getContent()
+    const { CommonStore } = this.props
+    CommonStore.getPageInfo(CommonStore.ACTIVE_PAGE.id)
+    store.getNews()
   }
 
   render () {
-    const newsItems = store.content.map(item => (
-      <div className="FBV news-item">
-        <span>{item.title}</span>
-        <span className="news-content">{item.content}</span>
-        <div className="FBH news-bottom">
-          <span className="mr8">
-            发布于
-            {item.time}
-          </span>
-          <span>
-            {item.counts}
-            浏览
-          </span>
-        </div>
-      </div>
-    ))
+    const { CommonStore: { PAGE_MODULES = [], setActivePage } } = this.props
+    const { FIRST, SECOND, THIRD } = MODULE_CODE
     return (
       <div className="page-about">
         <div className="about-header FBV FBAC">
-          <h1 className="about-header-title">关于我们</h1>
+          <h1 className="about-header-title">
+            {getModInfo(PAGE_MODULES, FIRST, 'title')}
+          </h1>
           <div className="about-header-content mini-font">
-          欢迎联系我们洽谈合作,欢迎联系我们洽谈合作,欢迎联系我们洽谈合作,
-          欢迎联系我们洽谈合作,欢迎联系我们洽谈合作,欢迎联系我们洽谈
+            {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
-          <button type="button" className="common-btn">了解更多</button>
+          <button
+            type="button"
+            className="common-btn"
+            onClick={() => {
+              setActivePage()
+            }}
+          >
+            {/* <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl')}> */}
+            {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
+            {/* </Link> */}
+          </button>
         </div>
         <div className="about-content m-p2rem">
           <Row justify="space-between">
@@ -53,8 +59,8 @@ export default class About extends Component {
               className="FBV FBAC"
             >
               <div className="leftBg">
-                <LineTitle titleClass="subtitle-font" title="公司风采" />
-                <img src={aboutCompSrc} alt="公司" className="comp-src" />
+                <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, SECOND, 'title')} />
+                <img src={getImgSrc(getModInfo(PAGE_MODULES, SECOND, 'imageId'))} alt="公司" className="comp-src mt20" />
               </div>
             </Col>
             <Col
@@ -64,8 +70,24 @@ export default class About extends Component {
               lg={11}
               xl={11}
             >
-              <LineTitle titleClass="subtitle-font" title="媒体报道" />
-              {newsItems}
+              <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, THIRD, 'title')} />
+              <List
+                className="mt20"
+                itemLayout="horizontal"
+                dataSource={store.news}
+                renderItem={item => (
+                  <List.Item>
+                    <List.Item.Meta
+                      title={<a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>}
+                      description={item.summary}
+                    />
+                  </List.Item>
+                )}
+                pagination={{
+                  total: store.news.length,
+                  pageSize: 3,
+                }}
+              />
             </Col>
           </Row>
         </div>

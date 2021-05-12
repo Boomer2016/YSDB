@@ -1,12 +1,14 @@
-import ioContext, { BASE_PATH } from '../common/io-context'
+import IoContext, { BASE_PATH } from '../common/io-context'
+
+const io = new IoContext()
 
 const ioAbout = {
-  getBannerImgs: (data, config = {}) => {
-    return ioContext.request({
+  getNews: (data, config = {}) => {
+    return io.request({
       ...config,
       data,
-      url: `${BASE_PATH}/v1/api/getBannerImgs`,
-      method: 'POST',
+      url: `${BASE_PATH}/News/top`,
+      method: 'GET',
     })
   },
 }

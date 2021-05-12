@@ -1,16 +1,17 @@
 /* eslint-disable radix */
-import { Row, Col } from "antd"
-import React, { Component } from "react"
-import { inject, observer } from "mobx-react"
-import LineTitle from '../component/line-title'
-import MODULE_CODE from './config'
-import { getModInfo, getImgSrc, getMapSrc } from '../common/util'
-import { Link } from "react-router-dom"
 
+import { Col, Row } from "antd"
+import React, { Component } from "react"
+import { getImgSrc, getMapSrc, getModInfo } from '../common/util'
+import { inject, observer } from "mobx-react"
+
+import LineTitle from '../component/line-title'
+import { Link } from "react-router-dom"
+import MODULE_CODE from './config'
 
 @observer
 class Cooperation extends Component {
-  componentWillMount() {
+  componentWillMount () {
     const { CommonStore } = this.props
     CommonStore.setPageModules([])
   }
@@ -21,7 +22,7 @@ class Cooperation extends Component {
   }
 
   render () {
-    const { CommonStore: {PAGE_MODULES = []} } = this.props
+    const { CommonStore: { PAGE_MODULES = [] } } = this.props
     const { FIRST, SECOND, THIRD, FOURTH } = MODULE_CODE
     const width = document.body.clientWidth
     const mapWidth = parseInt(width * 0.9 / 2)

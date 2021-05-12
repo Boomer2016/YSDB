@@ -5,14 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 
+import { action, observable, toJS } from 'mobx'
+import { inject, observer } from 'mobx-react'
+
 import { ConfigProvider } from 'antd'
-import Header from './header'
 import Footer from './footer'
+import Header from './header'
 import React from 'react'
 import zhCN from 'antd/lib/locale-provider/zh_CN'
-import { inject, observer } from 'mobx-react'
-import { toJS, observable, action } from 'mobx'
-
 
 @inject('CommonStore')
 @observer
@@ -44,7 +44,9 @@ class Frame extends React.Component {
         const activeSubItem = activeItem.subList.find(item => +item.id === +pageId)
         CommonStore.setActivePage(activeSubItem)
       } else {
-        const activeItem = res.find(item => item.url === location.pathname) || {}
+        // 处理从根目录/  重定向到 /home的情况
+        const targetUrl = location.pathname === '/' ? '/home' : location.pathname
+        const activeItem = res.find(item => item.url === targetUrl) || {}
         CommonStore.setActivePage(activeItem)
       }
       this.couldRender = true

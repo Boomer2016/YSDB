@@ -7,6 +7,7 @@ import AboutStore from "./store-about"
 import LineTitle from '../component/line-title'
 import { Link } from "react-router-dom"
 import MODULE_CODE from './config'
+import { toJS } from 'mobx'
 
 const store = new AboutStore()
 
@@ -19,8 +20,9 @@ export default class About extends Component {
   }
 
   componentDidMount () {
-    const { CommonStore } = this.props
-    CommonStore.getPageInfo(CommonStore.ACTIVE_PAGE.id)
+    const { CommonStore, location: { pathname } } = this.props
+    const activeItem = CommonStore.PAGES.find(item => item.url === pathname)
+    CommonStore.getPageInfo(activeItem.id)
     store.getNews()
   }
 
@@ -40,12 +42,12 @@ export default class About extends Component {
             type="button"
             className="common-btn"
             onClick={() => {
-              setActivePage()
+              setActivePage({})
             }}
           >
-            {/* <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl')}> */}
-            {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
-            {/* </Link> */}
+            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl')}>
+              {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
+            </Link>
           </button>
         </div>
         <div className="about-content m-p2rem">

@@ -22,8 +22,9 @@ class Home extends Component {
   }
 
   componentDidMount () {
-    const { CommonStore } = this.props
-    CommonStore.getPageInfo(CommonStore.ACTIVE_PAGE.id)
+    const { CommonStore, location: {pathname} } = this.props
+    const activeItem = CommonStore.PAGES.find(item => item.url === pathname)
+    CommonStore.getPageInfo(activeItem.id)
     this.bannerStart()
   }
 

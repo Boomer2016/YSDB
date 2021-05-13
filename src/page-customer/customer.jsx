@@ -18,8 +18,14 @@ class Customer extends Component {
   }
 
   componentDidMount () {
-    const { CommonStore } = this.props
-    CommonStore.getPageInfo(CommonStore.ACTIVE_PAGE.id)
+    const { CommonStore, location: {pathname, search} } = this.props
+    if (search) {
+      const pageId = search.split('=') && search.split('=')[1]
+      CommonStore.getPageInfo(pageId)
+    } else {
+      const activeItem = CommonStore.PAGES.find(item => item.url === pathname)
+      CommonStore.getPageInfo(activeItem.id)
+    }
   }
 
   render () {

@@ -15,9 +15,23 @@ class Header extends React.Component {
     this.activeKey = [pathname]
   }
 
+  componentDidUpdate(preProps) {
+    const {location: {pathname, search}, CommonStore} = this.props
+    if (pathname !== preProps.location.pathname && !search) {
+      this.activeKey = [pathname]
+    } else if (pathname !== preProps.location.pathname && search) {
+      const pageId = search.split('=') && search.split('=')[1]
+      const activeItem = CommonStore.PAGES.find(item => item.url === pathname)
+      const activeSubItem = (activeItem.subList || []).find(item => item.id === pageId)
+      this.activeKey = [activeSubItem.url]
+    }
+  }
+
   @action
   menuClick = e => {
     const { history, CommonStore } = this.props
+    console.log(e.key)
+    CommonStore.setPageModules([])
     if (e.keyPath && e.keyPath.length === 2) {
       const activeItem = CommonStore.PAGES.find(item => item.url === e.keyPath[1])
       const activeSubItem = (activeItem.subList || []).find(item => item.url === e.keyPath[0])

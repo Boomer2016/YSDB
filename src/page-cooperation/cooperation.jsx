@@ -8,17 +8,19 @@ import { inject, observer } from "mobx-react"
 import LineTitle from '../component/line-title'
 import { Link } from "react-router-dom"
 import MODULE_CODE from './config'
+import { toJS } from "mobx"
 
 @observer
 class Cooperation extends Component {
-  componentWillMount () {
+  componentWillMount() {
     const { CommonStore } = this.props
     CommonStore.setPageModules([])
   }
 
   componentDidMount () {
-    const { CommonStore } = this.props
-    CommonStore.getPageInfo(CommonStore.ACTIVE_PAGE.id)
+    const { CommonStore, location: {pathname} } = this.props
+    const activeItem = CommonStore.PAGES.find(item => item.url === pathname)
+    CommonStore.getPageInfo(activeItem.id)
   }
 
   render () {

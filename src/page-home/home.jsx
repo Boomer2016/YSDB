@@ -16,13 +16,13 @@ class Home extends Component {
   slider = React.createRef()
   timer = null
 
-  componentWillMount() {
+  componentWillMount () {
     const { CommonStore } = this.props
     CommonStore.setPageModules([])
   }
 
   componentDidMount () {
-    const { CommonStore, location: {pathname} } = this.props
+    const { CommonStore, location: { pathname } } = this.props
     const activeItem = CommonStore.PAGES.find(item => item.url === pathname)
     CommonStore.getPageInfo(activeItem.id)
     this.bannerStart()
@@ -43,7 +43,7 @@ class Home extends Component {
   }
 
   render () {
-    const { CommonStore: {PAGE_MODULES = []} } = this.props
+    const { CommonStore: { PAGE_MODULES = [] } } = this.props
     const { FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH } = MODULE_CODE
     const bannerData = getModInfo(PAGE_MODULES, SECOND, 'subList')
     const activeIndex = bannerData.length ? toJS(this.startIndex) % bannerData.length : 0
@@ -124,16 +124,18 @@ class Home extends Component {
             {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
           <button type="button" className="common-btn">
-            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl')}>
-              {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
-            </Link>
+            {getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') && (
+              <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/cooperation'}>
+                {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
+              </Link>
+            )}
           </button>
           <div className="home-header-banner">
             {actualShowitems.map((item, i) => (
               <div
                 key={item.code}
                 className={`banner-item ${i === 1 ? 'banner-active' : ''}`}
-                style={{backgroundImage: `url(${getImgSrc(item.imageId)})`}}
+                style={{ backgroundImage: `url(${getImgSrc(item.imageId)})` }}
               >
                 {i === 1 && <span>{item.title}</span>}
                 {i === 1 && <span className="active-content-bottom">{item.content}</span>}
@@ -180,7 +182,7 @@ class Home extends Component {
             {getModInfo(PAGE_MODULES, SIXTH, 'content')}
           </div>
           <button type="button" className="common-btn FBAC-S">
-            <Link to={getModInfo(PAGE_MODULES, SIXTH, 'buttonUrl')}>
+            <Link to={getModInfo(PAGE_MODULES, SIXTH, 'buttonUrl') || '/cooperation'}>
               {getModInfo(PAGE_MODULES, SIXTH, 'buttonTxt')}
             </Link>
           </button>

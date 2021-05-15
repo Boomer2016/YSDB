@@ -39,7 +39,7 @@ class Cooperation extends Component {
             {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
           <button type="button" className="common-btn">
-            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl')}>
+            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/aboutus'}>
               {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
             </Link>
           </button>

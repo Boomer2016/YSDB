@@ -3,23 +3,39 @@ import React, { Component } from "react"
 import { action, observable, toJS } from "mobx"
 
 import DocumentsStore from "./store-documents"
-import { observer } from "mobx-react"
-import { UnorderedListOutlined } from '@ant-design/icons'
+import { observer, inject } from "mobx-react"
+import { UnorderedListOutlined, SearchOutlined } from '@ant-design/icons'
+import MODULE_CODE from './config'
+import { getModInfo } from '../common/util'
 
 const store = new DocumentsStore()
 
+@inject('CommonStore')
 @observer
 export default class Documents extends Component {
   @observable selectV = undefined
   @observable selectedKeys = []
   docRef = React.createRef()
 
+  componentWillMount () {
+    const { CommonStore } = this.props
+    CommonStore.setPageModules([])
+  }
+
   componentDidMount () {
+    const { CommonStore, location: { pathname, search } } = this.props
+    const activeItem = CommonStore.PAGES.find(item => item.url === pathname)
+    CommonStore.getPageInfo(activeItem.id)
     store.getDocTree().then(res => {
       if (res && res[0]) {
         this.changeVersion(res[0].versionId)
         if (res[0].categoryList.length && res[0].categoryList[0].documentList && res[0].categoryList[0].documentList.length) {
-          this.selectedKeys = [res[0].categoryList[0].documentList[0].url]
+          if (search) {
+            const targetUrl = search.split('=') && search.split('=')[1]
+            this.selectedKeys = [`/docfile/${targetUrl}.html`]
+          } else {
+            this.selectedKeys = [res[0].categoryList[0].documentList[0].url]
+          }
         }
       }
     })
@@ -64,21 +80,37 @@ export default class Documents extends Component {
     const { current } = this.docRef
     if (current) {
       const { pathname } = current.contentWindow.location
-      this.selectedKeys = [pathname]
+      this.selectedKeys = [decodeURI(pathname)]
     }
   }
 
   render () {
     const { docTree, searchDoc } = store
+    const { CommonStore: { PAGE_MODULES = [] } } = this.props
+    const { FIRST } = MODULE_CODE
+    const allDocs = []
+    docTree.forEach(item => {
+      (item.categoryList || []).forEach(k => {
+        k.documentList.forEach(m => {
+          allDocs.push({
+            ...m,
+            name: `${item.versionTxt}-${m.title}`,
+            key: `${item.versionId}_${k.categoryId}_/${m.url}`,
+          })
+        })
+      })
+    })
     const treeData = this.selectV && docTree.length ? this.getTreeNode() : []
     return (
       <div className="page-documents">
         <div className="documents-header FBV FBAS FBJC">
-          <h3 className="head-title">文档中心</h3>
+          <h3 className="head-title">
+            {getModInfo(PAGE_MODULES, FIRST, 'title')}
+          </h3>
           <span className="head-desc mini-font">
-            在这里你可以获取最全的资料，包括其他文案补充，其他文案补充
+            {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </span>
-          <Input.Search
+          {/* <Input.Search
             placeholder="请输入关键字"
             enterButton="搜索文档"
             size="large"
@@ -87,7 +119,31 @@ export default class Documents extends Component {
               console.log(v, 111)
               searchDoc(v)
             }}
-          />
+          /> */}
+          <Select
+            showSearch
+            allowClear
+            className="search-select"
+            placeholder="请输入关键字"
+            optionFilterProp="children"
+            suffixIcon={<SearchOutlined />}
+            onChange={e => {
+              if (e) {
+                const keys = e.split('_') || []
+                // eslint-disable-next-line prefer-destructuring
+                const targetVersion = keys[0]
+                this.selectV = +targetVersion
+                this.selectedKeys = [keys[2]]
+              }
+            }}
+            filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+          >
+            {allDocs.map(item => (
+              <Select.Option key={item.key}>
+                {item.name}
+              </Select.Option>
+            ))}
+          </Select>
         </div>
         <div className="FBH doc-main">
           <div className="main-left FBV">

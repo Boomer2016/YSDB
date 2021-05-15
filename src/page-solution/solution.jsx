@@ -90,7 +90,7 @@ class Solution extends Component {
               {item.content}
             </span>
             <button type="button" className="common-btn">
-              <Link to={item.buttonUrl}>{item.buttonTxt}</Link>
+              <Link to={item.buttonUrl || '/cooperation'}>{item.buttonTxt}</Link>
             </button>
           </div>
         </div>
@@ -106,7 +106,7 @@ class Solution extends Component {
             {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
           <button type="button" className="common-btn">
-            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl')}>
+            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/cooperation'}>
               {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
             </Link>
           </button>

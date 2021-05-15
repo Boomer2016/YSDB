@@ -116,7 +116,7 @@ class Product extends Component {
             className="common-btn ml20"
             type="button"
           >
-            <Link to={item.buttonUrl}>{item.buttonTxt}</Link>
+            <Link to={item.buttonUrl || '/cooperation'}>{item.buttonTxt}</Link>
           </button>
         </div>
       </div>

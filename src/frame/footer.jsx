@@ -17,7 +17,30 @@ class Footer extends React.Component {
         <div className="link-item">{item.groupName}</div>
         <div className="FB1 FBV mt6">
           {(item.navList || []).map(k => (
-            <a key={k.name} className="pt8 link-name">
+            <a
+              key={k.name}
+              className="pt8 link-name"
+              onClick={() => {
+                if (k.url.includes('document')) {
+                  const name = k.url.split('/') && k.url.split('/')[2]
+                  history.push({
+                    pathname: '/documents',
+                    search: `name=${name}`,
+                  })
+                } else {
+                  CommonStore.PAGES.forEach(m => {
+                    m.subList.forEach(n => {
+                      if (n.url === k.url) {
+                        history.push({
+                          pathname: m.url,
+                          search: `id=${n.id}`,
+                        })
+                      }
+                    })
+                  })
+                }
+              }}
+            >
               {k.name}
             </a>
           ))}

@@ -22,8 +22,8 @@ class Header extends React.Component {
     } else if (pathname !== preProps.location.pathname && search) {
       const pageId = search.split('=') && search.split('=')[1]
       const activeItem = CommonStore.PAGES.find(item => item.url === pathname)
-      const activeSubItem = (activeItem.subList || []).find(item => item.id === pageId)
-      this.activeKey = [activeSubItem.url]
+      const activeSubItem = (activeItem.subList || []).find(item => +item.id === +pageId)
+      this.activeKey = activeSubItem ? [activeSubItem.url] : []
     }
   }
 

@@ -45,7 +45,7 @@ export default class About extends Component {
               setActivePage({})
             }}
           >
-            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl')}>
+            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/cooperation'}>
               {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
             </Link>
           </button>

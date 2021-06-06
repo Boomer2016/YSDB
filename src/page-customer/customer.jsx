@@ -35,13 +35,12 @@ class Customer extends Component {
       className: "case-slider",
       dots: false,
       infinite: true,
-      slidesToShow: 2,
+      slidesToShow: getModInfo(PAGE_MODULES, SECOND, 'subList').length < 2 ? 1 : 2,
       slidesToScroll: 1,
-      adaptiveHeight: true,
+      // adaptiveHeight: true,
       autoplay: true,
       speed: 500,
       autoplaySpeed: 5000,
-      rtl: true,
       ref: this.slider,
       responsive: [
         {
@@ -77,9 +76,9 @@ class Customer extends Component {
         </div>
       </div>
     ))
-    const painPointsItems = getModInfo(PAGE_MODULES, FOURTH, 'subList').map(item => (
+    const painPointsItems = getModInfo(PAGE_MODULES, FOURTH, 'subList').map((item, i) => (
       <Col
-        className="FBV earn-item"
+        className={`FBV earn-item ${(i + 1) % 3 ? 'right-border' : ''}`}
         xs={24}
         sm={24}
         md={12}
@@ -88,7 +87,7 @@ class Customer extends Component {
         key={item.code}
       >
         <span className="pt10 pl20">{item.title}</span>
-        <span className="mini-font mt8 pl20 pr20">{item.content}</span>
+        <div className="mini-font mt8 pl20 pr20">{item.content}</div>
       </Col>
     ))
     return (

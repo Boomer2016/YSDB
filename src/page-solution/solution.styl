@@ -38,10 +38,22 @@
       width 100%
       @media only screen and (max-width: 768px)
         background-size 3rem
+        padding-bottom 0.5rem
     .points-row
       width 80%
       padding-bottom 2rem
-    .point-item
+    .pain-item-title
+      font-weight 500
+      font-size 1.2rem
+      @media only screen and (max-width: 768px)
+        text-align center
+    .pain-item-content
+      padding 0.5rem 1rem 0rem 0rem
+      @media only screen and (max-width: 768px)
+        text-align center
+    .pain-item
+      padding-top 1rem
+    .right-border
       border-right 1px solid #1D5894
       @media only screen and (max-width: 768px)
         border none
@@ -93,17 +105,6 @@
         background-size 2rem
     .case-main
       padding 1rem
-    .case-pic
-      padding-right 2rem
-      width 40%
-      @media only screen and (max-width: 768px)
-        width 100%
-        padding 0.1rem
-      img
-        width 100%
-        height auto
-    .case-content
-      padding-left 5%
     .solotion-item-content
       display flex
       flex-direction row
@@ -115,6 +116,21 @@
         @media only screen and (max-width: 768px)
           align-self center
           margin-top 1rem
+      .case-pic
+        padding-right 2rem
+        width 40%
+        @media only screen and (max-width: 768px)
+          width 100%
+          padding 0.1rem
+        img
+          width 100%
+          height auto
+      .case-content
+        width 60%
+        padding-left 5%
+        @media only screen and (max-width: 768px)
+          width 100%
+          padding 0.1rem
 .solution-slider
   width 90vw
   @media only screen and (max-width: 768px)

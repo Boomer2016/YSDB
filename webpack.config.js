@@ -29,15 +29,18 @@ module.exports = {
     // proxy URLs to backend development server
     proxy: {
       '/doc/': {
-        target: 'http://121.43.233.147:93',
+        // target: 'http://121.43.233.147:93',
+        target: 'https://cod.sics.ac.cn',
         changeOrigin: true,
       },
       '/web/': {
-        target: 'http://121.43.233.147:92',
+        // target: 'http://121.43.233.147:92',
+        target: 'https://cod.sics.ac.cn',
         changeOrigin: true,
       },
       '/docfile/': {
-        target: 'http://121.43.233.147',
+        // target: 'http://121.43.233.147',
+        target: 'https://cod.sics.ac.cn',
         changeOrigin: true,
       },
     },

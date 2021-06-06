@@ -9,6 +9,7 @@ import Slider from "react-slick"
 import MODULE_CODE from './config'
 import { getModInfo, getImgSrc } from '../common/util'
 import { Link } from "react-router-dom"
+import logoTxtSrc from '../image/logoText.png'
 
 @observer
 class Home extends Component {
@@ -45,7 +46,12 @@ class Home extends Component {
   render () {
     const { CommonStore: { PAGE_MODULES = [] } } = this.props
     const { FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH } = MODULE_CODE
-    const bannerData = getModInfo(PAGE_MODULES, SECOND, 'subList')
+    let bannerData = getModInfo(PAGE_MODULES, SECOND, 'subList')
+    if (bannerData.length && bannerData.length === 1) {
+      bannerData = [...bannerData, {...bannerData[0], code: '1.2.2'}, {...bannerData[0], code: '1.2.3'}]
+    } else if (bannerData.length && bannerData.length === 2) {
+      bannerData = [...bannerData, {...bannerData[0], code: '1.2.3'}]
+    }
     const activeIndex = bannerData.length ? toJS(this.startIndex) % bannerData.length : 0
     const showItems = bannerData.slice(activeIndex)
     let actualShowitems = []
@@ -85,20 +91,21 @@ class Home extends Component {
         <span className="mini-font mt6 fac">{item.title}</span>
       </Col>
     ))
+    const col = !(getModInfo(PAGE_MODULES, FOURTH, 'subList').length % 3) ? 7 : 5
     const homeAdvanceItems = getModInfo(PAGE_MODULES, FOURTH, 'subList').map(item => (
       <Col
         key={item.code}
-        xs={12}
-        sm={12}
+        xs={22}
+        sm={22}
         md={12}
-        lg={5}
-        xl={5}
+        lg={col}
+        xl={col}
         className="FBV FBAC advance-item"
       >
         <div className="advance-icon">
           <img src={getImgSrc(item.imageId)} alt="" />
         </div>
-        <span className="advance-name main-color">{item.title}</span>
+        <span className="advance-name main-color fac">{item.title}</span>
         <div className="thin mini-font fac">{item.content}</div>
       </Col>
     ))
@@ -119,7 +126,10 @@ class Home extends Component {
     return (
       <div className="page-home">
         <div className="home-header FBV FBAC">
-          <h1 className="home-header-title">{getModInfo(PAGE_MODULES, FIRST, 'title')}</h1>
+          <h1 className="home-header-title">
+            <img src={logoTxtSrc} alt="" className="logo-text" />
+            {getModInfo(PAGE_MODULES, FIRST, 'title')}
+          </h1>
           <div className="home-header-content mini-font">
             {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
@@ -136,9 +146,12 @@ class Home extends Component {
                 key={item.code}
                 className={`banner-item ${i === 1 ? 'banner-active' : ''}`}
                 style={{ backgroundImage: `url(${getImgSrc(item.imageId)})` }}
+                onClick={() => {
+                  this.startIndex = i
+                }}
               >
-                {i === 1 && <span>{item.title}</span>}
-                {i === 1 && <span className="active-content-bottom">{item.content}</span>}
+                <span>{item.title}</span>
+                <span className="active-content-bottom">{item.content}</span>
               </div>
             ))}
           </div>

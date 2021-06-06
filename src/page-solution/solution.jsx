@@ -31,9 +31,9 @@ class Solution extends Component {
   render () {
     const { CommonStore: {PAGE_MODULES = []} } = this.props
     const { FIRST, SECOND, THIRD, FOURTH, FIFTH } = MODULE_CODE
-    const painPointsItems = getModInfo(PAGE_MODULES, SECOND, 'subList').map(item => (
+    const painPointsItems = getModInfo(PAGE_MODULES, SECOND, 'subList').map((item, i) => (
       <Col
-        className="FBV point-item"
+        className={`FBV pain-item ${(i + 1) % 3 ? 'right-border' : ''}`}
         xs={24}
         sm={24}
         md={12}
@@ -41,16 +41,16 @@ class Solution extends Component {
         xl={7}
         key={item.code}
       >
-        <span className="pt10 pl20">{item.title}</span>
-        <span className="mini-font mt8 pl20 pr20">{item.content}</span>
+        <span className="pain-item-title">{item.title}</span>
+        <span className="mini-font pain-item-content">{item.content}</span>
       </Col>
     ))
     const advantageItems = getModInfo(PAGE_MODULES, FOURTH, 'subList').map(item => (
       <Col
         className="FBV FBAC p8"
-        xs={12}
-        sm={12}
-        md={10}
+        xs={22}
+        sm={22}
+        md={22}
         lg={5}
         xl={5}
         key={item.code}
@@ -73,7 +73,6 @@ class Solution extends Component {
       autoplay: true,
       speed: 500,
       autoplaySpeed: 5000,
-      rtl: true,
       ref: this.slider,
     }
     const solutionItems = getModInfo(PAGE_MODULES, FIFTH, 'subList').map(item => (

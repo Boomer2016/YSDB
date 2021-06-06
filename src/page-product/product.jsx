@@ -123,7 +123,7 @@ class Product extends Component {
     ))
     const valueItems = getModInfo(PAGE_MODULES, SIXTH, 'subList').map(item => (
       <Col
-        className="FBV value-item FBAC FBJC"
+        className="FBV value-item FBAC"
         xs={24}
         sm={24}
         md={12}
@@ -131,7 +131,8 @@ class Product extends Component {
         xl={5}
         key={item.code}
       >
-        <div className="value-icon"></div>
+        {/* <div className="value-icon" style={{background: `url(${getImgSrc(item.imageId)})`}}></div> */}
+        <img src={getImgSrc(item.imageId)} alt="" className="value-icon" />
         <span className="p10 mini-font">{item.title}</span>
         <span className="mini-font fac">{item.content}</span>
       </Col>
@@ -156,7 +157,7 @@ class Product extends Component {
             {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
           </button>
         </div>
-        <div className="product-intro m-p2rem">
+        {/* <div className="product-intro m-p2rem">
           <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, SECOND, 'title')} className="t-FBJS" />
           <div className="FBH FBJB FBAC">
             <LeftOutlined onClick={() => this.introSlider.current.slickPrev()} className="left-icon" />
@@ -165,33 +166,43 @@ class Product extends Component {
             </Slider>
             <RightOutlined className="right-icon" onClick={() => this.introSlider.current.slickNext()} />
           </div>
-        </div>
-        <div className="product-area m-p2rem">
-          <Row gutter={8} className="arch-area m-p2rem">
+        </div> */}
+        <div className="product-intro m-p2rem">
+          <Row gutter={8}>
             <Col
-              xs={24}
-              sm={24}
-              md={12}
-              lg={12}
-              xl={12}
-              className="arch-pic fac"
-            >
-              <img src={getImgSrc(getModInfo(PAGE_MODULES, THIRD, 'imageId'))} alt="产品架构" />
-            </Col>
-            <Col
-              className="arch-content FBV"
+              className="intro-content FBV"
               xs={24}
               sm={24}
               md={12}
               lg={12}
               xl={12}
             >
-              <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, THIRD, 'title')} className="t-FBJS" />
+              <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, SECOND, 'title')} className="t-FBJS" />
               <span className="intro-detail">
-                {getModInfo(PAGE_MODULES, THIRD, 'content')}
+                {getModInfo(PAGE_MODULES, SECOND, 'content')}
               </span>
             </Col>
+            <Col
+              xs={24}
+              sm={24}
+              md={12}
+              lg={12}
+              xl={12}
+            >
+              <img src={getImgSrc(getModInfo(PAGE_MODULES, SECOND, 'imageId'))} alt="产品简介" className="intro-pic fac" />
+            </Col>
           </Row>
+        </div>
+        <div className="product-area m-p2rem">
+          <div className="arch-pic fac">
+            <img src={getImgSrc(getModInfo(PAGE_MODULES, THIRD, 'imageId'))} alt="产品架构" />
+          </div>
+          <div className="arch-content FBV">
+            <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, THIRD, 'title')} className="t-FBJS" />
+            <span className="intro-detail">
+              {getModInfo(PAGE_MODULES, THIRD, 'content')}
+            </span>
+          </div>
         </div>
         <div className="service-power m-p2rem">
           <div className="service-title">

@@ -85,7 +85,7 @@ export default class Documents extends Component {
   }
 
   render () {
-    const { docTree, searchDoc } = store
+    const { docTree } = store
     const { CommonStore: { PAGE_MODULES = [] } } = this.props
     const { FIRST } = MODULE_CODE
     const allDocs = []
@@ -130,10 +130,12 @@ export default class Documents extends Component {
             onChange={e => {
               if (e) {
                 const keys = e.split('_') || []
+                const tmpLength = e.split('/docfile').length
+                const htmlName = e.split('/docfile')[tmpLength - 1]
                 // eslint-disable-next-line prefer-destructuring
                 const targetVersion = keys[0]
                 this.selectV = +targetVersion
-                this.selectedKeys = [keys[2]]
+                this.selectedKeys = [`/docfile${htmlName}`]
               }
             }}
             filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}

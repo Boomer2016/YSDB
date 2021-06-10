@@ -7,7 +7,6 @@ import LineTitle from '../component/line-title'
 import Slider from "react-slick"
 import MODULE_CODE from './config'
 import { getModInfo, getImgSrc } from '../common/util'
-import { Link } from "react-router-dom"
 
 @observer
 class Product extends Component {
@@ -101,7 +100,7 @@ class Product extends Component {
         xl={8}
         key={item.code}
       >
-        <h5 className="pl20 pr20 item-title">{item.title}</h5>
+        <div className="item-title">{item.title}</div>
         <span className="mini-font mt8 pl20 pr20">{item.content}</span>
       </Col>
     ))
@@ -115,8 +114,12 @@ class Product extends Component {
           <button
             className="common-btn ml20"
             type="button"
+            onClick={() => {
+              const { history } = this.props
+              history.push(item.buttonUrl || '/cooperation')
+            }}
           >
-            <Link to={item.buttonUrl || '/cooperation'}>{item.buttonTxt}</Link>
+            {item.buttonTxt}
           </button>
         </div>
       </div>

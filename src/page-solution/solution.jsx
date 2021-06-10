@@ -6,7 +6,6 @@ import LineTitle from '../component/line-title'
 import Slider from "react-slick"
 import MODULE_CODE from './config'
 import { getModInfo, getImgSrc } from '../common/util'
-import { Link } from "react-router-dom"
 
 @observer
 class Solution extends Component {
@@ -88,8 +87,15 @@ class Solution extends Component {
             <span className="mini-font">
               {item.content}
             </span>
-            <button type="button" className="common-btn">
-              <Link to={item.buttonUrl || '/cooperation'}>{item.buttonTxt}</Link>
+            <button
+              type="button"
+              className="common-btn"
+              onClick={() => {
+                const { history } = this.props
+                history.push(item.buttonUrl || '/cooperation')
+              }}
+            >
+              {item.buttonTxt}
             </button>
           </div>
         </div>
@@ -104,10 +110,15 @@ class Solution extends Component {
           <div className="solution-header-content mini-font">
             {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
-          <button type="button" className="common-btn">
-            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/cooperation'}>
-              {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
-            </Link>
+          <button
+            type="button"
+            className="common-btn"
+            onClick={() => {
+              const { history } = this.props
+              history.push(getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/cooperation')
+            }}
+          >
+            {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
           </button>
         </div>
         <div className="pain-points FBV FBAC m-p2rem">

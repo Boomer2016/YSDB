@@ -6,9 +6,7 @@ import { getImgSrc, getMapSrc, getModInfo } from '../common/util'
 import { inject, observer } from "mobx-react"
 
 import LineTitle from '../component/line-title'
-import { Link } from "react-router-dom"
 import MODULE_CODE from './config'
-import { toJS } from "mobx"
 
 @observer
 class Cooperation extends Component {
@@ -38,10 +36,15 @@ class Cooperation extends Component {
           <div className="cooperation-header-content mini-font">
             {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
-          <button type="button" className="common-btn">
-            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/aboutus'}>
-              {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
-            </Link>
+          <button
+            type="button"
+            className="common-btn"
+            onClick={() => {
+              const { history } = this.props
+              history.push(getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/aboutus')
+            }}
+          >
+            {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
           </button>
         </div>
         <div className="contact-area m-p2rem">

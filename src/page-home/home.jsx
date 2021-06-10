@@ -8,7 +8,6 @@ import LineTitle from '../component/line-title'
 import Slider from "react-slick"
 import MODULE_CODE from './config'
 import { getModInfo, getImgSrc } from '../common/util'
-import { Link } from "react-router-dom"
 import logoTxtSrc from '../image/logoText.png'
 
 @observer
@@ -133,12 +132,15 @@ class Home extends Component {
           <div className="home-header-content mini-font">
             {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
-          <button type="button" className="common-btn">
-            {getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') && (
-              <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/cooperation'}>
-                {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
-              </Link>
-            )}
+          <button
+            type="button"
+            className="common-btn"
+            onClick={() => {
+              const { history } = this.props
+              history.push(getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/cooperation')
+            }}
+          >
+            {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
           </button>
           <div className="home-header-banner">
             {actualShowitems.map((item, i) => (
@@ -189,15 +191,20 @@ class Home extends Component {
           </div>
           <div className="right-middle-line"></div>
         </div>
-        <div className="home-experience FBV">
+        <div className="home-experience FBV" style={{overflow: 'hidden'}}>
           <LineTitle title={getModInfo(PAGE_MODULES, SIXTH, 'title')} titleClass="subtitle-white" />
           <div className="FBAC-S sub-content m14">
             {getModInfo(PAGE_MODULES, SIXTH, 'content')}
           </div>
-          <button type="button" className="common-btn FBAC-S">
-            <Link to={getModInfo(PAGE_MODULES, SIXTH, 'buttonUrl') || '/cooperation'}>
-              {getModInfo(PAGE_MODULES, SIXTH, 'buttonTxt')}
-            </Link>
+          <button
+            type="button"
+            className="common-btn FBAC-S"
+            onClick={() => {
+              const { history } = this.props
+              history.push(getModInfo(PAGE_MODULES, SIXTH, 'buttonUrl') || '/cooperation')
+            }}
+          >
+            {getModInfo(PAGE_MODULES, SIXTH, 'buttonTxt')}
           </button>
         </div>
       </div>

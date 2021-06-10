@@ -42,6 +42,7 @@ module.exports = {
         // target: 'http://121.43.233.147',
         target: 'https://cod.sics.ac.cn',
         changeOrigin: true,
+        secure: true,
       },
     },
   },

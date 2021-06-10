@@ -5,9 +5,7 @@ import { inject, observer } from "mobx-react"
 
 import AboutStore from "./store-about"
 import LineTitle from '../component/line-title'
-import { Link } from "react-router-dom"
 import MODULE_CODE from './config'
-import { toJS } from 'mobx'
 
 const store = new AboutStore()
 
@@ -43,11 +41,11 @@ export default class About extends Component {
             className="common-btn"
             onClick={() => {
               setActivePage({})
+              const { history } = this.props
+              history.push(getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/cooperation')
             }}
           >
-            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/cooperation'}>
-              {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
-            </Link>
+            {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
           </button>
         </div>
         <div className="about-content m-p2rem">

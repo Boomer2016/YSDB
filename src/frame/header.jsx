@@ -30,18 +30,18 @@ class Header extends React.Component {
   @action
   menuClick = e => {
     const { history, CommonStore } = this.props
-    console.log(e.key)
-    CommonStore.setPageModules([])
-    if (e.keyPath && e.keyPath.length === 2) {
-      const activeItem = CommonStore.PAGES.find(item => item.url === e.keyPath[1])
-      const activeSubItem = (activeItem.subList || []).find(item => item.url === e.keyPath[0])
+    const splitKeys = e.key.split('/')
+    // CommonStore.setPageModules([])
+    if (splitKeys.length === 3) {
+      const activeItem = CommonStore.PAGES.find(item => item.url.includes(splitKeys[1]))
+      const activeSubItem = (activeItem.subList || []).find(item => item.url === e.key)
       CommonStore.setActivePage(activeSubItem)
       history.push({
         pathname: activeItem.url,
         search: `id=${activeSubItem.id}`,
       })
-    } else if (e.keyPath && e.keyPath.length === 1) {
-      const activePage = CommonStore.PAGES.find(item => item.url === e.keyPath[0])
+    } else if (splitKeys.length === 2) {
+      const activePage = CommonStore.PAGES.find(item => item.url === e.key)
       history.push({
         pathname: activePage.url,
       })
@@ -76,7 +76,7 @@ class Header extends React.Component {
     const cellphoneNavItems = CommonStore.PAGES.map(item => (
       <React.Fragment key={item.id}>
         {item.subList.length ? (
-          <Menu.ItemGroup title={item.name}>
+          <Menu.ItemGroup title={item.name} key={item.url}>
             {item.subList.map(k => (
               <Menu.Item key={k.url}>
                 <span className="menu-item-name">

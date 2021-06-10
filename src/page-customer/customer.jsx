@@ -6,7 +6,6 @@ import LineTitle from '../component/line-title'
 import MODULE_CODE from './config'
 import Slider from "react-slick"
 import { getModInfo, getImgSrc } from '../common/util'
-import { Link } from "react-router-dom"
 
 @observer
 class Customer extends Component {
@@ -99,10 +98,15 @@ class Customer extends Component {
           <div className="customer-header-content mini-font">
             {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </div>
-          <button type="button" className="common-btn">
-            <Link to={getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/cooperation'}>
-              {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
-            </Link>
+          <button
+            type="button"
+            className="common-btn"
+            onClick={() => {
+              const { history } = this.props
+              history.push(getModInfo(PAGE_MODULES, FIRST, 'buttonUrl') || '/cooperation')
+            }}
+          >
+            {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
           </button>
         </div>
         <div className="case-desc FBV FBAC m-p2rem">

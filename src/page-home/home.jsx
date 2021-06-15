@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Col, Row } from "antd"
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import React, { Component } from "react"
@@ -12,7 +13,12 @@ import logoTxtSrc from '../image/logoText.png'
 
 @observer
 class Home extends Component {
-  @observable startIndex = 0
+  @observable indexes = {
+    previousIndex: 2,
+    currentIndex: 0,
+    nextIndex: 1,
+  }
+  @observable bannerData = []
   slider = React.createRef()
   timer = null
 
@@ -24,7 +30,21 @@ class Home extends Component {
   componentDidMount () {
     const { CommonStore, location: { pathname } } = this.props
     const activeItem = CommonStore.PAGES.find(item => item.url === pathname)
-    CommonStore.getPageInfo(activeItem.id)
+    const { SECOND } = MODULE_CODE
+    CommonStore.getPageInfo(activeItem.id).then(() => {
+      let bannerData = getModInfo(CommonStore.PAGE_MODULES, SECOND, 'subList')
+      if (bannerData.length && bannerData.length === 1) {
+        bannerData = [...bannerData, { ...bannerData[0], code: '1.2.2' }, { ...bannerData[0], code: '1.2.3' }]
+      } else if (bannerData.length && bannerData.length === 2) {
+        bannerData = [...bannerData, { ...bannerData[0], code: '1.2.3' }]
+      }
+      this.bannerData = bannerData
+      this.indexes = {
+        previousIndex: bannerData.length - 1,
+        currentIndex: 0,
+        nextIndex: 1,
+      }
+    })
     this.bannerStart()
   }
 
@@ -38,29 +58,38 @@ class Home extends Component {
   @action
   bannerStart = () => {
     this.timer = setInterval(() => {
-      this.startIndex = this.startIndex + 1
+      if (this.indexes.currentIndex <= 0) {
+        this.indexes = {
+          previousIndex: this.bannerData.length - 2,
+          currentIndex: this.bannerData.length - 1,
+          nextIndex: 0,
+        }
+      } else {
+        this.indexes = {
+          previousIndex: this.indexes.currentIndex - 1 <= 0 ? this.bannerData.length - 1 : this.indexes.currentIndex - 2,
+          currentIndex: this.indexes.currentIndex - 1,
+          nextIndex: this.indexes.currentIndex,
+        }
+      }
     }, 5000)
+  }
+
+  @action
+  setCardStatus = (indexes, cardIndex) => {
+    // console.log(indexes, cardIndex);
+    if (indexes.currentIndex === cardIndex) {
+      return 'banner-active'
+    } if (indexes.nextIndex === cardIndex) {
+      return 'banner-next'
+    } if (indexes.previousIndex === cardIndex) {
+      return 'banner-prev'
+    }
+    return 'banner-inactive'
   }
 
   render () {
     const { CommonStore: { PAGE_MODULES = [] } } = this.props
     const { FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH } = MODULE_CODE
-    let bannerData = getModInfo(PAGE_MODULES, SECOND, 'subList')
-    if (bannerData.length && bannerData.length === 1) {
-      bannerData = [...bannerData, {...bannerData[0], code: '1.2.2'}, {...bannerData[0], code: '1.2.3'}]
-    } else if (bannerData.length && bannerData.length === 2) {
-      bannerData = [...bannerData, {...bannerData[0], code: '1.2.3'}]
-    }
-    const activeIndex = bannerData.length ? toJS(this.startIndex) % bannerData.length : 0
-    const showItems = bannerData.slice(activeIndex)
-    let actualShowitems = []
-    if (showItems.length === 1) {
-      actualShowitems = showItems.concat([bannerData[0], bannerData[1]])
-    } else if (showItems.length === 2) {
-      actualShowitems = showItems.concat(bannerData[0])
-    } else {
-      actualShowitems = showItems.slice(0, 3)
-    }
     // console.log(actualShowitems, 'actualShowitems', activeIndex)
     const settings = {
       className: "partner-slider",
@@ -143,19 +172,38 @@ class Home extends Component {
             {getModInfo(PAGE_MODULES, FIRST, 'buttonTxt')}
           </button>
           <div className="home-header-banner">
-            {actualShowitems.map((item, i) => (
-              <div
-                key={item.code}
-                className={`banner-item ${i === 1 ? 'banner-active' : ''}`}
-                style={{ backgroundImage: `url(${getImgSrc(item.imageId)})` }}
-                onClick={() => {
-                  this.startIndex = i
-                }}
-              >
-                <span>{item.title}</span>
-                <span className="active-content-bottom">{item.content}</span>
-              </div>
-            ))}
+            <ul className="banner-container">
+              {this.bannerData.map((item, i) => {
+                return (
+                  <li
+                    key={item.code}
+                    className={`banner-item ${this.setCardStatus(this.indexes, i)}`}
+                    style={{ backgroundImage: `url(${getImgSrc(item.imageId)})` }}
+                    onClick={() => {
+                      clearInterval(this.timer)
+                      this.timer = null
+                      if (i <= 0) {
+                        this.indexes = {
+                          previousIndex: this.bannerData.length - 1,
+                          currentIndex: 0,
+                          nextIndex: 1,
+                        }
+                      } else {
+                        this.indexes = {
+                          previousIndex: i - 1 < 0 ? this.bannerData.length - 1 : i - 1,
+                          currentIndex: i,
+                          nextIndex: i + 1 > this.bannerData.length - 1 ? 0 : i + 1,
+                        }
+                      }
+                      this.bannerStart()
+                    }}
+                  >
+                    <span>{item.title}</span>
+                    <span className="active-content-bottom">{item.content}</span>
+                  </li>
+                )
+              })}
+            </ul>
           </div>
         </div>
         <div className="home-highlight m-p2rem">
@@ -191,7 +239,7 @@ class Home extends Component {
           </div>
           <div className="right-middle-line"></div>
         </div>
-        <div className="home-experience FBV" style={{overflow: 'hidden'}}>
+        <div className="home-experience FBV" style={{ overflow: 'hidden' }}>
           <LineTitle title={getModInfo(PAGE_MODULES, SIXTH, 'title')} titleClass="subtitle-white" />
           <div className="FBAC-S sub-content m14">
             {getModInfo(PAGE_MODULES, SIXTH, 'content')}

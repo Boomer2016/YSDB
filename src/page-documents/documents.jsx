@@ -104,9 +104,9 @@ export default class Documents extends Component {
     return (
       <div className="page-documents">
         <div className="documents-header FBV FBAS FBJC">
-          <h3 className="head-title">
+          <h1 className="head-title">
             {getModInfo(PAGE_MODULES, FIRST, 'title')}
-          </h3>
+          </h1>
           <span className="head-desc mini-font">
             {getModInfo(PAGE_MODULES, FIRST, 'content')}
           </span>

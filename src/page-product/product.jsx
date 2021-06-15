@@ -42,7 +42,7 @@ class Product extends Component {
       autoplay: true,
       speed: 500,
       autoplaySpeed: 5000,
-      rtl: true,
+      // rtl: true,
       responsive: [
         {
           breakpoint: 1024,
@@ -100,7 +100,7 @@ class Product extends Component {
         xl={8}
         key={item.code}
       >
-        <div className="item-title">{item.title}</div>
+        <div className="item-title" title={item.title}>{item.title}</div>
         <span className="mini-font mt8 pl20 pr20">{item.content}</span>
       </Col>
     ))

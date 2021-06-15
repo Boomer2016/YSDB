@@ -83,7 +83,7 @@ class Solution extends Component {
           <div className="case-pic">
             <img src={getImgSrc(item.imageId)} alt={item.content} />
           </div>
-          <div className="FBV FBJB case-content">
+          <div className="FBV case-content">
             <span className="mini-font">
               {item.content}
             </span>
@@ -155,14 +155,16 @@ class Solution extends Component {
             </span>
           </Col>
         </Row>
-        <div className="advantage-area FBV FBAC m-p2rem">
-          <div className="subBg FBV FBAC">
-            <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, FOURTH, 'title')} />
-            <div className="solution-header-content mini-font mt10">
-              {getModInfo(PAGE_MODULES, FOURTH, 'content')}
+        <div className="advantage-bg">
+          <div className="advantage-area FBV FBAC m-p2rem">
+            <div className="subBg FBV FBAC">
+              <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, FOURTH, 'title')} />
+              <div className="solution-header-content mini-font mt10">
+                {getModInfo(PAGE_MODULES, FOURTH, 'content')}
+              </div>
             </div>
+            <Row justify="space-between" className="pt20">{advantageItems}</Row>
           </div>
-          <Row justify="space-between" className="pt20">{advantageItems}</Row>
         </div>
         <div className="case-area m-p2rem FBH FBAC FBJB">
           <LeftOutlined onClick={() => this.slider.current.slickPrev()} className="left-icon" />

@@ -72,14 +72,29 @@ export default class About extends Component {
             >
               <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, THIRD, 'title')} />
               <List
-                className="mt20"
+                className="mt20 about-news"
                 itemLayout="horizontal"
                 dataSource={store.news}
+                split={false}
                 renderItem={item => (
                   <List.Item>
                     <List.Item.Meta
-                      title={<a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>}
-                      description={item.summary}
+                      title={(
+                        <a href={item.url} target="_blank" rel="noopener noreferrer" className="news-item-title">
+                          {item.title}
+                        </a>
+                      )}
+                      description={(
+                        <div className="FBV">
+                          <div className="omit-2 news-item-content">{item.summary}</div>
+                          {item.publishTime && (
+                            <span className="fs12">
+                                发布于
+                              {item.publishTime}
+                            </span>
+                          )}
+                        </div>
+                      )}
                     />
                   </List.Item>
                 )}

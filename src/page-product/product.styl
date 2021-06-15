@@ -1,5 +1,6 @@
 .page-product
-  overflow auto
+  overflow-y auto
+  overflow-x hidden
   .product-header
     width 100vw
     height 23rem
@@ -53,12 +54,14 @@
       background-position bottom left
       @media only screen and (max-width: 768px)
         width 100%
+        background-size 0rem
     .intro-pic
       width 80%
       height auto
       margin-left 8%
     .intro-detail
       padding 1rem 10%
+      font-size 1rem
       @media only screen and (max-width: 768px)
         padding 1rem 0.6rem
   .product-area
@@ -80,7 +83,7 @@
         margin 0 auto
     .arch-content
       width 50%
-      font-size 0.9rem
+      font-size 1rem
       @media only screen and (max-width: 768px)
         width 100%
       .intro-detail
@@ -92,7 +95,7 @@
     background-size 10rem
     background-repeat no-repeat
     background-image url('../image/prodPower.png')
-    background-position top right
+    background-position 100% 10%
     @media only screen and (max-width: 768px)
       background-size 2rem
     .service-title
@@ -111,7 +114,11 @@
           text-align center
       .item-title
         color #2e5890
-        padding 0 1rem
+        padding-left 1rem
+        overflow hidden
+        text-overflow ellipsis
+        word-break keep-all
+        white-space nowrap
   .product-scene
     background-size 20rem
     background-repeat no-repeat
@@ -131,7 +138,6 @@
       width 22vw
       height 26.54vw
       padding 3rem
-      color #ffffff
       background-size cover
       background-color #E4EBF3
       background-repeat no-repeat
@@ -172,10 +178,10 @@
       // background #ffffff
       // border-radius 50%
     .core-bottom
-      background-size 20rem
+      background-size 40rem
       background-repeat no-repeat
-      background-image url('../image/waveLine.png')
-      background-position bottom left
+      background-image url('../image/pic_hd.jpg')
+      background-position 0% 95%
       background-color #EBEBEB
       position absolute
       width 100%

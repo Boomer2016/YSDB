@@ -1,7 +1,7 @@
 import { Col, Row } from 'antd'
 
 import React from 'react'
-import logoSrc from '../image/logo.png'
+import logoSrc from '../image/logo.jpg'
 import { observable } from 'mobx'
 import { observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
@@ -21,23 +21,33 @@ class Footer extends React.Component {
               key={k.name}
               className="pt8 link-name"
               onClick={() => {
-                if (k.url.includes('document')) {
-                  const name = k.url.split('/') && k.url.split('/')[2]
-                  history.push({
-                    pathname: '/documents',
-                    search: `name=${name}`,
-                  })
+                // if (k.url.includes('document')) {
+                //   const name = k.url.split('/') && k.url.split('/')[2]
+                //   history.push({
+                //     pathname: '/documents',
+                //     search: `name=${name}`,
+                //   })
+                // } else {
+                //   CommonStore.PAGES.forEach(m => {
+                //     m.subList.forEach(n => {
+                //       if (n.url === k.url) {
+                //         history.push({
+                //           pathname: m.url,
+                //           search: `id=${n.id}`,
+                //         })
+                //       }
+                //     })
+                //   })
+                // }
+                console.log(k.url.split('?'))
+                const params = k.url.split('?')
+                if (params.length > 1) {
+                  const pathname = params && params[0]
+                  const search = params && params[1]
+                  history.push({ pathname, search })
                 } else {
-                  CommonStore.PAGES.forEach(m => {
-                    m.subList.forEach(n => {
-                      if (n.url === k.url) {
-                        history.push({
-                          pathname: m.url,
-                          search: `id=${n.id}`,
-                        })
-                      }
-                    })
-                  })
+                  const pathname = params && params[0]
+                  history.push({ pathname })
                 }
               }}
             >

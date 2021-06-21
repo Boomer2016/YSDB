@@ -69,10 +69,8 @@ class Customer extends Component {
     }
     const caseItems = getModInfo(PAGE_MODULES, SECOND, 'subList').map(item => (
       <div className="case-item" key={item.code}>
-        <div className="FBH case-content">
-          <div className="case-item-title">{item.title}</div>
-          <span className="mini-font FB1">{item.content}</span>
-        </div>
+        <div className="case-item-title">{item.title}</div>
+        <div className="case-content" style={{fontSize: '0.9rem'}}>{item.content}</div>
       </div>
     ))
     const painPointsItems = getModInfo(PAGE_MODULES, FOURTH, 'subList').map((item, i) => (

@@ -32,16 +32,18 @@ class Solution extends Component {
     const { FIRST, SECOND, THIRD, FOURTH, FIFTH } = MODULE_CODE
     const painPointsItems = getModInfo(PAGE_MODULES, SECOND, 'subList').map((item, i) => (
       <Col
-        className={`FBV pain-item ${(i + 1) % 3 ? 'right-border' : ''}`}
+        className={`${(i + 1) % 3 ? 'right-border' : ''}`}
         xs={24}
         sm={24}
-        md={12}
-        lg={7}
-        xl={7}
+        md={8}
+        lg={8}
+        xl={8}
         key={item.code}
       >
-        <span className="pain-item-title">{item.title}</span>
-        <span className="mini-font pain-item-content">{item.content}</span>
+        <div className="FBV pain-item">
+          <span className="pain-item-title">{item.title}</span>
+          <span className="mini-font pain-item-content">{item.content}</span>
+        </div>
       </Col>
     ))
     const advantageItems = getModInfo(PAGE_MODULES, FOURTH, 'subList').map(item => (
@@ -128,12 +130,12 @@ class Solution extends Component {
               {getModInfo(PAGE_MODULES, SECOND, 'content')}
             </div>
           </div>
-          <Row justify="space-between" className="points-row">{painPointsItems}</Row>
+          <Row className="points-row">{painPointsItems}</Row>
         </div>
         <Row justify="space-between" className="solution-area">
           <Col
-            xs={24}
-            sm={24}
+            xs={{span: 24, order: 2}}
+            sm={{span: 24, order: 2}}
             md={12}
             lg={10}
             xl={10}
@@ -143,8 +145,8 @@ class Solution extends Component {
           </Col>
           <Col
             className="FBV"
-            xs={24}
-            sm={24}
+            xs={{span: 24, order: 1}}
+            sm={{span: 24, order: 1}}
             md={12}
             lg={12}
             xl={12}

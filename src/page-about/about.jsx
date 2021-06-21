@@ -2,6 +2,7 @@ import { Col, List, Row } from 'antd'
 import React, { Component } from "react"
 import { getImgSrc, getModInfo } from '../common/util'
 import { inject, observer } from "mobx-react"
+import moment from 'moment'
 
 import AboutStore from "./store-about"
 import LineTitle from '../component/line-title'
@@ -90,7 +91,7 @@ export default class About extends Component {
                           {item.publishTime && (
                             <span className="fs12">
                                 发布于
-                              {item.publishTime}
+                              {moment(item.publishTime).format('YYYY-MM-DD hh:mm:ss')}
                             </span>
                           )}
                         </div>
@@ -101,6 +102,7 @@ export default class About extends Component {
                 pagination={{
                   total: store.news.length,
                   pageSize: 3,
+                  hideOnSinglePage: true,
                 }}
               />
             </Col>

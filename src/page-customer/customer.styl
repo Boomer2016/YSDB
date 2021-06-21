@@ -40,25 +40,24 @@
       @media only screen and (max-width: 768px)
         background-size 4rem
     .case-item
-      background #fff
-      padding 1rem
+      padding 0.5rem
       display flex !important
       width 98%
-      flex-direction row !important
-      justify-content space-between
-    .case-content
+      height 6rem
+    @media only screen and (max-width: 768px)
+        height 16rem
+    .case-item-title
       background #e0e0e0
       padding 1rem
-      width 100%
-      height 6rem
+    .case-content
+      flex 1
+      background #e0e0e0
+      padding 1rem
       overflow hidden
       text-overflow ellipsis
+      display -webkit-box
       -webkit-line-clamp 3
-      /* autoprefixer: off */
       -webkit-box-orient vertical
-      /* autoprefixer: on */
-      @media only screen and (max-width: 768px)
-        height 16rem
   .case-item-title
     padding-right 1rem
 .customer-earns

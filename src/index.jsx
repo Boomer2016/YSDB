@@ -1,6 +1,6 @@
 import "babel-polyfill"
 
-import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Redirect, Route, Router, Switch } from 'react-router-dom'
 
 import About from './page-about'
 import CommonStore from './common/store-common'
@@ -15,13 +15,24 @@ import { Provider } from 'mobx-react'
 import React from 'react'
 import ReactDom from 'react-dom'
 import Solution from './page-solution'
+import { createBrowserHistory } from 'history'
 
 require('es6-symbol/implement')
+
+const history = createBrowserHistory()
+
+history.listen(location => {
+  setTimeout(() => {
+    if (location.action === 'POP') return
+    const ele = document.getElementById('main')
+    if (ele) ele.scrollTop = 0
+  }, 0)
+})
 
 export default class Entry extends React.Component {
   render () {
     return (
-      <Router>
+      <Router history={history}>
         <Switch>
           <Frame>
             <Switch>

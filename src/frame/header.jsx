@@ -3,17 +3,14 @@ import { action, observable, toJS } from 'mobx'
 
 import React from 'react'
 import { UnorderedListOutlined } from '@ant-design/icons'
-import logoSrc from '../image/logo.png'
+import logoSrc from '../image/logo.jpg'
 import { observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
 
+const initKey = localStorage.getItem('activeKey') || '/home'
 @observer
 class Header extends React.Component {
-  @observable activeKey = ['/home']
-  componentDidMount () {
-    const { pathname } = window.location
-    this.activeKey = [pathname]
-  }
+  @observable activeKey = [initKey]
 
   componentDidUpdate(preProps) {
     const {location: {pathname, search}, CommonStore} = this.props
@@ -48,6 +45,7 @@ class Header extends React.Component {
       CommonStore.setActivePage(activePage)
     }
     this.activeKey = [e.key]
+    localStorage.setItem('activeKey', e.key)
   }
 
   render () {

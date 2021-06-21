@@ -108,11 +108,11 @@ class Product extends Component {
       <div key={item.code}>
         <div className="scene-item" style={{ backgroundImage: `url(${getImgSrc(item.imageId)})` }}>
           <div className="FB1 FBV">
-            <span className="pl20 pr20 main-color">{item.title}</span>
-            <span className="mini-font mt8 pl20">{item.content}</span>
+            <span className="main-color">{item.title}</span>
+            <span className="mini-font scene-content">{item.content}</span>
           </div>
           <button
-            className="common-btn ml20"
+            className="common-btn"
             type="button"
             onClick={() => {
               const { history } = this.props
@@ -137,11 +137,11 @@ class Product extends Component {
         {/* <div className="value-icon" style={{background: `url(${getImgSrc(item.imageId)})`}}></div> */}
         <img src={getImgSrc(item.imageId)} alt="" className="value-icon" />
         <span className="p10 mini-font">{item.title}</span>
-        <span className="mini-font fac">{item.content}</span>
+        <span className="fac" style={{fontSize: '0.8rem'}}>{item.content}</span>
       </Col>
     ))
     return (
-      <div className="page-product">
+      <div className="page-product" id="page">
         <div className="product-header FBV FBAC FBJC ">
           <h1 className="product-header-title">
             {getModInfo(PAGE_MODULES, FIRST, 'title')}

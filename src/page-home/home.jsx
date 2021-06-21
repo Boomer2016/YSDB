@@ -9,7 +9,7 @@ import LineTitle from '../component/line-title'
 import Slider from "react-slick"
 import MODULE_CODE from './config'
 import { getModInfo, getImgSrc } from '../common/util'
-import logoTxtSrc from '../image/logoText.png'
+import logoTxtSrc from '../image/logoTxt.jpg'
 
 @observer
 class Home extends Component {
@@ -104,20 +104,15 @@ class Home extends Component {
       rtl: true,
       ref: this.slider,
     }
+    const hLen = getModInfo(PAGE_MODULES, THIRD, 'subList').length
+    const grid = hLen < 5 ? hLen : 5
+    const percent = hLen < 5 ? `${100 / hLen}%` : '20%'
     const highLights = getModInfo(PAGE_MODULES, THIRD, 'subList').map((item, i) => (
-      <Col
-        xs={12}
-        sm={12}
-        md={12}
-        lg={4}
-        xl={4}
-        className={`FBV FBAC ${i ? 'detail-item' : ''}`}
-        key={item.code}
-      >
+      <div className={`FBV FBAC ${i % grid ? 'detail-item' : ''}`} key={item.code}>
         <span className="subtitle-font">{item.content}</span>
         <div className="highlight-border"></div>
         <span className="mini-font mt6 fac">{item.title}</span>
-      </Col>
+      </div>
     ))
     const col = !(getModInfo(PAGE_MODULES, FOURTH, 'subList').length % 3) ? 7 : 5
     const homeAdvanceItems = getModInfo(PAGE_MODULES, FOURTH, 'subList').map(item => (
@@ -213,9 +208,9 @@ class Home extends Component {
               {getModInfo(PAGE_MODULES, THIRD, 'content')}
             </div>
           </div>
-          <Row gutter={8} className="highlight-detail" justify="space-between">
+          <div className="highlight-detail" style={{gridTemplateColumns: `repeat(${grid}, ${percent})`}}>
             {highLights}
-          </Row>
+          </div>
         </div>
         <div className="home-advance m-p2rem">
           <div className="FBV FBAC top-bird">

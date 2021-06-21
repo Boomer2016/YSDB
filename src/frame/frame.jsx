@@ -31,6 +31,10 @@ class Frame extends React.Component {
     if (preProps.location.pathname === pathname && preProps.location.search !== search) {
       this.routerChange()
     }
+    const { location } = this.props
+    if (location !== preProps.location) {
+      window.scrollTo(0, 0)
+    }
   }
 
   @action
@@ -59,7 +63,7 @@ class Frame extends React.Component {
       <ConfigProvider locale={zhCN}>
         <div className="FBV frame">
           <Header CommonStore={CommonStore} />
-          <div className="FB1 frame-main">
+          <div className="FB1 frame-main" id="main">
             {this.couldRender && (
               <main role="main">
                 {children}

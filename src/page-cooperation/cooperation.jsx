@@ -69,18 +69,20 @@ class Cooperation extends Component {
               md={11}
               lg={11}
               xl={11}
-              className="FBV"
+              className="FBV contact-mobile"
             >
               <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, THIRD, 'title')} />
               <span className="mini-font m10">
                 {getModInfo(PAGE_MODULES, THIRD, 'content')}
               </span>
-              {getModInfo(PAGE_MODULES, THIRD, 'subList').map(item => (
-                <div key={item.code} className="mt14">
-                  <span className="contact-name">{item.title}</span>
-                  <span className="contact-value">{item.content}</span>
-                </div>
-              ))}
+              <div>
+                {getModInfo(PAGE_MODULES, THIRD, 'subList').map(item => (
+                  <div key={item.code} className="mt14">
+                    <span className="contact-name">{item.title}</span>
+                    <span className="contact-value">{item.content}</span>
+                  </div>
+                ))}
+              </div>
             </Col>
           </Row>
         </div>

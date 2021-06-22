@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+
 import { Col, Row } from "antd"
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import React, { Component } from "react"
 import { action, observable, toJS } from "mobx"
+import { getImgSrc, getModInfo } from '../common/util'
 import { inject, observer } from "mobx-react"
 
 import LineTitle from '../component/line-title'
-import Slider from "react-slick"
 import MODULE_CODE from './config'
-import { getModInfo, getImgSrc } from '../common/util'
+import Slider from "react-slick"
 import logoTxtSrc from '../image/logoTxt.jpg'
 
 @observer
@@ -208,7 +209,7 @@ class Home extends Component {
               {getModInfo(PAGE_MODULES, THIRD, 'content')}
             </div>
           </div>
-          <div className="highlight-detail" style={{gridTemplateColumns: `repeat(${grid}, ${percent})`}}>
+          <div className="highlight-detail" style={{ gridTemplateColumns: `repeat(${grid}, ${percent})` }}>
             {highLights}
           </div>
         </div>

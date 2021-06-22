@@ -13,15 +13,15 @@
       width 65%
       text-align center
       color #ffffff
-      @media only screen and (max-width: 768px)
+      @media only screen and (max-width 768px)
         width 100%
         font-size 1.4rem
     .logo-text
       margin-right 1rem
       margin-bottom 0.2rem
       height 3.5rem
-      @media only screen and (max-width: 768px)
-        width 1.4rem
+      @media only screen and (max-width 768px)
+        height 2.5rem
         margin-right 0.6rem
         margin-bottom 0.2rem
     .home-header-content
@@ -30,7 +30,7 @@
       text-align center
       font-size 1rem
       font-weight 300
-      @media only screen and (max-width: 768px)
+      @media only screen and (max-width 768px)
         width 98%
     .home-header-banner
       width 90%
@@ -63,7 +63,7 @@
         flex-direction column
         justify-content space-between
         cursor pointer
-        @media only screen and (max-width: 768px)
+        @media only screen and (max-width 768px)
           height 60%
           padding 0.5rem
           width 80%
@@ -72,7 +72,7 @@
         transform scale(1) translateX(40px)
         z-index 1
         left 0
-        @media only screen and (max-width: 768px)
+        @media only screen and (max-width 768px)
           left 10%
           transform scale(1) translateX(-80px)
       .banner-next
@@ -90,14 +90,14 @@
         opacity 1
         left 33%
         transform scale(1.2) translateY(-10%)
-        @media only screen and (max-width: 768px)
+        @media only screen and (max-width 768px)
           height 70%
           padding 0.5rem
           left 10%
       .active-content-bottom
         font-size 1.5rem
         width 40%
-        @media only screen and (max-width: 768px)
+        @media only screen and (max-width 768px)
           font-size 0.8rem
           width 100%
   .home-highlight
@@ -107,14 +107,14 @@
     background-repeat no-repeat
     background-size 12rem
     background-position bottom right
-    @media only screen and (max-width: 768px)
+    @media only screen and (max-width 768px)
       background-size 4rem
     .top-line
       background-image url('../image/left-top-line.svg')
       background-repeat no-repeat
       background-size 12rem
       background-position top left
-      @media only screen and (max-width: 768px)
+      @media only screen and (max-width 768px)
         background-size 4rem
     .highlight-title
       color #2E5890
@@ -126,11 +126,16 @@
       display grid
       // grid-template-columns repeat(auto-fill, 20%)
       grid-gap 1rem 0rem
-      justify-items space-between
+      // justify-items space-between
+      @media only screen and (max-width 768px)
+        display flex
+        flex-direction column
       .detail-item
         border-left 0.14rem solid #EBEBEB
         margin 0.2rem 0
         padding-left 1rem
+        @media only screen and (max-width 768px)
+          border none
     .highlight-border
       width 2rem
       height 0.1rem
@@ -144,7 +149,7 @@
   background-color #F5F5F3
   background-position top right
   margin-top 1rem
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width 768px)
     background-size 4rem
   .top-bird
     background-image url('../image/topBird.png')
@@ -154,7 +159,7 @@
     background-position top left
     width 60vw
     margin-left 20vw
-    @media only screen and (max-width: 768px)
+    @media only screen and (max-width 768px)
       background-size 2rem
       width 100vw
       margin-left 0
@@ -184,7 +189,7 @@
 .slider-title
   margin-bottom -2rem !important
   align-items flex-start
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width 768px)
     margin 0.1rem !important
     align-items center !important
 .left-icon
@@ -202,7 +207,7 @@
   background-position bottom left
   position relative
   margin-bottom 0.5rem
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width 768px)
     background-size 4rem
   .right-middle-line
     position absolute
@@ -216,21 +221,21 @@
     z-index -100
   .partner-slider
     width 90vw
-    @media only screen and (max-width: 768px)
+    @media only screen and (max-width 768px)
       width 80vw
   .partner-item
     display flex !important
     width 100%
     flex-direction row !important
     justify-content space-between
-    @media only screen and (max-width: 768px)
+    @media only screen and (max-width 768px)
       flex-direction column !important
   .partner-item-content
     display flex !important
     width 60%
     height 100%
     align-items center
-    @media only screen and (max-width: 768px)
+    @media only screen and (max-width 768px)
       width 100% !important
   .partner-item-name
     margin-top 1rem
@@ -240,5 +245,5 @@
   .partner-item-src
     width 40%
     height 100%
-    @media only screen and (max-width: 768px)
+    @media only screen and (max-width 768px)
       width 100% !important

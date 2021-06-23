@@ -4,10 +4,12 @@
   .product-header
     width 100vw
     height 23rem
-    background-size cover
+    background-size 100% 100%
     background-repeat no-repeat
     background-image url('../image/prodBg.png')
     color #ffffff
+    @media only screen and (max-width 768px)
+      background-size cover
     .product-header-title
       width 65%
       text-align center
@@ -24,6 +26,7 @@
       @media only screen and (max-width 768px)
         width 98%
   .product-intro
+    overflow-x hidden
     .intro-item
       display flex !important
       width 100%
@@ -60,7 +63,7 @@
       height auto
       margin-left 8%
     .intro-detail
-      padding 1rem 10%
+      padding 1rem
       font-size 1rem
       @media only screen and (max-width 768px)
         padding 1rem 0.6rem
@@ -87,7 +90,7 @@
       @media only screen and (max-width 768px)
         width 100%
       .intro-detail
-        padding 1rem 10%
+        padding 1rem
         @media only screen and (max-width 768px)
           width 100%
           padding 1rem 0.6rem
@@ -170,6 +173,7 @@
       color #ffffff
       margin 1rem 0rem
       background-color #24A0E4
+      text-align center
       &:nth-of-type(odd)
         background #1E67AD
     .scene-row

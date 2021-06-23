@@ -4,10 +4,12 @@
   .home-header
     width 100%
     height 35rem
-    background-size cover
+    background-size 100% 100%
     background-repeat no-repeat
     background-image url('../image/homeBg.png')
     color #ffffff
+    @media only screen and (max-width 768px)
+      background-size cover
     .home-header-title
       margin-top 5rem
       width 65%
@@ -123,24 +125,18 @@
     .highlight-detail
       padding 1rem 0rem
       width 100%
-      display grid
-      // grid-template-columns repeat(auto-fill, 20%)
-      grid-gap 1rem 0rem
-      // justify-items space-between
-      @media only screen and (max-width 768px)
-        display flex
-        flex-direction column
+      .highlight-item
+        float left
+        margin 0.2rem auto
       .detail-item
         border-left 0.14rem solid #EBEBEB
-        margin 0.2rem 0
         padding-left 1rem
         @media only screen and (max-width 768px)
           border none
-    .highlight-border
-      width 2rem
-      height 0.1rem
-      background #FF6D19
-      overflow hidden
+      .highlight-border
+        width 2rem
+        margin 0.2rem auto
+        border-bottom 2px solid #FF6D19
 .home-advance
   width 100%
   background-image url('../image/bCloud.png')
@@ -176,16 +172,18 @@
       height 100%
       width auto
   .advance-item
+    text-align center
     padding 1.2rem 0
   .advance-name
     margin 0.4rem 0
 .home-experience
-  background-image url('../image/homeExp.svg')
+  background-image url('../image/homeExp.png')
   background-repeat no-repeat
-  background-size cover
-  background-position-y 80%
+  background-size 100% 100%
   padding 3.5rem 0.12rem 8rem
   color #ffffff
+  @media only screen and (max-width 768px)
+    background-size cover
 .slider-title
   margin-bottom -2rem !important
   align-items flex-start

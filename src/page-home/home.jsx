@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 
-import { Col, Row } from "antd"
+import { Col, Divider, Row } from "antd"
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import React, { Component } from "react"
 import { action, observable, toJS } from "mobx"
@@ -106,13 +106,12 @@ class Home extends Component {
       ref: this.slider,
     }
     const hLen = getModInfo(PAGE_MODULES, THIRD, 'subList').length
-    const grid = hLen < 5 ? hLen : 5
-    const percent = hLen < 5 ? `${100 / hLen}%` : '20%'
+    const grid = hLen < 6 ? hLen : 6
     const highLights = getModInfo(PAGE_MODULES, THIRD, 'subList').map((item, i) => (
-      <div className={`FBV FBAC ${i % grid ? 'detail-item' : ''}`} key={item.code}>
-        <span className="subtitle-font">{item.content}</span>
+      <div className={`highlight-item ${i % grid ? 'detail-item' : ''}`} key={item.code} style={{ width: `${100 / grid}%` }}>
+        <div className="subtitle-font fac">{item.content}</div>
         <div className="highlight-border"></div>
-        <span className="mini-font mt6 fac">{item.title}</span>
+        <div className="mini-font mt6 fac">{item.title}</div>
       </div>
     ))
     const col = !(getModInfo(PAGE_MODULES, FOURTH, 'subList').length % 3) ? 7 : 5
@@ -124,12 +123,10 @@ class Home extends Component {
         md={12}
         lg={col}
         xl={col}
-        className="FBV FBAC advance-item"
+        className="advance-item"
       >
-        <div className="advance-icon">
-          <img src={getImgSrc(item.imageId)} alt="" />
-        </div>
-        <span className="advance-name main-color fac">{item.title}</span>
+        <img src={getImgSrc(item.imageId)} alt="" className="advance-icon" />
+        <div className="advance-name main-color fac">{item.title}</div>
         <div className="thin mini-font fac">{item.content}</div>
       </Col>
     ))
@@ -209,10 +206,11 @@ class Home extends Component {
               {getModInfo(PAGE_MODULES, THIRD, 'content')}
             </div>
           </div>
-          <div className="highlight-detail" style={{ gridTemplateColumns: `repeat(${grid}, ${percent})` }}>
+          <div className="highlight-detail">
             {highLights}
           </div>
         </div>
+        <div style={{ clear: 'both' }}></div>
         <div className="home-advance m-p2rem">
           <div className="FBV FBAC top-bird">
             <LineTitle title={getModInfo(PAGE_MODULES, FOURTH, 'title')} titleClass="subtitle-font" />

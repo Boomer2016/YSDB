@@ -65,9 +65,9 @@ class Frame extends React.Component {
           <Header CommonStore={CommonStore} />
           <div className="FB1 frame-main" id="main">
             {this.couldRender && (
-              <main role="main">
+              <div role="main">
                 {children}
-              </main>
+              </div>
             )}
             <Footer CommonStore={CommonStore} />
           </div>

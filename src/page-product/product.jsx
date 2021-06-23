@@ -1,25 +1,25 @@
 import { Col, Row } from "antd"
-import React, { Component } from "react"
-import { inject, observer } from "mobx-react"
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+import React, { Component } from "react"
+import { getImgSrc, getModInfo } from '../common/util'
+import { inject, observer } from "mobx-react"
 
 import LineTitle from '../component/line-title'
-import Slider from "react-slick"
 import MODULE_CODE from './config'
-import { getModInfo, getImgSrc } from '../common/util'
+import Slider from "react-slick"
 
 @observer
 class Product extends Component {
   slider = React.createRef()
   introSlider = React.createRef()
 
-  componentWillMount() {
+  componentWillMount () {
     const { CommonStore } = this.props
     CommonStore.setPageModules([])
   }
 
   componentDidMount () {
-    const { CommonStore, location: {pathname, search} } = this.props
+    const { CommonStore, location: { pathname, search } } = this.props
     if (search) {
       const pageId = search.split('=') && search.split('=')[1]
       CommonStore.getPageInfo(pageId)
@@ -30,7 +30,7 @@ class Product extends Component {
   }
 
   render () {
-    const { CommonStore: {PAGE_MODULES = []} } = this.props
+    const { CommonStore: { PAGE_MODULES = [] } } = this.props
     const { FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH } = MODULE_CODE
     const settings = {
       className: "common-slider",
@@ -126,7 +126,7 @@ class Product extends Component {
     ))
     const valueItems = getModInfo(PAGE_MODULES, SIXTH, 'subList').map(item => (
       <Col
-        className="FBV value-item FBAC"
+        className="value-item"
         xs={24}
         sm={24}
         md={12}
@@ -136,8 +136,8 @@ class Product extends Component {
       >
         {/* <div className="value-icon" style={{background: `url(${getImgSrc(item.imageId)})`}}></div> */}
         <img src={getImgSrc(item.imageId)} alt="" className="value-icon" />
-        <span className="p10 mini-font">{item.title}</span>
-        <span className="fac" style={{fontSize: '0.8rem'}}>{item.content}</span>
+        <div className="p10 mini-font">{item.title}</div>
+        <div className="fac" style={{ fontSize: '0.8rem' }}>{item.content}</div>
       </Col>
     ))
     return (
@@ -181,9 +181,9 @@ class Product extends Component {
               xl={12}
             >
               <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, SECOND, 'title')} className="t-FBJS" />
-              <span className="intro-detail">
+              <pre className="intro-detail">
                 {getModInfo(PAGE_MODULES, SECOND, 'content')}
-              </span>
+              </pre>
             </Col>
             <Col
               xs={24}
@@ -202,9 +202,9 @@ class Product extends Component {
           </div>
           <div className="arch-content FBV">
             <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, THIRD, 'title')} className="t-FBJS" />
-            <span className="intro-detail">
+            <pre className="intro-detail">
               {getModInfo(PAGE_MODULES, THIRD, 'content')}
-            </span>
+            </pre>
           </div>
         </div>
         <div className="service-power m-p2rem">
@@ -230,7 +230,7 @@ class Product extends Component {
             <RightOutlined className="right-icon" onClick={() => this.slider.current.slickNext()} />
           </div>
         </div>
-        <div className="core-value FBV FBAC m-p2rem">
+        <div className="core-value FBV m-p2rem">
           <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, SIXTH, 'title')} className="subBg FBJC" />
           <div className="product-header-content mini-font mt10">
             {getModInfo(PAGE_MODULES, SIXTH, 'content')}

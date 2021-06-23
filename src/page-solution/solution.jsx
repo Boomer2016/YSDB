@@ -1,23 +1,24 @@
-import { Row, Col, Avatar } from "antd"
-import { LeftOutlined, RightOutlined} from '@ant-design/icons'
+import { Avatar, Col, Row } from "antd"
+import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import React, { Component } from "react"
+import { getImgSrc, getModInfo } from '../common/util'
 import { inject, observer } from "mobx-react"
+
 import LineTitle from '../component/line-title'
-import Slider from "react-slick"
 import MODULE_CODE from './config'
-import { getModInfo, getImgSrc } from '../common/util'
+import Slider from "react-slick"
 
 @observer
 class Solution extends Component {
   slider = React.createRef()
 
-  componentWillMount() {
+  componentWillMount () {
     const { CommonStore } = this.props
     CommonStore.setPageModules([])
   }
 
   componentDidMount () {
-    const { CommonStore, location: {pathname, search} } = this.props
+    const { CommonStore, location: { pathname, search } } = this.props
     if (search) {
       const pageId = search.split('=') && search.split('=')[1]
       CommonStore.getPageInfo(pageId)
@@ -28,7 +29,7 @@ class Solution extends Component {
   }
 
   render () {
-    const { CommonStore: {PAGE_MODULES = []} } = this.props
+    const { CommonStore: { PAGE_MODULES = [] } } = this.props
     const { FIRST, SECOND, THIRD, FOURTH, FIFTH } = MODULE_CODE
     const painPointsItems = getModInfo(PAGE_MODULES, SECOND, 'subList').map((item, i) => (
       <Col
@@ -48,20 +49,21 @@ class Solution extends Component {
     ))
     const advantageItems = getModInfo(PAGE_MODULES, FOURTH, 'subList').map(item => (
       <Col
-        className="FBV FBAC p8"
         xs={22}
         sm={22}
         md={22}
-        lg={5}
-        xl={5}
+        lg={4}
+        xl={4}
         key={item.code}
       >
-        <Avatar
-          size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
-          src={getImgSrc(item.imageId)}
-        />
-        <span className="fac p10">{item.title}</span>
-        <span className="mini-font fac">{item.content}</span>
+        <div className="FBV FBAC">
+          <Avatar
+            size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+            src={getImgSrc(item.imageId)}
+          />
+          <span className="fac p10">{item.title}</span>
+          <span className="mini-font fac">{item.content}</span>
+        </div>
       </Col>
     ))
     const settings = {
@@ -134,8 +136,8 @@ class Solution extends Component {
         </div>
         <Row justify="space-between" className="solution-area">
           <Col
-            xs={{span: 24, order: 2}}
-            sm={{span: 24, order: 2}}
+            xs={{ span: 24, order: 2 }}
+            sm={{ span: 24, order: 2 }}
             md={12}
             lg={10}
             xl={10}
@@ -145,8 +147,8 @@ class Solution extends Component {
           </Col>
           <Col
             className="FBV"
-            xs={{span: 24, order: 1}}
-            sm={{span: 24, order: 1}}
+            xs={{ span: 24, order: 1 }}
+            sm={{ span: 24, order: 1 }}
             md={12}
             lg={12}
             xl={12}
@@ -158,14 +160,14 @@ class Solution extends Component {
           </Col>
         </Row>
         <div className="advantage-bg">
-          <div className="advantage-area FBV FBAC m-p2rem">
+          <div className="advantage-area FBV m-p2rem">
             <div className="subBg FBV FBAC">
               <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, FOURTH, 'title')} />
               <div className="solution-header-content mini-font mt10">
                 {getModInfo(PAGE_MODULES, FOURTH, 'content')}
               </div>
             </div>
-            <Row justify="space-between" className="pt20">{advantageItems}</Row>
+            <Row className="pt20" justify="space-between">{advantageItems}</Row>
           </div>
         </div>
         <div className="case-area m-p2rem FBH FBAC FBJB">

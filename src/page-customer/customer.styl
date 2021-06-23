@@ -4,10 +4,12 @@
   .customer-header
     width 100%
     height 30rem
-    background-size cover
+    background-size 100% 100%
     background-repeat no-repeat
     background-image url('../image/customerBg.png')
     color #ffffff
+    @media only screen and (max-width 768px)
+      background-size cover
     .customer-header-title
       margin-top 5rem
       width 65%

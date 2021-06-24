@@ -210,7 +210,6 @@ class Home extends Component {
             {highLights}
           </div>
         </div>
-        <div style={{ clear: 'both' }}></div>
         <div className="home-advance m-p2rem">
           <div className="FBV FBAC top-bird">
             <LineTitle title={getModInfo(PAGE_MODULES, FOURTH, 'title')} titleClass="subtitle-font" />

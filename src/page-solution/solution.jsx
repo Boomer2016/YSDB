@@ -154,9 +154,9 @@ class Solution extends Component {
             xl={12}
           >
             <LineTitle titleClass="subtitle-font" title={getModInfo(PAGE_MODULES, THIRD, 'title')} />
-            <span className="p10 mini-font">
+            <pre className="p10 mini-font">
               {getModInfo(PAGE_MODULES, THIRD, 'content')}
-            </span>
+            </pre>
           </Col>
         </Row>
         <div className="advantage-bg">
